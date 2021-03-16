@@ -1,0 +1,32 @@
+<view class='content bgf5'>
+  <view class='feedback_content'>
+    <view class='feedback_type_content'>
+        <view class='feedback_type_box'>
+          <image src='{{bigimg}}'></image>
+        </view>
+    </view>
+  </view>
+  <view class='feedback_textarea_content'>
+    <form bindsubmit="formSubmit"> 
+    <view class='feedback_text_content' style="background-image:url(/images/9_1/share_btn_bg.png)">
+      <view class='apply_input'>
+        <input type='number' placeholder='输入手机号' name="phone"></input>
+      </view>
+      <view class='apply_list_input'>
+        <button form-type="submit">领取优惠券</button>
+      </view>
+    </view>
+    </form>
+    <view class='shareRuleCon'>
+      <view class='shareRule' style='background-color:{{actcolor}}'>
+        <view class='shareimg'>
+          <image src='/images/9_1/share_tit.png'></image>
+        </view>
+        <view class='activerule'>
+          <text>{{avtrule}}</text>
+          <image src='/images/9_1/share_lh.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

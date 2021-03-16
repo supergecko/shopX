@@ -1,0 +1,196 @@
+
+.orderpay_info_head{
+  background-color:#4BC877;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+}
+.orderpay_info_head view{
+  width: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.needpaybox{
+  padding-top:10px;
+}
+.paybox{
+  height:24px;
+  line-height:24px;
+  font-size:24px;
+  padding-top:20rpx;
+}
+.toshowbox{
+  padding-bottom: 20rpx;
+}
+.toshowbox text{
+  width:80px;
+  height:24px;
+  line-height:24px;
+  margin-top:12px;
+  text-align:center;
+  border:1px solid #fff;
+  border-radius:100px;
+}
+
+.orderpay_mode_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.orderpay_mode_box{
+  height: 104rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderpay_mode_img{
+  height: 64rpx;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderpay_mode_img image{
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 10rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderpay_mode_box text{
+  flex-grow: 1;
+}
+
+.orderpay_mode_box .balance{
+  font-size:12px;
+  color:#999;
+  margin-left:10px;
+}
+
+.button_bottom_content{
+  position:fixed;
+  bottom:0;
+}
+.button_bottom_box{
+  padding: 0;
+}
+.button_bottom_box button{
+  background-color: #4BC877;
+  border-radius: 0;
+  height:50px;
+  line-height:50px;
+  font-size:15px;
+}
+.order_det_box{
+  display:flex;
+  flex-direction:column;
+  width:90%;
+  background-color:#fff;
+  top:10%;
+  z-index:999;
+  position:fixed;
+  left:5%;
+  border-radius:4px;
+}
+.order_det_title{
+  display:flex;
+  height:40px;
+  align-items:center;
+  width:100%;
+  justify-content:center;
+  position:relative;
+  border-bottom:1px solid #f0f0f0;
+}
+.order_det_title image{
+  height:16px;
+  width:16px;
+  position:absolute;
+  top:12px;
+  right:10px;
+}
+.order_det_content{
+  display:flex;
+  flex-direction:column;
+  padding:0 3%;
+  width:94%;
+}
+.det_content_box{
+  padding:8px 0;
+  display:flex;
+  flex-direction:column;
+  border-bottom:1px solid #f0f0f0;
+  width: 100%;
+}
+.det_content_box .boxcontent{
+  padding-top:3px;
+  color:#808080;
+  font-size:13px;
+}
+.det_content_box .boxcontent.row{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  width:100%;
+}
+.det_content_box .boxcontent.column{
+  display:flex;
+  flex-direction:column;
+}
+.det_content_box .boxcontent text{
+ margin-top: 3px;
+}
+.overpaybox{
+  display:block;
+  position:fixed;
+  width:70%;
+  top:30%;
+  background-color:#fff;
+  left:15%;
+  z-index:999;
+  border-radius:4px;
+  height:225px;
+}
+.pay_box_content{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  justify-content:center;
+  height:100%;
+  align-items:center;
+}
+.pay_box_content image{
+  width:80px;
+  height:80px;
+}
+.pay_box_content text.first{
+  font-size:18px;
+  margin-top:12px;
+  color:#333;
+}
+.pay_box_content text.second{
+  font-size:14px;
+  margin-top:8px;
+  color:#999;
+}
+.nextrecharge{
+  text-align:right;
+  padding-right:10px;
+  color:#ff6e6e;
+  font-size:12px;
+}
+
+
+
+
+
+
+

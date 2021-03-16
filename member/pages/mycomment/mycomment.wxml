@@ -1,0 +1,108 @@
+<view class='content bgf5'>
+  <view class='h_5'></view>
+  <view class='myevaluate_list_content'>
+    <block wx:if="{{commentlist.length >0}}">
+        <block wx:for='{{commentlist}}' wx:key='keys' wx:for-index="inex" wx:for-item="item">
+          <view class='myevaluate_list_box'>
+            <block wx:if="{{item.type == 1}}">
+              <view class='myevaluate_list_top' bindtap="goShop" data-shopid="{{item.shopid}}" data-shopname="{{item.shopname}}" data-shoptype="{{item.shoptype}}">
+                <view class='myevaluate_list_logo'><image src='{{item.shoplogo}}'></image></view>
+                <view class='myevaluate_list_info_content'>
+                  <view class='myevaluate_list_info_top'>
+                    <text>{{item.shopname}}</text>
+                    <text>{{item.addtime}}</text>
+                  </view>
+                  <view class='myevaluate_list_info_bottom'>
+                    <view class='myevaluate_list_info_star'>
+                      <text>商家</text>
+                      <block wx:for="{{item.shoppoint}}" wx:key='key5' wx:for-item="item5">
+                        <image src='/images/9_1/icon_myvaluate_light.png'></image>
+                      </block>
+                      <block wx:for="{{5-item.shoppoint}}" wx:key='key6' wx:for-item="item6">
+                        <image src='/images/9_1/icon_myvaluate_dark.png'></image>
+                      </block>
+                    </view>
+                    <view class='myevaluate_list_info_star'>
+                      <text>配送</text>
+                      <block wx:for="{{item.pspoint}}" wx:key='key7' wx:for-item="item7">
+                        <image src='/images/9_1/icon_myvaluate_light.png'></image>
+                      </block>
+                      <block wx:for="{{5-item.pspoint}}" wx:key='key8' wx:for-item="item8">
+                        <image src='/images/9_1/icon_myvaluate_dark.png'></image>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class='myevaluate_list_top'>
+                <view class='myevaluate_list_info_content'>
+                  <view class='myevaluate_list_info_top'>
+                    <view class="tops_left">
+                      <text style="font-weight: bold;">{{item.shopname}}</text>
+                      <text class="font_s12 font_c3" style="font-size: 12px;color: #333; max-width: 180px;overflow: hidden;display: inline-block;text-overflow: ellipsis;white-space: nowrap;height: 15px;line-height: 15px;margin-left: 15px;">| {{item.content}}</text>
+                    </view>
+                    <text>{{item.addtime}}</text>
+                  </view>
+                  <view class='myevaluate_list_info_bottom'>
+                    <view class='myevaluate_list_info_star'>
+                      <text>总体</text>
+                      <block wx:for="{{item.shoppoint}}" wx:key='key1' wx:for-item="item1">
+                        <image src='/images/9_1/icon_myvaluate_light.png'></image>
+                      </block>
+                      <block wx:for="{{5-item.shoppoint}}" wx:key='key2' wx:for-item="item2">
+                        <image src='/images/9_1/icon_myvaluate_dark.png'></image>
+                      </block>
+                    </view>
+                    <view class='myevaluate_list_info_star'>
+                      <text>配送</text>
+                      <block wx:for="{{item.pspoint}}" wx:key='key3' wx:for-item="item3">
+                        <image src='/images/9_1/icon_myvaluate_light.png'></image>
+                      </block>
+                      <block wx:for="{{5-item.pspoint}}" wx:key='key4' wx:for-item="item4">
+                        <image src='/images/9_1/icon_myvaluate_dark.png'></image>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </block>
+            <view class='myevaluate_list_bottom'>
+              <view class='myevaluate_list_text' wx:if="{{item.type == 1 && item.content!=''}}"><text>{{item.content}}</text></view>
+              <view class='myevaluate_list_img' wx:if="{{item.goodsimglist.length>0}}" bindtap="lookImg" data-imglist="{{item.goodsimglist}}">
+                <block wx:for='{{item.goodsimglist}}' wx:key='index' wx:for-index="index" wx:for-item="gtem">
+                  <image src='{{gtem.img}}'></image>
+                </block>
+              </view>
+              <view class='myevaluate_list_reply' wx:if="{{item.replycontent!='' && item.type == 1}}">
+                <text>商家回复：</text>
+                <text>{{item.replycontent}}</text>
+              </view>
+              <view class='myevaluate_list_del' bindtap="delComment" data-comid="{{item.id}}">
+                <image src='/images/9_1/icon_myvaluate_del.png'></image>
+                <text>删除</text>
+              </view>
+            </view>
+          </view>
+          <view class='h_5'></view>
+        </block>
+    </block>
+    <block wx:else>
+        <view class="emptybox">
+            <image src="/images/9_1/emptycomment.png"></image>
+            <text>未对订单进行评价~</text>
+        </view>
+    </block>
+  </view>
+</view>
+<view class="mask" wx:if="{{maskshow==1}}" style="background:rgba(0, 0, 0, .8)" bindtap="hideImg"> </view>
+<view class="imgbox" wx:if="{{is_showimg==1}}">
+    <swiper indicator-dots autoplay interval="5000">
+        <block wx:for="{{img_box_list}}" wx:key="keys" wx:for-index="index" wx:for-item="btem">
+            <swiper-item>
+                <image src='{{btem.img}}'></image>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

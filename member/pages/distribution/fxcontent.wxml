@@ -1,0 +1,5 @@
+<view class='content'>
+  <view class="descontent">
+  	<web-view src="{{siteurl}}/index.php?ctrl=applet&action=fxcontent&version={{version}}"></web-view>
+  </view>
+</view>

@@ -1,0 +1,99 @@
+<view class='content bgf5'>
+  <!-- 头部 -->
+  <view class='recharge_head_content' style='background-image: url(/images/9_1/balance_bg.png);'>
+    <text>￥{{userInfo.cost}}</text>
+    <text>余额</text>
+    <text class="balance_head_costlog" bindtap="showcostlog">余额明细</text>
+  </view>
+  <view class='recharge_tabs_content'>
+    <view class="recharge_tabs_box {{wxchargeShow==1?'navaA':''}}" bindtap="showwxcharge">
+      <text>充值</text>
+    </view>
+    <view class="recharge_tabs_box {{cardchargeShow==1?'navaA':''}}" bindtap="showcardcharge">
+      <text>充值卡充值</text>
+    </view>
+  </view>
+  <!-- 头部结束 -->
+  <block wx:if="{{wxchargeShow==1 && cardchargeShow==0}}">
+    <view class='recharge_content'>
+      <view class='recharge_price_content' wx:if="{{rechargelist.length>0}}">
+        <block wx:for='{{rechargelist}}' wx:key='index<=6' wx:for-item="items">
+          <block wx:if="{{index<=5}}">
+            <view class="recharge_price_box {{items.check==1?'navaA':''}}" bindtap="selectRecharge" data-checkid="{{items.id}}">
+              <text>{{items.totalsendcost}}元</text>
+              <text>售价{{items.cost}}元</text>
+            </view>
+          </block>
+          <block wx:if="{{index>5 && showMore==1}}">
+            <view class="recharge_price_box {{items.check==1?'navaA':''}}" bindtap="selectRecharge" data-checkid="{{items.id}}">
+              <text>{{items.totalsendcost}}元</text>
+              <text>售价{{items.cost}}元</text>
+            </view>
+          </block>
+        </block>
+      </view>
+      <view class='recharge_price_input_content' wx:if="{{rechargelist.length<=6 ||(rechargelist.length>6 && showMore==1)}}">
+        <view class='recharge_price_input_box'>
+          <text>其它金额</text>
+          <input type='digit' placeholder='充值金额不能小于1' bindinput="checkVal"/>
+          <text>元</text>
+        </view>
+      </view>
+      <view class='recharge_updown_content' wx:if="{{rechargelist.length>6}}" bindtap="isShowMore"><image src="/images/9_1/{{showMore==0?'icon_balance_down.png':'icon_balance_up.png'}}"></image></view>
+      <view class='recharge_tips_content'>
+        <text>充值说明：</text>
+        <text>{{yhinfo!=''?yhinfo:''}}</text>
+      </view>
+    </view>
+    <!-- 充值 -->
+    <view class='recharge_button_content'>
+      <view class='recharge_button_box'>
+        <button bindtap="surewxrecharge">充值</button>
+      </view>
+    </view>
+  </block>
+  <!-- 充值卡充值 -->
+  <block wx:if="{{cardchargeShow==1 && wxchargeShow==0}}">
+    <view class="balance_rechargecar_content" wx:if="{{cardchargeShow==1 && wxchargeShow==0}}">
+      <view class="balance_rechargecar_box">
+        <text>卡号：</text>
+        <view class="balance_rechargecar_input">
+          <input type="text" placeholder="输入卡号" value="{{cardnum}}" bindinput="checkCnum"/>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="balance_rechargecar_box">
+        <text>密码：</text>
+        <view class="balance_rechargecar_input">
+          <input type="text" password placeholder="输入密码" value="{{cardpwd}}" bindinput="checkPwd"/>
+        </view>
+      </view>
+    </view>
+    <!-- 充值 -->
+    <view class='recharge_button_content'>
+      <view class='recharge_button_box'>
+        <button bindtap="surecardrecharge">充值</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 余额明细弹窗 -->
+  <view class="costlogcontent" wx:if="{{costlogShow==1}}">
+    <view class="costlogtitle">余额明细</view>
+    <scroll-view scroll-y style="height:400px;">
+        <block wx:for="{{costloglist}}" wx:key="key" wx:for-item="item">
+            <view class="costlogbox">
+               <view class="costlogbox_left">
+                  <text class="costleftname">{{item.title}}</text>
+                  <text class="costleftdate">{{item.addtime}}</text>
+               </view>
+               <view class="costlogbox_right">
+                  <text class="{{item.addtype==1?'addcost':'jiancost'}}">{{item.result}}</text>
+               </view>
+            </view>
+             <view class="h_10" style="background-color:#fafafa;"></view>
+        </block>
+    </scroll-view>
+  </view>
+  <view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>
+</view>

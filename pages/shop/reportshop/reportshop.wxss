@@ -1,0 +1,67 @@
+.reportshop_title{
+  height: 100rpx;
+  padding: 0 2.7777%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.reportshop_title image{
+  width: 39rpx;
+  height: 34rpx;
+  margin-right: 20rpx;
+}
+
+.reportshop_title text{
+  font-size: 32rpx;
+  color: #333;
+}
+
+.reportshop_content{
+  background-color: #fff;
+}
+
+.reportshop_box{
+  padding: 20rpx;
+}
+.reportshop_box radio{
+  transform:scale(0.7);
+}
+.reportshop_box text{
+  font-size: 28rpx;
+  color: #3c3c3c;
+}
+
+.reportshop_textarea,
+.reportshop_input{
+  padding: 20rpx;
+  background-color: #fff;
+}
+
+.reportshop_textarea textarea,
+.reportshop_input{
+  width: 100%;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.reportshop_textarea textarea{
+  height: 230rpx;
+}
+
+.button_bottom_box{
+  background-color: #fff;
+}
+.buttonbox{
+  background-color:#fff;
+  padding:10px 0;
+}
+.buttonbox button{
+  background-color:#00cd85;
+  width:90%;
+  height:44px;
+  line-height:44px;
+  color:#fff;
+  font-size:14px;
+}

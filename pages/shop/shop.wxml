@@ -1,0 +1,368 @@
+<view class="content" wx:if="{{!loginShow}}">
+  <!-- 优惠活动弹窗 -->
+  <view class="maskbg" wx:if="{{cxdisplay == 1}}">
+    <view class="wmr_order_popup_con">
+      <view class="wmr_order_popup_box">
+        <view class="wmr_order_popup">
+          <view class="wmr_order_popup_head">
+            <image src="{{shopinfo.shoplogo}}"></image>
+            <view class="wmr_h3">{{shopinfo.shopname}}</view>
+          </view>
+          <view class="wmr_order_popup_juan" wx:if="{{shopjuan.length > 0}}">
+              <scroll-view scroll-x="true">
+                <block wx:for="{{shopjuan}}" wx:key="kcx" wx:for-item="itcx">
+                  <view class="juna_li {{itcx.canget==0?'active':''}}" bindtap="receiveJuan" data-juanid="{{itcx.id}}">
+                    <view class="li_left {{itcx.canget==0?'active':''}}">
+                      <text>￥{{itcx.cost}}</text>
+                      <text>{{itcx.name}}</text>
+                      <text>有效期至{{itcx.endtime}}</text>
+                    </view>
+                    <view class="li_right {{itcx.canget==0?'active':''}}">
+                      <text>{{itcx.canget==1?'领取':'已领'}}</text>
+                    </view>
+                  </view>
+                </block>
+              </scroll-view>
+          </view>
+          <view class="wmr_order_popup_list" wx:if="{{cxlist.length > 0}}">
+              <block wx:for="{{cxlist}}" wx:key="kcx" wx:for-item="itcx">
+                <view class="wmr_li">
+                  <image src="{{itcx.imgurl}}"></image>
+                  <text>{{itcx.name}}</text>
+                </view>
+              </block>
+          </view>
+          <view class="wmr_order_popup_txt">
+            <view class="wmr_p">店铺公告：{{shopinfo.notice_info}}</view>
+          </view>
+        </view>
+        <image class="icon_colse" bindtap="showCx" data-val="0" src="/images/9_1/icon_payment_x.png"></image>
+      </view>
+    </view>
+  </view>
+  <!-- *** -->
+  <view class="ordeing_content">
+    <!-- 店铺头部 -->
+    <view class="order_head_content">
+      <view class="head_search_box">
+        <view class="box_left" bindtap="toShopSearch">
+          <image src="/images/9_1/icon_head_search.png"></image>
+          <input type="text" name="searchVal" placeholder="搜索本店商品" disabled />
+        </view>
+        <view class="box_right" bindtap="myFavorite">
+          <image src="{{favoriteImg}}"></image>
+        </view>
+      </view>
+      <view class="order_head_top">
+        <view class="order_head_photo">
+          <image src="{{shopinfo.shoplogo}}"></image>
+        </view>
+        <view class="order_head_center">
+          <view class="namebox">
+            <text>{{shopinfo.shopname}}</text>
+          </view>
+          <view class="ul">
+            <view class="li">起送价￥{{shopinfo.limitcost}}<text></text></view>
+            <view class="li">配送费￥{{psinfo.pscost}}<text></text></view>
+            <view class="li">{{shopinfo.arrivetime}}分钟</view>
+          </view>
+          <view class="notice">
+            <view class="noticespan"><image src="/images/icon_notice1.png"></image>：</view>
+            <view class="noticep marquee_box">
+              <text class="marquee_text marquee_animation">{{shopinfo.notice_info}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="head_cxbox" bindtap="showCx" data-val="1">
+        <view class="cx_juanbox" wx:if="{{shopjuan.length>0}}">
+          <block wx:for="{{shopjuan}}" wx:key="keys" wx:for-index="index" wx:for-item="items">
+            <view class="box_child {{items.canget==0?'active':''}}">
+              <text>￥{{items.cost}}</text>
+              <text>{{items.canget==1?'领取':'已领'}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="cx_detbox" wx:if="{{simplerule.length > 0}}">
+          <view class="box_left">
+            <block wx:for="{{simplerule}}" wx:key="keys" wx:for-index="idx" wx:for-item="items">
+              <view class="left_child" wx:if="{{idx<4}}">
+                <text>{{items}}</text>
+              </view>
+            </block>
+          </view>
+          <view class="box_right">
+            <view class="right_title">
+              <text>{{simplerule.length}}种优惠</text>
+              <image src="/images/9_1/icon_sort.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="h_10"></view>
+    <view class="ordeing_class">
+      <view class="ordeing_classTxt navaA">
+        <text>商品</text>
+      </view>
+      <view class="ordeing_classTxt" data-url="orderingassess" bindtap="topOnclick">
+        <text>评价</text>
+      </view>
+      <view class="ordeing_classTxt" data-url="orderingshop" bindtap="topOnclick">
+        <text>商家</text>
+      </view>
+    </view>
+    <!-- 商品和分类 -->
+    <view class="ordeing_box">
+      <!-- 左侧分类 -->
+      <view class="ordeing_left">
+        <scroll-view scroll-y="true" style="height:{{scrollHeight}}px">
+          <view class="ordeing_left_box">
+            <block wx:for="{{showtypelist}}" wx:key="ks" wx:for-item="items">
+              <view class="ordeing_left_list {{checkcate == items.id?'navaA':''}}" data-id="{{items.id}}" bindtap="cateOnclick">
+                <image  wx:if="{{items.cate_icon!=''}}" style="width:16px;height:16px;margin-right:2px;" src="{{items.cate_icon}}"></image><text>{{items.name}}</text>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+      <!-- 右侧商品 -->
+      <view class="ordeing_right">
+        <!-- 右侧超市分类 -->
+        <view class="market_class_content" wx:if="{{typeshow == 1}}">
+          <scroll-view scroll-x="true">
+            <view class="market_class_box">
+              <block wx:for="{{newtypelist}}" wx:key="key" wx:for-item="item">
+              <block wx:for="{{item.soncate}}" wx:key="key" wx:for-item="itv">
+                <view class="market_class {{checksoncate == itv.id?'navaA':''}}" data-id="{{itv.id}}" bindtap="soncateOnclick">
+                  <text>{{itv.name}}</text>
+                </view>
+                </block>
+              </block>
+            </view>
+          </scroll-view>
+        </view>
+        <scroll-view scroll-y="true" style="height:{{scrollHeight + 15}}px" bindscroll="scroll">
+          <view class="ordeing_list_content">
+            <block wx:for="{{list}}" wx:key="cc" wx:for-item="itc">
+              <view class="ordeing_stit">
+                <text>{{itc.name}}</text>
+              </view>
+              <!--单商品-->
+              <view class="ordeing_list_box" wx:if="{{shopinfo.goodlistmodule != 1}}">
+                <block wx:for="{{itc.goodslist}}" wx:key="aa" wx:for-item="ita">
+                  <view class="ordeing_list">
+                    <view class="ordeing_list_top">
+                      <view class="ordeing_list_img">
+                        <image src="{{ita.img}}"></image>
+                      </view>
+                      <view class="ordeing_list_info">
+                        <view class="ordeing_list_name">
+                          <text>{{ita.name}}</text>
+                        </view>
+                        <view class="ordeing_list_desc" wx:if="{{ita.descgoods !=''}}">
+                          <text>{{ita.descgoods}}</text>
+                        </view>
+                        <view class="ordeing_list_volume">
+                          <text>已售 {{ita.sellcount}}{{ita.goodattr}}</text>
+                        </view>
+                        <view class="ordeing_list_price">
+                          <view class="price_left">
+                            <text class="ordeing_symbol">￥</text>
+                            <text class="ordeing_price">{{ita.newcost}}</text>
+                            <text wx:if="{{ita.is_cx == 1}}" style="font-size:11px;color:#b3b3b3;text-decoration: line-through;margin-left: 5px;">￥{{ita.cost}}</text>
+                          </view>
+                          <view class="price_right">
+                            <view class="ordeing_list_input" wx:if="{{ita.have_det != 1 && ita.count > 0 && (opentype == 2 || opentype == 3)}}">
+                              <image hidden="{{ita.cartnum == 0}}" data-id="{{ita.id}}" data-cost="{{ita.newcost}}" bindtap="downGoods" src="/images/downgoods.png"></image>
+
+                              <input hidden="{{ita.cartnum == 0}}" type="text" value="{{ita.cartnum}}" disabled />
+                              <image data-id="{{ita.id}}" class="add" data-cost="{{ita.newcost}}" data-oldcost="{{ita.oldcost}}" data-stock="{{ita.count}}" data-bagcost="{{ita.bagcost}}" data-iscx="{{ita.is_cx}}" data-name="{{ita.name}}" data-pic="{{ita.img}}" data-cxnum="{{ita.cxnum}}" bindtap="addGoods" src="/images/addgoods.png"></image>
+                            </view>
+                            <view class="ordeing_list_selbtn" data-id="{{ita.id}}" wx:if="{{ita.have_det == 1 && ita.count > 0 && (opentype == 2 || opentype == 3)}}" bindtap="ggShow">选规格</view>
+                            <view class="ordeing_list_selbtn ordeing_gary" wx:if="{{ita.count <= 0 && (opentype == 2 || opentype == 3)}}">售完</view>
+                            <view class="ordeing_list_selbtn ordeing_gary" wx:if="{{opentype != 2 && opentype != 3}}">休息中</view>
+                          </view>
+                        </view>
+                        <view class="ordeing_list_lab" wx:if="{{ita.is_cx == 1}}">
+                          <text style="font-size:10px;border-radius:5rpx;color:#ff5514;border:1px solid #ff5514;">{{ita.zhekou}}折 <block wx:if="{{ita.cxnum >0}}">限购{{ita.cxnum}}{{ita.goodattr}}</block></text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+              <!-- 一行两商品 -->
+              <view class="ordeing_market_content" wx:if="{{shopinfo.goodlistmodule == 1}}">
+                <block wx:for="{{itc.goodslist}}" wx:key="kg" wx:for-item="itg">
+                  <view class="ordeing_market_list">
+                    <view class="ordeing_market_img">
+                      <image src="{{itg.img}}"></image>
+                      <view  wx:if="{{itg.is_cx == 1}}" class="zhekou_nameclass" style="background-image:url(/images/cx_bg_icon.png);">
+                        <image src="/images/cx_icon.png"></image>
+                        <text>{{itg.zhekou}}折</text>
+                        <block wx:if="{{itg.cxnum==0}}">
+                          <text>不限购</text>
+                        </block>
+                        <block wx:else>
+                          <text>限购{{itg.cxnum}}{{itg.goodattr}}</text>
+                        </block>
+                      </view>
+                    </view>
+                    <view class="ordeing_market_name">
+                      <text>{{itg.name}}</text>
+                    </view>
+                    <view class="ordeing_market_sale">
+                      <text>已售 {{itg.sellcount}}{{itg.goodattr}}</text>
+                    </view>
+                    <view class="ordeing_market_price">
+                      <text>￥</text>
+                      <text>{{itg.newcost}}</text>
+                      <text>/{{itg.goodattr}}</text>
+                    </view>
+                    <view class="ordeing_market">
+                      <view class="ordeing_market_input" wx:if="{{itg.have_det != 1 && itg.count > 0 && (opentype == 2 || opentype == 3)}}">
+                        <text class="inp_add" hidden="{{itg.cartnum == 0}}" data-id="{{itg.id}}" data-cost="{{itg.newcost}}" bindtap="downGoods">-</text>
+                        <input hidden="{{itg.cartnum == 0}}" type="text" value="{{itg.cartnum}}" disabled />
+                        <text class="inp_minus" data-id="{{itg.id}}" data-cost="{{itg.newcost}}" data-oldcost="{{itg.oldcost}}" data-bagcost="{{itg.bagcost}}" data-stock="{{itg.count}}" data-name="{{itg.name}}" data-pic="{{itg.img}}" data-cxnum="{{itg.cxnum}}" data-iscx="{{itg.is_cx}}" bindtap="addGoods">+</text>
+                      </view>
+                      <view class="ordeing_market_spec" data-id="{{itg.id}}" wx:if="{{itg.have_det == 1 && itg.count > 0 && (opentype == 2 || opentype == 3)}}" bindtap="ggShow">选规格</view>
+                      <view class="ordeing_market_over" wx:if="{{itg.count <= 0 && (opentype == 2 || opentype == 3)}}">售完</view>
+                      <view class="ordeing_market_over" wx:if="{{opentype != 2 && opentype != 3}}">休息中</view>
+                    </view>
+                  </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+    <!-- *** -->
+    <!-- 规格弹窗 -->
+    <view class="ordering_popup_content" wx:if="{{gghide}}">
+      <view class="ordering_popup_box">
+        <view class="ordering_popup_title">
+          <text style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width:384rpx;">{{productname}}</text>
+          <text class="ordering_popup_colse" bindtap="maskbind">x</text>
+        </view>
+        <view class="ordering_popup_main">
+          <block wx:for="{{productlist}}" wx:key="keyp" wx:for-item="vap">
+            <view class="ordering_popup">
+              <view class="ordering_popup_name">{{vap.name}}：</view>
+              <view class="ordering_popup_text">
+                <block wx:for="{{vap.det}}" wx:key="kdet" wx:for-item="vat">
+                  <text class="{{vat.check == 1?'navaA':''}}" data-gid="{{productgid}}"data-main="{{vap.id}}" data-id="{{vat.id}}" bindtap="choiceattr">{{vat.name}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="ordering_popup_bottom">
+          <view class="ordering_popup_left">
+            <text wx:if="{{productinfo.id > 0}}">￥{{productinfo.price}}</text>
+            <text wx:else>请选规格</text>
+          </view>
+          <view class="ordering_popup_right">
+            <view class="ordeing_popup_input">
+              <text class="inp_add" hidden="{{productinfo.count == 0}}" data-id="{{productinfo.id}}" bindtap="downggGoods">-</text>
+              <input hidden="{{productinfo.count == 0}}" type="text" value="{{productinfo.count}}" disabled />
+              <text class="inp_minus" data-id="{{productinfo.id}}" data-gid="{{productinfo.gid}}" data-iscx="{{productinfo.iscx}}" data-attrid="{{productinfo.attrid}}" data-cost="{{productinfo.price}}" data-oldcost="{{productinfo.oldcost}}" data-stock="{{productinfo.stock}}" data-name="{{productinfo.name}}" data-attrname="{{productinfo.attrname}}" data-pic="{{productinfo.pic}}" data-bagcost="{{productinfo.bagcost}}" data-cxnum="{{productinfo.cxnum}}"  bindtap="addggGoods">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- *** -->
+  </view>
+
+  <!-- 店铺底部 购物车，支付 -->
+  <view class="ordering_payment_content">
+    <view class="ordering_payment_box">
+      <!-- 支付 -->
+      <view class="ordering_payment_left">
+        <view class="ordering_payment_numbox" >
+          <view class="ordering_payment_num main_bg" catchtap="bgShow">
+            <image src="/images/icon_shoppingcar.png"></image>
+            <text>{{total.count}}</text>
+          </view>
+        </view>
+        <view class="ordering_payment_price">
+          <text class="ordering_payment_txtT">
+            <text class="ordering_payment_doller">￥</text>
+            <text class="ordering_payment_cost">{{total.money}}</text>
+          </text>
+          <view style="display: flex;">
+              <text wx:if="{{psinfo.pscost > 0}}" class="ordering_payment_txtB">另需配送费 {{psinfo.pscost}} 元</text>
+              <text  wx:if="{{psinfo.is_allow_ziti==1}}" class="ordering_payment_txtB" style="margin-left:8rpx;">|</text>
+              <block wx:if="{{psinfo.is_allow_ziti==1}}"><text class="ordering_payment_txtB" style="margin-left:8rpx;">支持自取</text></block>
+          </view>
+        </view>
+      </view>
+      <view class="ordering_payment_right">
+        <button class="main_bg" wx:if="{{limitcost == 0 && (opentype == 2 || opentype == 3)}}" bindtap="gotoPay">选好了</button>
+        <button class="main_bg" wx:if="{{limitcost > 0 && (opentype == 2 || opentype == 3)}}">还差{{limitcost}}元</button>
+        <button class="main_bg" wx:if="{{opentype != 2 && opentype != 3}}">休息中</button>
+      </view>
+      <!-- *** -->
+      <!-- 购物车 -->
+      <view class="ordering_ppoput_content" wx:if="{{ordhide}}">
+        <!-- 购物车头部 -->
+        <view class="ordering_ppoput_list" style="background-color: #e4e2e2;">
+          <view class="ordering_ppoput_name" catchtap="bgShow">
+            <text style="color:#4a4a4a;font-size:14px;font-weight:bold;">关闭</text>
+          </view>
+          <view class="ordering_ppoput_price">
+            <text></text>
+          </view>
+          <view class="ordering_ppoput_input" bindtap="clearCar">
+             <text style="color:#4a4a4a;font-size:14px;font-weight:bold;">清空购物车</text>
+          </view>
+        </view>
+        <!-- *** -->
+        <!-- 购物车滚动 -->
+        <scroll-view scroll-y="true" style="height: 400rpx;" bindscroll="scroll">
+          <block wx:for="{{cartinfo}}" wx:key="kf" wx:for-item="itf">
+            <view class="ordering_ppoput_list" wx:if="{{itf.count > 0}}">
+              <view class="ordering_ppoput_name">
+                <text>{{itf.name}}</text>
+              </view>
+              <view class="ordering_ppoput_price">
+                <text>￥{{itf.price}}</text>
+              </view>
+              <view class="ordering_ppoput_input">
+                 <text class="ordering_add" data-id="{{itf.id}}" data-cost="{{itf.newcost}}" bindtap="downGoods">-</text>
+                 <input type="text" value="{{itf.count}}" disabled />
+                 <text class="ordering_minus main_bg" data-id="{{itf.id}}" data-cost="{{itf.price}}" data-oldcost="{{itf.oldcost}}" data-bagcost="{{itf.bagcost}}"  data-stock="{{itf.stock}}" data-cxnum="{{itf.cxnum}}" data-iscx="{{itf.iscx}}" bindtap="addGoods">+</text>
+              </view>
+            </view>
+          </block>
+          <block wx:for="{{ggcartinfo}}" wx:key="gg" wx:for-item="igc">
+            <view class="ordering_ppoput_list" wx:if="{{igc.count > 0}}">
+              <view class="ordering_ppoput_name">
+                <text>{{igc.name}}【{{igc.attrname}}】</text>
+              </view>
+              <view class="ordering_ppoput_price">
+                <text>￥{{igc.price}}</text>
+              </view>
+              <view class="ordering_ppoput_input">
+                 <text class="ordering_add" data-id="{{igc.id}}" bindtap="downggGoods">-</text>
+                 <input type="text" value="{{igc.count}}" disabled />
+                 <text class="ordering_minus main_bg" data-id="{{igc.id}}" data-gid="{{igc.gid}}" data-iscx="{{igc.iscx}}" data-attrid="{{igc.attrid}}" data-cost="{{igc.price}}" data-oldcost="{{igc.oldcost}}" data-stock="{{igc.stock}}" data-name="{{igc.name}}" data-attrname="{{igc.attrname}}" data-pic="{{igc.pic}}" data-bagcost="{{igc.bagcost}}" data-cxnum="{{igc.cxnum}}"  bindtap="addggGoods">+</text>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+        <!-- *** -->
+      </view>
+      <!-- *** -->
+    </view>
+  </view>
+
+  <view class="mask" wx:if="{{ordhide || gghide}}" bindtap="maskbind"></view>
+</view>
+<view class="basestate_content" wx:if="{{loginShow}}">
+  <image class="no_login" src="/images/no_login.png"></image>
+  <text>您还没登录，请先登录</text>
+  <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</view>

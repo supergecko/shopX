@@ -1,0 +1,119 @@
+<view class="content">
+	<view class="helpbanner">
+		<image src="/images/helpme_banner_1.png"></image>
+		<text class="balance_head_ptordlog" bindtap="urltoptorder">跑腿订单 ></text>
+	</view>
+	<view class="helptab">
+		<view class="tabcontent" style="width: 98%;">
+			<view class="tableft {{pttype==2?'navaA':''}}" data-pttype="2" bindtap="changeType">
+				<image class="tableftimg" src="/images/icon_helpbuy1.png"></image>
+				<text class="tablefttext">帮我买</text>
+			</view>
+			<view class="tabright {{pttype==1?'navaA':''}}" data-pttype="1" bindtap="changeType">
+				<image class="tabrightimg" src="/images/icon_helpgive1.png"></image>
+				<text class="tabrighttext">帮我送</text>
+			</view>
+		</view>
+	</view>
+	<view class="helpcontent">
+		<view class="helpprompt">
+			<image src="/images/icon_prompt.png"></image>
+			<text>{{pttype == 2?'想买点什么':'需要送什么'}}</text>
+		</view>
+		<block wx:if="{{pttype==2}}">
+			<view class="helpinput">
+				<view class="inputleft">
+					<input type="text" name="searchgood" value="{{searchVal}}" bindinput="inputVal" placeholder="输入你想要买的商品"/>
+				</view>
+				<view class="inputright"  bindtap="buymeOnclick" data-pttype="2">
+					帮我买
+				</view>
+			</view>
+			<view class="helpbuyclass">
+				<block  wx:for="{{helpbuyinfo}}" wx:key="key" wx:for-item="item">
+					<view class="smallclass" bindtap="helpbuyOnclick" data-pttype="2" data-id="{{item.id}}">
+						<image src="{{item.imgurl}}"></image>
+						<view class="small_right">
+							<text class="right_first">{{item.name}}</text>
+							<text class="right_second">{{item.description}}</text>
+						</view>
+					</view>
+				</block>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="helpgiveclass">
+				<block  wx:for="{{helpmoveinfo}}" wx:key="key" wx:for-item="item">
+					<view class="moveclass {{checkid==item.id?'clickborder':''}}" bindtap="movegoodOnclick" data-id="{{item.id}}" data-name="{{item.name}}" data-bordershow="{{bordershow}}" >
+						<image src="{{item.imgurl}}"></image>
+						<text>{{item.name}}</text>
+						<image class="icon" src="/images/icon_choice_1.png" wx:if="{{checkid==item.id}}"></image>
+					</view>
+				</block>
+			</view>
+			<view class="helpgivechioce">
+				<view class="goodweight" bindtap="showWeight">
+					<text class="chioceleft">重量</text>
+					<text class="chioceright">{{weight}}</text>
+					<image src="/images/angle_right.png"></image>
+				</view>
+				<view class="goodcost" bindtap="showCost">
+					<text class="chioceleft">物品价值</text>
+					<text class="chioceright">{{cost}}</text>
+					<image src="/images/angle_right.png"></image>
+				</view>
+			</view>
+			<view class="intopaotui" bindtap="helpgiveOnclick" data-pttype="{{pttype}}" data-movegood="{{movegood}}" data-cost="{{cost}}" data-weight="{{weight}}">
+				<view style="background-color:{{color}}">
+					帮我送
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="received_address_content" wx:if="{{weightShow == 1}}">
+		<view class="masktop">
+			<view class="maskleft">
+				<text>重量</text>
+			</view>
+			<view class="maskright" bindtap="closeMask">
+				<text>取消</text>
+			</view>
+		</view>
+		<scroll-view scroll-y style="height:300px" scroll-top="{{scrollTop}}">
+			<block wx:for="{{weightlist}}" wx:key="ks" wx:for-item="its">
+				<view class="received_address_box">
+					<view class="received_address_top" data-weight="{{its}}"  bindtap="choiceWeight">
+						<view class="received_address_info">
+							<view class="received_address_name nousejuan" style="text-align:center;color:#333333; ">
+								<text>{{its}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</view>
+	<view class="received_address_content" wx:if="{{costShow == 1}}">
+		<view class="masktop">
+			<view class="maskleft">
+				<text>物品价值</text>
+			</view>
+			<view class="maskright" bindtap="closeMask">
+				<text>取消</text>
+			</view>
+		</view>
+		<scroll-view scroll-y style="height:300px" scroll-top="{{scrollTop}}">
+			<block wx:for="{{costlist}}" wx:key="ks" wx:for-item="its">
+				<view class="received_address_box">
+					<view class="received_address_top" data-cost="{{its}}"  bindtap="choiceCost">
+						<view class="received_address_info">
+							<view class="received_address_name nousejuan" style="text-align:center;color:#333333; ">
+								<text>{{its}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+	</view>
+</view>

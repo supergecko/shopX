@@ -1,0 +1,40 @@
+<view class="content" wx:if="{{userinfo!=null}}">
+  <view class='integralgoodslist_banner_content'>
+    <image src='{{lunboimg}}'></image>
+  </view>
+  <view class='integralgoodslist_userinfo_content'>
+    <view class='integralgoodslist_userinfo_left'>
+      <text>我的积分</text>
+      <text>{{userinfo.score}}</text>
+    </view>
+    <view class='integralgoodslist_userinfo_right' bindtap="urltogiftlog">
+      <view class='integralgoodslist_userinfo_btn main_bg'>兑换记录</view>
+    </view>
+  </view>
+  <view class='integral_goodslist_content' wx:if="{{giftlist.length>0}}">
+    <block wx:for="{{giftlist}}" wx:key="key" wx:for-item="item">
+      <view class='integral_goodslist_box'>
+        <view class='integral_goodslist_img' bindtap="urltogiftdetail" data-id="{{item.id}}">
+          <image src='{{item.img}}'></image>
+        </view>
+        <view class='integral_goodslist_info'>
+          <view class='integral_goodslist_name'>
+            <text>{{item.title}}</text>
+          </view>
+          <view class='integral_goodslist_bottom'>
+            <view class='integral_goodslist_integral'>{{item.score}} 积分</view>
+            <block wx:if="{{item.stock>0}}">
+              <view class='integral_goodslist_btn' bindtap="startfuihuan" data-id="{{item.id}}" data-score="{{item.score}}" data-stock="{{item.stock}}">立即兑换</view>
+            </block>
+             <block wx:else>
+              <view class='integral_goodslist_btn active'>已兑完</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="emptygift" wx:if="{{giftlist.length==0}}">
+    <text>暂无商品可兑换......</text>
+  </view>
+</view>

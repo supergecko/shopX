@@ -1,0 +1,3 @@
+<view class="content">  
+    <map id="map" longitude="{{orderinfo.buyerlng}}" latitude="{{orderinfo.buyerlat}}" scale="16" markers="{{markers}}" polyline="{{polyline}}" style="width: 100%; height: {{windowHeight}}px;" enable-zoom="true" />
+ </view>

@@ -1,0 +1,164 @@
+.putforward_head_content{
+  padding: 10px 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.putforward_head_top{
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.putforward_head_top text:nth-child(1){
+  font-size: 16px;
+  color: #333;
+  display: block;
+}
+
+.putforward_head_btn{
+  font-size: 12px;
+  display: block;
+  color: #00cd85;
+}
+
+.putforward_head_inp{
+  padding: 0 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-size: 0;
+}
+
+.putforward_head_inp input{
+  height: 40px;
+  font-size: 14px;
+  color: #333;
+}
+
+.putforward_head_txt{
+  padding: 6px 0;
+  display: flex;
+  text-align: right;
+}
+
+.putforward_head_txt text{
+  font-size: 12px;
+  color: #999;
+  display: block;
+}
+
+.putforward_title_content{
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.putforward_title_content text{
+  font-size: 12px;
+  color: #999;
+  display: block;
+}
+
+.putforward_list_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.putforward_list_box{
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.putforward_list_left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.putforward_list_left image{
+  width: 30px;
+  height: 30px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 8px;
+  display: block;
+  border-radius: 6px;
+}
+
+.putforward_list_name{
+  display: flex;
+  flex-direction: column;
+}
+
+.putforward_list_name text:nth-child(1){
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.putforward_list_name text:nth-child(2){
+  font-size: 11px;
+  color: #999;
+  display: block;
+}
+
+.payinfo_content,
+.payinfo_box{
+  display: flex;
+  flex-direction: column;
+}
+
+.payinfo{
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.payinfo_left{
+  min-width: 44px;
+}
+
+.payinfo_left text,
+.payinfo_right input{
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.payinfo_right{
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.payinfo_right input{
+  width: 100%;
+}
+
+.putforward_btn_content{
+  padding: 15px 10px;
+}
+
+.putforward_btn_box button{
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.putforward_btn_box button::after{
+  border: none;
+}
+

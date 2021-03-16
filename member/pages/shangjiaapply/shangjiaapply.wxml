@@ -1,0 +1,52 @@
+<view class='content bgf5'>
+  <form bindsubmit="formSubmit"> 
+  <view class='feedback_content'>
+    <view class='feedback_type_content'>
+        <view class='feedback_type_box'>
+          <image src='/images/9_1/pro_02_1.png'></image>
+        </view>
+        <view class='feedback_type_zi'>
+          <text>商家资料</text>
+          <text>账户信息</text>
+          <text>网站审核</text>
+        </view>
+    </view>
+  </view>
+  <view class='feedback_textarea_content'>
+    <view class='feedback_text_content'>
+      <view class='apply_list_input'>
+        <text class='apply_list_title'>登录账号：</text>
+        <input type='text' placeholder='请输入登录账号' name="username"></input>
+      </view>
+    </view>
+    <view class='feedback_text_content'>
+      <view class='apply_list_input'>
+        <text class='apply_list_title'>登录密码：</text>
+        <input type='password' placeholder='请输入登录密码' name="password"></input>
+      </view>
+    </view>
+    <view class='feedback_text_content'>
+      <view class='apply_list_input'>
+        <text class='apply_list_title'>确认密码：</text>
+        <input type='password' placeholder='请确认密码' name="password2"></input>
+      </view>
+    </view>
+    <view class='feedback_text_content1'>
+      <view class='apply_list_input'>
+        <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for="1" wx:key="keys">
+            <checkbox  value="{{item}}" />
+          </label>
+        </checkbox-group>
+        <text class='apply_list_title'>我已阅读并同意</text>
+        <view class="home_class_box" bindtap="xyOnclick" data-url="/member/pages/xieyi/xieyi">
+          <text style="color:#EC4F56;font-size:13px;">《商家入驻协议》</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='feedback_submit_content'>
+    <button style='background-color: {{baseColor}};' form-type="submit">提交申请</button>
+  </view>
+  </form>
+</view>

@@ -1,0 +1,149 @@
+.coupon_head{
+  background-color: #fff;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+}
+
+.canuse {
+    height: 36px;
+    width: 49%;
+    display: inline-block;
+    border-right: 1px solid #e5e5e5;
+    font-size: 14px;
+    color:#666;
+}
+
+.nouse {
+    height: 36px;
+    width: 49%;
+    display: inline-block;
+    font-size: 14px;
+    color:#666;
+}
+
+.show {
+    color: #00cd85;
+}
+
+.coupon_content{
+  width:100%;
+}
+
+.discouponBox{
+  padding: 0 2%;
+  width: 96%;
+}
+
+.discoupon {
+    width: 100%;    
+    margin-top: 10rpx;
+    background-color: #fff;
+    border-radius: 0;
+    position: relative;
+    border:1px solid #ebebeb;
+}
+
+.top_div{
+  padding-bottom: 5px;
+  position: relative;
+}
+
+.left_div{
+  display: inline-block;
+  text-align: center;
+  width: 30%;
+  margin-top: 10rpx;
+}
+
+.dis_cost .sign{
+  color: #fe5722;
+  font-size: 12px;
+}
+
+.dis_cost .cost{
+  color: #fe5722;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.nouselist .dis_cost .sign{
+  color: #999999;
+}
+
+.nouselist .dis_cost .cost{
+  color: #999999;
+}
+
+.limit_cost{
+    text-align: center;
+    font-size: 11px;
+    background-color: #FFEEE8;
+    border-radius: 25px;
+    height: 22px;
+    line-height: 22px;
+    margin-left: 5px;
+    color:#666;
+}
+
+.nouselist .limit_cost{
+  background-color: #F0F0F0;
+}
+
+.right_div{
+  display: inline-block;
+  text-align: center;
+  margin:0 0 0 6px;
+}
+
+.timeover{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    color:#333;
+}
+
+.timeover image{
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.overtext{
+  color:red;
+  font-weight: normal;
+  font-size: 12px;
+  position:absolute;
+  top:5px;
+  right:10px;
+}
+
+.use_time{
+  font-size: 11px;
+  margin:10px 0 0 0;
+  color:#666;
+}
+
+.bottom_div{
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px #F0F0F0 dashed;
+  font-size: 11px;
+  padding-left: 3.8235%;
+  background-color: #fff;  
+  color: #666;
+}
+
+.bottom_add{
+  width:100%;
+  height:36px;
+  line-height:36px;
+  text-align: center;
+  background-color:#fff;
+  position:fixed;
+  left:0;
+  bottom:0;
+  z-index:999;
+}

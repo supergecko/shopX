@@ -1,0 +1,120 @@
+<view class="content" wx:if="{{!loginShow}}">
+
+  <form class="search-form" bindsubmit="searchAddress">
+    <view class="choice_head_content main_bg">
+
+      <view class="choice_head_text" bindtap="showCity">
+        <text>{{cityname}}</text>
+        <image src="/images/icon_angle_down.png"></image>
+      </view>
+        <view class="choice_head_input">
+          <input type="text" name="searchval" value="{{serachVal}}" bindfocus="showArea" bindinput="bindKeyInput" placeholder-style="color:rgba(255,255,255,0.5)" placeholder="请输入您的收货地址" />
+          <image src="/images/icon_gb.png" wx:if="{{locationshow == 3}}" bindtap="showAddress"></image>
+        </view>
+        <view class="choice_head_button">
+          <button formType="submit">搜索</button>
+        </view>
+
+    </view>
+  </form>
+
+  <view class="already_content" wx:if="{{locationshow == 2}}">
+    <view class="already_title">已开通城市</view>
+    <view class="already_text">
+      <block wx:for="{{citylist}}" wx:key="key" wx:for-item="item">
+        <text class="{{cityid == item.adcode ? 'navaA' : ''}}" data-id="{{item.adcode}}" data-name="{{item.name}}" data-location="{{item.location}}" bindtap="checkCity">{{item.name}}</text>
+      </block>
+    </view>
+  </view>
+
+  <view class="default_content" wx:if="{{locationshow == 1}}">
+    <view class="b_h"></view>
+    <view class="default_position" bindtap="choiceAddress">
+      <view wx:if="{{nowlocation!=''}}">{{nowlocation}}</view>
+      <view style="display: flex;color: #00cd85;align-items: center;">
+        <image src="/images/9_1/addaddress.png"></image>
+        <text>重新定位</text>
+      </view>
+    </view>
+    <!-- 我的收货地址 -->
+    <view wx:if="{{userinfo}}">
+      <view class="b_h"></view>
+      <view class="default_address_title">
+        <image src="/images/icon_position1.png"></image>
+        <text>我的收货地址</text>
+      </view>
+      <view class="default_address_content">
+        <block wx:for="{{arealist}}" wx:key="ka" wx:for-index="index" wx:for-item="ita">
+          <block wx:if="{{index<5}}">
+            <view class="line"></view>
+            <view class="default_address_box" data-location="{{ita.lng}},{{ita.lat}}" data-address="{{ita.bigadr}}" bindtap="choiceAddress">
+              <text class="default_add">{{ita.address}}</text>
+              <view><text class="default_info">{{ita.contactname}} <block wx:if="{{ita.sex==2}}">男士</block><block wx:elif="{{ita.sex==1}}">女士</block></text><text style="margin: 8rpx 0 0 20rpx;font-size: 25rpx;color: #999999;">{{ita.phone}}</text></view>
+              <block wx:if="{{ita.tag>0}}">
+                <text class="adrbq green" wx:if="{{ita.tag==1}}">家</text>
+                <text class="adrbq blue" wx:elif="{{ita.tag==2}}">公司</text>
+                <text class="adrbq orange" wx:else>学校</text>
+              </block>
+            </view>
+          </block>
+          <block wx:elif="{{index>4 && adrshowmore}}">
+            <view class="line"></view>
+            <view class="default_address_box" data-location="{{ita.lng}},{{ita.lat}}" data-address="{{ita.bigadr}}" bindtap="choiceAddress">
+              <text class="default_add">{{ita.address}}</text>
+              <text class="default_info">{{ita.contactname}} <block wx:if="{{ita.sex==2}}">男士</block><block wx:elif="{{ita.sex==1}}">女士</block><text>{{ita.phone}}</text></text>
+              <block wx:if="{{ita.tag>0}}">
+                <text class="adrbq green" wx:if="{{ita.tag==1}}">家</text>
+                <text class="adrbq blue" wx:elif="{{ita.tag==2}}">公司</text>
+                <text class="adrbq orange" wx:else>学校</text>
+              </block>
+            </view>
+          </block>
+        </block>
+        <view class="line"></view>
+        <view class="adrmorebox" wx:if="{{arealist.length>5}}" bindtap="showMoreAdr">
+          <text>{{!adrshowmore?'展开更多地址':'已展示全部地址'}}</text>
+          <image src="{{!adrshowmore?'/images/9_1/icon_balance_down.png':'/images/9_1/icon_balance_up.png'}}"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 附近的地址 -->
+    <view wx:if="{{nowlocation!=''&&nearadrlist.length>0}}">
+      <view class="b_h"></view>
+      <view class="default_address_title">
+        <image src="/images/icon_position1.png"></image>
+        <text>附近的地址</text>
+      </view>
+      <view class="default_address_content">
+        <block wx:for="{{nearadrlist}}" wx:key="ka" wx:for-item="ita">
+          <view class="line"></view>
+          <view class="default_address_box" data-location="{{ita.location}}" data-address="{{ita.name}}" bindtap="choiceAddress">
+            <text class="default_add">{{ita.name}}</text>
+            <text class="default_info"></text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="default_content" wx:if="{{locationshow == 3}}">
+    <view class="default_address_content">
+
+      <block wx:for="{{list}}" wx:key="ks" wx:for-item="its">
+        <view class="line"></view>
+        <view class="default_address_box" data-location="{{its.location}}" data-address="{{its.name}}" bindtap="choiceAddress">
+          <text class="default_add">{{its.name}}</text>
+          <text class="default_info">{{its.address.length == 0 ? its.district : its.address}}</text>
+        </view>
+      </block>
+
+    </view>
+  </view>
+  <view class="h_10"></view>
+  <view class="addbox" bindtap="navToOther" wx:if="{{!loginShow}}">
+    <text>新增地址</text>
+  </view>
+</view>
+ <view class="basestate_content" wx:if="{{loginShow}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请您先登录</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>

@@ -1,0 +1,51 @@
+<view class='content' wx:if="{{userinfo != null}}">
+  <view class='commisiondetail_head_content'>
+    <view class='commisiondetail_head_box'>
+      <icon type='search' size='12' color='#999'></icon>
+      <view class='commisiondetail_head_inp'><input type='text' placeholder='输入订单号/账户名' value="{{searchvalue}}" bindinput="checksearchval"></input></view>
+      <text bindtap="clearsearchval">x</text>
+    </view>
+  </view>
+  <view class='commisiondetail_list_content'>
+    <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+      <view class='commisiondetail_list_box'>
+        <view class='commisiondetail_list_head'>
+          <text>本单收入佣金</text>
+          <text>￥{{item.yjbcost}}</text>
+        </view>
+        <view class='line'></view>
+        <view class='commisiondetail_list_main'>
+          <view class='commisiondetail_list'>
+            <view class='commisiondetail_list_left'><text>订单编号</text></view>
+            <view class='commisiondetail_list_right'><text>{{item.dno}}</text></view>
+          </view>
+          <view class='commisiondetail_list'>
+            <view class='commisiondetail_list_left'><text>下单时间</text></view>
+            <view class='commisiondetail_list_right'><text>{{item.addtime}}</text></view>
+          </view>
+          <view class='commisiondetail_list'>
+            <view class='commisiondetail_list_left'><text>下单账户</text></view>
+            <view class='commisiondetail_list_right'>
+              <text>{{item.buyername}}</text>
+              <text>{{item.grade}}</text>
+            </view>
+          </view>
+          <view class='commisiondetail_list'>
+            <view class='commisiondetail_list_left'><text>商品金额</text></view>
+            <view class='commisiondetail_list_right'><text>￥{{item.ordercost}}</text></view>
+          </view>
+        </view>
+      </view>
+      <view class='b_h'></view>
+    </block>
+  </view>
+  <view class='nodata' wx:if="{{list.length ==0}}">
+    <image src='/images/icon_norecord.png'></image>
+    <text>暂无佣金记录</text>
+  </view>
+
+  <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+
+  <view class="loadingmore" hidden="{{loadshow}}" wx:if="{{list.length > 0}}">加载完毕...</view>
+</view>
+ <view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>

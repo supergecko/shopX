@@ -1,0 +1,137 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="content">
+  <view class="ordeing_class">
+    <view class="ordeing_classTxt" data-url="shop" bindtap="topOnclick">
+      <text>商品</text>
+    </view>
+    <view class="ordeing_classTxt" data-url="orderingassess" bindtap="topOnclick">
+      <text>评价</text>
+    </view>
+    <view class="ordeing_classTxt navaA">
+      <text>商家</text>
+    </view>
+  </view>
+  <view class="b_h"></view>
+  <view class="orderingshop_head_content">
+    <view class="orderingshop_head_img">
+      <image src="{{shopinfo.shoplogo}}"></image>
+    </view>
+    <view class="orderingshop_head_right">
+      <view class="orderingshop_head_title">
+        <text>{{shopinfo.shopname}}</text>
+      </view>
+      <view class="shopreport" bindtap="reportShop">
+        <text>举报商家</text>
+      </view>
+      <view class="orderingshop_head_star">
+          <block wx:for="{{shopstart}}" wx:key="kf">
+            <image src="/images/star_light.png"></image>
+           </block>
+          <block wx:for="{{5-shopstart}}" wx:key="ks">
+            <image src="/images/star_gray.png"></image>
+          </block>
+      </view>
+      <view class="orderingshop_head_price">
+        <text>起送价{{shopdet.limitcost}}元</text>|
+        <text>配送费{{psinfo.pscost}}元</text>
+      </view>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="orderingshop_info_content">
+    <view class="orderingshop_info_box">
+      <image src="/images/9_1/Icon_Location.png"></image>
+      <text>{{shopinfo.address}}</text>
+    </view>
+    <view class="line"></view>
+    <view class="orderingshop_info_box">
+      <image src="/images/9_1/icon_time.png"></image>
+      <text>营业时间：{{shopinfo.starttime}}</text>
+    </view>
+    <view class="line"></view>
+    <view class="orderingshop_info_box">
+      <image src="/images/9_1/shop_phone.png"></image>
+      <text>商家电话：</text>
+      <text bindtap="telShop" data-phone="{{shopinfo.phone}}" style="color:#368ed9;">{{shopinfo.phone}}</text>
+    </view>
+  </view>
+  <view class="b_h"></view>
+  <view class="orderingshop_intr_content">
+      <view class="orderingshop_intr_title">商家实景</view>
+      <view class="line"></view>
+      <view class="orderingshop_intr_box" style="display: flex;">
+        <block wx:if="{{shopreal.length>0}}">
+          <view class="real_img_box">
+            <scroll-view scroll-x="true" style=" white-space: nowrap;">
+              <block wx:for="{{shopreal}}" wx:key="keys" wx:for-item="items">
+                <view class="realbox" data-imglist="{{items.shoprealimg}}" bindtap="showImgBox">
+                  <image src="{{items.shoprealimg[0].img}}"></image>
+                  <text class="left_top">{{items.name}}</text>
+                  <text class="right_bottom">{{items.imgcount}}张</text>
+                </view>
+              </block>
+            </scroll-view>
+          </view>
+        </block>
+        <block wx:else>
+          <text>暂无信息</text>
+        </block>
+      </view>
+    </view>
+  <view class="b_h" wx:if="{{shopinfo.notice_info!='' && shopinfo.notice_info!=null}}"></view>
+  <view class="orderingshop_intr_content" wx:if="{{shopinfo.notice_info!='' && shopinfo.notice_info!=null }}">
+      <view class="orderingshop_intr_title">商家公告</view>
+      <view class="line"></view>
+      <view class="orderingshop_intr_box" style="display: flex;">
+        <image src="/images/039.png" style="width: 24px;height:24px;margin-right:10px;"></image>
+        <text style="font-size: 28rpx;line-height:50rpx;">{{shopinfo.notice_info}}</text>
+      </view>
+    </view>
+
+  <view class="b_h" wx:if="{{is_allow_ziti==1}}"></view>
+  <view class="orderingshop_intr_content" wx:if="{{is_allow_ziti==1}}">
+    <view class="orderingshop_intr_title">商家服务</view>
+    <view class="line"></view>
+    <view class="orderingshop_intr_box" style="display: flex;">
+     <!--  <text style=" background-color:#00cd85;padding:3px 5px;color:#fff;font-weight:900;font-size:14px;margin-right:10px;line-height:36rpx;">取</text> -->
+      <text style="font-size: 28rpx;line-height:50rpx;">本店支持到店自取</text>
+    </view>
+  </view>
+
+  <view class="b_h" wx:if="{{cxlist.length>0}}"></view>
+  <view class="orderingshop_intr_content" wx:if="{{cxlist.length>0}}">
+    <view class="orderingshop_intr_title">商家活动</view>
+    <view class="line"></view>
+    <view class="orderingshop_intr_box" style="display: flex;">
+      <view class="cx_content">
+        <block wx:for="{{cxlist}}" wx:key="keys" wx:for-item="items">
+          <view class="cx_box">
+            <image src="{{items.imgurl}}"></image>
+            <text>{{items.name}}</text>
+          </view>
+          <view class="line"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="b_h"></view>
+  <view class="orderingshop_intr_content">
+    <view class="orderingshop_intr_title">商家简介</view>
+    <view class="line"></view>
+    <view class="orderingshop_intr_box"><template is="wxParse" data="{{wxParseData:intr_info.nodes}}"/></view>
+  </view>
+  <view class="b_h"></view>
+
+  <!--<view class="orderingshop_report">举报商家</view>-->
+</view>
+<view class="mask" wx:if="{{maskshow==1}}" style="background:rgba(0, 0, 0, .8)" bindtap="hideImg"> </view>
+<view class="imgbox" wx:if="{{is_showimg==1}}">
+    <swiper indicator-dots autoplay interval="5000">
+        <block wx:for="{{img_box_list}}" wx:key="keys" wx:for-index="index" wx:for-item="btem">
+            <swiper-item>
+                <image src='{{btem.img}}'></image>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

@@ -1,0 +1,85 @@
+<view class='content bgf5'>
+<form bindsubmit="formSubmit">
+<input type="text" name="orderid" value="{{orderid}}" hidden="true" />
+  <block wx:if="{{type==1}}">
+    <view class='evaluateorder_head_content'>
+      <view class='evaluateorder_head_left'>
+        <image src='{{shoplogo}}'></image>
+      </view>
+      <view class='evaluateorder_head_right'>
+        <text class='evaluateorder_head_name'>{{shopname}}</text>
+        <view class='evaluateorder_head_label'>
+          <block wx:for='{{goodslist}}' wx:key="key" wx:for-item="item">
+            <text>{{item}}</text>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='evaluateorder_content'>
+      <view class='evaluateorder_textarea'>
+        <textarea name='content' placeholder='请填写意见与建议，分享给更多想买的他们吧' maxlength='auto'></textarea>
+      </view>
+      <view class='evaluateorder_upload_content'>
+        <view class='evaluateorder_upload_btn' bindtap="upimg" wx:if="{{!uploadhide}}"><image src='/images/9_1/img_upload_bg.png'></image></view>
+        <block wx:for='{{uploadlist}}' wx:key='index' wx:for-item="items">
+          <view class='evaluateorder_upload_img' wx:key="index" wx:if="{{items!=''}}">
+            <image src='{{items}}'></image>
+            <text data-delindex="{{index}}" data-imglist="{{uploadlist}}" bindtap="delNowImg">x</text>
+          </view>
+        </block>
+      </view>
+      <view class='h_20'></view>
+    </view>
+    <view class='h_5'></view>
+    <view class='evaluateorder_star_content'>
+      <view class='evaluateorder_star_box'>
+        <text>配送服务</text>
+        <input type="text" name="pspoint" value="{{distribution}}" hidden="true" />
+        <block wx:for="{{distribution}}" wx:key="keys" wx:for-index="kd">
+          <image src='/images/star_light.png' data-type="1" data-index="{{kd}}" bindtap="bindDistribution"></image>
+        </block>
+        <block wx:for="{{5-distribution}}" wx:key="keys" wx:for-index="dd">
+          <image src='/images/star_gray.png' data-type="2" data-index="{{dd}}" bindtap="bindDistribution"></image>
+        </block>
+      </view>
+      <view class='evaluateorder_star_box'>
+        <text>商家评价</text>
+        <input type="text" name="sjpoint" value="{{population}}" hidden="true" />
+        <block wx:for="{{population}}" wx:key="keys" wx:for-index="kp">
+          <image src='/images/star_light.png' data-type="1" data-index="{{kp}}" bindtap="bindPopulation"></image>
+        </block>
+        <block wx:for="{{5-population}}" wx:key="keys" wx:for-index="pp">
+          <image src='/images/star_gray.png' data-type="2" data-index="{{pp}}" bindtap="bindPopulation"></image>
+        </block>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{type==2}}">
+    <view class='evaluateorder_star_content'>
+      <view class='evaluateorder_star_box'>
+        <text>总体评价</text>
+        <input type="text" name="sjpoint" value="{{allpoint}}" hidden="true" />
+        <block wx:for="{{allpoint}}" wx:key="keys" wx:for-index="kd">
+          <image src='/images/star_light.png' data-type="1" data-index="{{kd}}" bindtap="bindAllpoint"></image>
+        </block>
+        <block wx:for="{{5-allpoint}}" wx:key="keys" wx:for-index="dd">
+          <image src='/images/star_gray.png' data-type="2" data-index="{{dd}}" bindtap="bindAllpoint"></image>
+        </block>
+      </view>
+      <view class='evaluateorder_star_box'>
+        <text>配送服务</text>
+        <input type="text" name="pspoint" value="{{pspoint}}" hidden="true" />
+        <block wx:for="{{pspoint}}" wx:key="keys" wx:for-index="kp">
+          <image src='/images/star_light.png' data-type="1" data-index="{{kp}}" bindtap="bindPsPoint"></image>
+        </block>
+        <block wx:for="{{5-pspoint}}" wx:key="keys" wx:for-index="pp">
+          <image src='/images/star_gray.png' data-type="2" data-index="{{pp}}" bindtap="bindPsPoint"></image>
+        </block>
+      </view>
+    </view>
+  </block>
+  <view class='evaluateorder_btn_content'>
+    <button style='color: {{baseColor}};' formType="submit">发布</button>
+  </view>
+</form>
+</view>

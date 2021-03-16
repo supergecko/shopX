@@ -1,0 +1,25 @@
+<view class='content bgf5'>
+  <form bindsubmit="formSubmit"> 
+  <view class='feedback_content'>
+    <view class='feedback_type_content'>
+        <view class='feedback_type_box'>
+          <image src='/images/9_1/pro_03_1.png'></image>
+        </view>
+        <view class='feedback_type_zi'>
+          <text>商家资料</text>
+          <text>账户信息</text>
+          <text>网站审核</text>
+        </view>
+    </view>
+  </view>
+  <view class='feedback_textarea_content'>
+    <view class='feedback_text_content'>
+      <view class='apply_list_input'>
+        <image src='/images/9_1/exa_03.png'></image>
+        <text style='font-size:16px;margin-top:30px;'>您的申请已经提交</text>
+        <text class='apply_list_title'>请等待管理员处理</text>
+      </view>
+    </view>
+  </view>
+  </form>
+</view>

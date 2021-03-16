@@ -1,0 +1,55 @@
+<view class="history_search_content main_bg">
+  <view class='channel_head_search_box' bindtap="checkSearch">
+      <image src='/images/9_1/icon_head_search.png'></image>
+      <text>输入商家或商品名称</text>
+    </view>
+</view>
+<view class="container"> 
+  <view class="home_content" > 
+    <view class="home_shops_content">
+      <view class="ordeing_box" style="display:flex;">
+        <view class="ordeing_left">
+          <scroll-view scroll-y="true" style="height:{{scrollHeight}}px"  >
+            <view class="ordeing_left_box">
+            <block wx:for="{{typelist}}" wx:key="ks" wx:for-item="items">
+              <view class="ordeing_left_list{{checkcate == items.id?'navaA':''}}"  data-index="{{items.id}}" data-id="b{{items.id}}" bindtap="typeOnclick">
+                <text>{{items.name}}</text>
+                <text>{{items.shopcount}}</text>
+              </view>
+            </block>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="ordeing_right">
+          <view class="market_class_content">
+            <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" scroll-width-animation="true" scroll-into-view="{{toView}}" bindscroll="scroll">
+              <view class="market_class_box">
+                <block wx:for="{{typelist}}" wx:key="key" wx:for-item="item">
+                <view class="ordeing_right_title" id="b{{item.id}}">
+                  <view class="ordeing_right_title_left">
+                    <text>{{item.name}}</text>
+                  </view>
+                  <view class="ordeing_right_title_right" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="sontypeOnclick">
+                    <text>去频道 ></text>
+                  </view>
+                </view>
+                <view class="ordeing_right_typelist">
+                <block wx:for="{{item.sonlist}}" wx:key="key" wx:for-item="itv">
+                
+                  <view class="market_class" data-id="{{itv.id}}" data-name="{{item.name}}" bindtap="sontypeOnclick">
+                    <image style="width:110rpx;height:72rpx;" src="{{itv.img}}"></image>
+                    <text>{{itv.name}}</text>
+                    <text>{{itv.shopcount}}</text>
+                  </view> 
+                
+                </block>
+                </view>
+                </block>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,71 @@
+<view class="content" wx:if="{{userInfo != null}}">
+
+  <view class="coupon_head">
+    <view class="canuse {{showtype == 1 ? 'show' : ''}}" data-type="1" bindtap="typeOnclick">可使用</view>
+    <view class="nouse {{showtype == 2 ? 'show' : ''}}" data-type="2" bindtap="typeOnclick">已失效</view>
+  </view>
+
+  <view class="coupon_content">
+
+    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" class="discouponBox canuselist" wx:if="{{showtype == 1}}">
+      <block wx:for="{{uselist}}" wx:key="ku" wx:for-item="itu" >
+        <view class="discoupon">
+          <view class="top_div">
+            <view class="left_div">
+              <view class="dis_cost">
+                <text class="sign">￥</text><text class="cost">{{itu.cost}}</text>
+              </view>
+              <view class="limit_cost">
+              满{{itu.limitcost}}元可用
+              </view>
+            </view>
+            <view class="right_div">
+              <view class="timeover">
+              {{itu.name}}<text class="overtext" wx:if="{{itu.willbeexpired == 1}}">即将过期</text>
+              </view>
+              <view class="use_time">
+              有效期：{{itu.creattime}} 至 {{itu.endtime}}
+              </view>
+            </view>
+          </view>
+          <view class="bottom_div" wx:if="{{itu.tiaojian != ''}}">{{itu.tiaojian}}</view>
+        </view>
+      </block>
+    </scroll-view>
+
+    <scroll-view scroll-y="true" style="height:{{scrollHeight}}px" class="discouponBox nouselist" wx:if="{{showtype == 2}}">
+      <block wx:for="{{nolist}}" wx:key="kn" wx:for-item="itn" >
+        <view class="discoupon">
+          <view class="top_div">
+            <view class="left_div">
+              <view class="dis_cost">
+                <text class="sign">￥</text><text class="cost">{{itn.cost}}</text>
+              </view>
+              <view class="limit_cost">
+              满{{itn.limitcost}}元可用
+              </view>
+            </view>
+            <view class="right_div">
+              <view class="timeover">
+              {{itn.name}}<block wx:if="{{itn.status == 4}}"><image src='/images/guoqi.png'></image></block><block wx:else><text class="overtext">已使用</text></block>
+              </view>
+              <view class="use_time">
+              有效期：{{itn.creattime}} 至 {{itn.endtime}}
+              </view>
+            </view>
+          </view>
+          <view class="bottom_div">{{itn.tiaojian}}</view>
+        </view>
+      </block>
+    </scroll-view>
+
+  </view>
+
+  <view class="basestate_content" style="z-index:-1" wx:if="{{shownothing == 1}}">
+    <image class="no_login" style="width:72px;height:80px" src="/images/wujuan.png"></image>
+    <text style="font-size:24rpx">无此类型优惠券</text>
+  </view>
+
+  <view class="bottom_add" data-url="newcoupon" bindtap="urlOnclick">添加</view>
+
+</view>

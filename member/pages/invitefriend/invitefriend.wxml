@@ -1,0 +1,33 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class='content bgf5' style="height:{{windowHeight}}px;background-color:{{shareinfo.color}}!important;">
+  <view class='feedback_content'>
+    <view class='feedback_type_content'>
+        <view class='feedback_type_box'>
+          <image src='{{bigimg}}'></image>
+        </view>
+    </view>
+  </view>
+  <view class='feedback_textarea_content'>
+    <view class='feedback_text_content' style="background-image:url(/images/9_1/share_btn_bg.png)">
+      <view class='apply_list_input'>
+        <block wx:if="{{checkinfosendjuan==1}}">
+          <button open-type='share'>马上分享  拿优惠券</button>
+        </block>
+        <block wx:else>
+          <button style="background:#ccc;">暂未开放  敬请期待</button>
+        </block>
+      </view>
+    </view>
+    <view class='shareRuleCon'>
+      <view class='shareRule' style='background-color:{{actcolor}}'>
+        <view class='shareimg'>
+          <image src='/images/9_1/share_tit.png'></image>
+        </view>
+        <view class='activerule'>
+          <template is="wxParse" data="{{wxParseData:avtrule.nodes}}"/>
+          <image src='/images/9_1/share_lh.png' class="shareimg"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

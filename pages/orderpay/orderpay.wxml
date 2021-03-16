@@ -1,0 +1,121 @@
+<view class="content">
+
+
+<form bindsubmit="formSubmit">
+
+<input type="text" name="userid" value="{{userinfo.uid}}" hidden="true" />
+<input type="text" name="orderid" value="{{info.id}}" hidden="true" />
+  <view class="orderpay_info_head">
+    <view class="needpaybox font_cf font_s14">
+      <text>需支付</text>
+    </view>
+    <view class="paybox font_cf">
+      <text>￥{{info.allcost}}</text>
+    </view>
+    <view class="toshowbox font_cf font_s12" wx:if="{{info.shoptype!=100}}">
+      <text bindtap="showOrderDet">查看订单</text>
+    </view>
+  </view>
+  <view class="order_det_box" wx:if="{{detshow}}">
+    <view class="order_det_title">
+      <text class="font_s15 font_c3">订单详情</text>
+      <image src="/images/9_1/icon_payment_x.png" bindtap="closeBox"></image>
+    </view>
+    <scroll-view scroll-y style="height:400px;">
+      <view class="order_det_content">
+        <view class="det_content_box">
+          <view class="boxtitle font_s14 font_c3">
+            <text>{{info.is_ziti==1?'取货地址':'收货地址'}}</text>
+          </view>
+          <view class="boxcontent column">
+            <text>{{info.is_ziti==1?info.shopaddress:info.buyeraddress}}</text>
+            <text>{{info.buyername}}    {{info.buyerphone}}</text>
+          </view>
+        </view>
+        <view class="det_content_box">
+          <view class="boxtitle font_s14 font_c3">
+            <text>{{info.shopname}}</text>
+          </view>
+          <block wx:for="{{orderdet}}" wx:key="keys" wx:for-item="items">
+            <view class="boxcontent row">
+              <text>{{items.goodsname}}</text>
+              <text>x {{items.goodscount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class="det_content_box">
+          <view class="boxtitle font_s14 font_c3">
+            <text>红包/积分</text>
+          </view>
+          <view class="boxcontent row">
+            <text>平台优惠券抵扣</text>
+            <block wx:if="{{info.yhjcost>0}}">
+              <text>-{{info.yhjcost}}元</text>
+            </block>
+            <block wx:else>
+              <text>无</text>
+            </block>
+          </view>
+          <view class="boxcontent row">
+            <text>商家优惠券抵扣</text>
+            <block wx:if="{{info.shopyhjcost>0}}">
+              <text>-{{info.shopyhjcost}}元</text>
+            </block>
+            <block wx:else>
+              <text>无</text>
+            </block>
+          </view>
+          <view class="boxcontent row">
+            <text>积分抵扣</text>
+            <block wx:if="{{info.scoredowncost>0}}">
+              <text>-{{info.scoredowncost}}元</text>
+            </block>
+            <block wx:else>
+              <text>无</text>
+            </block>
+          </view>
+        </view>
+        <view class="det_content_box">
+          <view class="boxtitle font_s14 font_c3">
+            <text>备注信息</text>
+          </view>
+          <view class="boxcontent">
+            <text>{{info.content!=''?info.content:'无'}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="orderpay_mode_content">
+    <radio-group name="paydotype">
+      <block wx:for="{{paylist}}" wx:key="key">
+        <view class="line"></view>
+        <view class="orderpay_mode_box" bindtap="changePaytype" data-type="{{item.loginname}}" data-paylist="{{paylist}}">
+          <view class="orderpay_mode_img">
+            <image wx:if="{{item.loginname == 'open_acout'}}" src="/images/9_1/icon_yue.png"></image>
+            <image wx:if="{{item.loginname == 'weixinapplet'}}" src="/images/9_1/icon_weixi.png"></image>
+          </view>
+          <text wx:if="{{item.loginname == 'weixinapplet'}}">微信支付</text>
+          <text wx:if="{{item.loginname == 'open_acout'}}">余额支付<text class="balance">账户余额：{{balance}}元</text></text>
+          <text class="nextrecharge" bindtap="nextRecharge" wx:if="{{item.loginname == 'open_acout'}}">去充值</text>
+          <radio value="{{item.loginname}}" checked="{{item.checked}}"/>
+        </view>
+      </block>
+    </radio-group>
+  </view>
+  <view class="button_bottom_content">
+    <view class="button_bottom_box">
+      <button wx:if="{{ordhide == 1}}" formType="submit">确认支付</button>
+      <button wx:if="{{ordhide == 0}}" class="gray-button">确认支付</button>
+    </view>
+  </view>
+</form>
+</view>
+<view class="overpaybox" wx:if="{{overPayBox}}">
+  <view class="pay_box_content">
+    <image src="/images/9_1/icon_payment_success.png"></image>
+    <text class="first">支付成功</text>
+    <text class="second">请稍候，美食即将送达~</text>
+  </view>
+</view>
+<view class="mask" wx:if="{{detshow || overPayBox}}" bindtap="maskbind"></view>

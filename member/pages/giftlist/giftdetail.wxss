@@ -1,0 +1,98 @@
+page{
+  background-color: #f5f5f5;
+}
+
+.integraldetails_banner_content{
+  width: 100%;
+  height: 510rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.integraldetails_banner_content image{
+  wwidth: 100%;
+  height: 510rpx;
+  display: inline;
+}
+
+.integraldetails_banner_name{
+  width: 100%;
+  background: rgba(0,0,0,.4);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.integraldetails_banner_name text{
+  padding: 24rpx 20rpx;
+  font-size: 32rpx;
+  color: #fff;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.integraldetails_head_content{
+  padding: 10rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.integraldetails_head_left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.integraldetails_head_left image{
+  width: 28rpx;
+  height: 30rpx;
+  margin-right: 14rpx;
+  margin-top: 5px;
+}
+
+.integraldetails_head_left text{
+  font-size: 40rpx;
+  color: #00cd85;
+}
+
+.integraldetails_head_right{
+  width: 208rpx;
+  height: 82rpx;
+  line-height: 82rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #00cd85;
+  border-radius: 8rpx;
+}
+
+.integraldetails_head_right.active{
+  background-color: #ccc;
+}
+
+.integral_details_content{
+  display: flex;
+  flex-direction: column;
+}
+
+.integral_details_title{
+  padding: 20rpx;
+  font-size: 30rpx;
+  color: #999;
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.integral_details_box{
+  padding: 20rpx;
+  font-size: 30rpx;
+  color: #333;
+  word-break: break-all;
+  background-color: #fff;
+}

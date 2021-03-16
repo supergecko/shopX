@@ -1,0 +1,51 @@
+<view class="content" wx:if="{{userInfo != null}}">
+  <view class="b_h"></view>
+  <view class="received_head_content" data-id="0" bindtap="editAddress">
+    <image src="/images/green/icon_addto.png"></image>
+    <text>添加收货地址</text>
+  </view>
+  <view class="received_address_content">
+    <radio-group bindchange="radioChange">
+      <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+
+      <view class="b_h"></view>
+      <view class="received_address_box">
+        <view class="received_address_top">
+          <view class="received_address_info">
+            <view class="received_address">
+              <text>{{item.bigadr}}   {{item.detailadr}}</text>
+            </view>
+            <view class="received_address_name">
+              <text>{{item.contactname}}</text>
+              <text>{{item.phone}}</text>
+            </view>
+
+          </view>
+          <view class="received_address_lab green" wx:if="{{item.tag == 1}}">家</view>
+          <view class="received_address_lab blue" wx:elif="{{item.tag == 2}}">公司</view>
+          <view class="received_address_lab orange" wx:elif="{{item.tag == 3}}">学校</view>
+        </view>
+        <view class="line"></view>
+        <view class="received_address_bottom">
+          <view class="received_address_radio">
+            <radio value="{{item.id}}" checked="{{item.default == 1?'true':''}}" />
+            <text>设为默认</text>
+          </view>
+          <view class="received_address_fun">
+            <view class="received_address_btn" data-id="{{item.id}}" bindtap="editAddress">
+              <image src="/images/icon_edit.png"></image>
+              <text>编辑</text>
+            </view>
+            <view class="received_address_btn" data-id="{{item.id}}" bindtap="delAddress">
+              <image src="/images/icon_del.png"></image>
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+      </block>
+    </radio-group>
+  </view>
+</view>

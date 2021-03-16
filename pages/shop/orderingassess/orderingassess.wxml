@@ -1,0 +1,101 @@
+<view class="content">
+  <view class="ordeing_class">
+      <view class="ordeing_classTxt" data-url="shop" bindtap="topOnclick">
+        <text>商品</text>
+      </view>
+      <view class="ordeing_classTxt navaA">
+        <text>评价</text>
+      </view>
+      <view class="ordeing_classTxt" data-url="orderingshop" bindtap="topOnclick">
+        <text>商家</text>
+      </view>
+    </view>
+    <view class="b_h"></view>
+    <view class="ordergeneral_content">
+      <view class="ordergeneral_left">
+        <text>{{zonghefen}}</text>
+        <text>综合评分</text>
+      </view>
+      <view class="ordergeneral_right">
+        <view class="ordergeneral_box">
+          <text>总体评价</text>
+          <block wx:for="{{zongtistart}}" wx:key="kz">
+            <image src="/images/star_light.png"></image>
+          </block>
+          <block wx:for="{{5-zongtistart}}" wx:key="kp">
+            <image src="/images/star_gray.png"></image>
+          </block>
+        </view>
+        <view class="ordergeneral_box">
+          <text>配送服务</text>
+          <block wx:for="{{psfuwustart}}" wx:key="kf">
+            <image src="/images/star_light.png"></image>
+           </block>
+          <block wx:for="{{5-psfuwustart}}" wx:key="ks">
+            <image src="/images/star_gray.png"></image>
+          </block>
+        </view>
+      </view>
+    </view>
+    <block wx:if="{{list.length==0}}" >
+      <view class="emptypinglun">
+          <image style="width:108rpx; height: 96rpx;" src="/images/pinglun.png"/>
+          <view>暂无评论</view>
+      </view>
+    </block>
+    <view class="shop_evaluate_content" wx:if="{{list.length>0}}">
+      <block wx:for='{{list}}' wx:key='keys' wx:for-index="index" wx:for-item="item">
+        <view class='shop_evaluate_main'>
+          <view class="shop_evaluate_portrait">
+            <image src="{{item.userlogo}}"></image>
+          </view>
+          <view class="shop_evaluate_box">
+            <view class="shop_evaluate_head">
+              <text>{{item.username}}</text>
+              <text>{{item.addtime}}</text>
+            </view>
+            <view class="shop_evaluate_star">
+              <block wx:for="{{item.shoppoint}}" wx:key="kk" wx:for-index="index">
+                <image src="/images/star_light.png"></image>
+               </block>
+              <block wx:for="{{5-item.shoppoint}}" wx:key="kp" wx:for-index="index">
+                <image src="/images/star_gray.png"></image>
+              </block>
+            </view>
+            <view class="shop_evaluate_text">{{item.content=='(null)'?'':item.content}}</view>
+            <view class="shop_evaluate_img_content">
+              <block wx:for="{{item.imglist}}" wx:key="keys" wx:for-item="imgitem" wx:for-index="indexs">
+                <view class="shop_evaluate_img" style="width: {{item.imglist.length==1?'176px':'30%'}};height:{{item.imglist.length==1?'176px':''}};" bindtap="showImgBox" data-imglist="{{item.imglist}}" data-imgindex="{{indexs}}">
+                  <image src="{{imgitem}}"></image>
+                </view>
+              </block>
+            </view>
+            <view class="shop_evaluate_label">
+              <image src="/images/9_1/icon_dinnercover.png" style="width:21px;height:21px;"></image>
+              <block wx:for="{{item.name}}" wx:key="keys" wx:for-item="nameitem">
+                <text>{{nameitem}}</text>
+              </block>
+            </view>
+            <view class="shop_evaluate_reply" wx:if="{{item.replycontent != '' && item.replycontent != null}}">
+              <text>商家回复：</text>
+              <text>{{item.replycontent}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  <view wx:if="{{loadshow != 2}}">
+    <view class="loadingmore" hidden="{{loadshow == 1}}">上拉加载更多...</view>
+    <view class="loadingmore" hidden="{{loadshow == 0}}">加载完毕...</view>
+  </view>
+</view>
+<view class="mask" wx:if="{{maskshow==1}}" style="background:rgba(0, 0, 0, .8)" bindtap="hideImg"> </view>
+<view class="imgbox" wx:if="{{is_showimg==1}}">
+    <scroll-view scroll-x style="height:100%;white-space: nowrap;" scroll-into-view="img-{{imgindex}}">
+        <block wx:for="{{img_box_list}}" wx:key="keys" wx:for-index="index" wx:for-item="btem">
+            <view style="height:100%;width: 100%;display: inline-block;" id="img-{{index}}">
+                <image src='{{btem}}'></image>
+            </view>
+        </block>
+    </scroll-view>
+</view>

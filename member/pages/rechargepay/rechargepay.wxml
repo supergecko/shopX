@@ -1,0 +1,54 @@
+<view class="content">
+
+
+<form bindsubmit="formSubmit">
+
+<input type="text" name="userid" value="{{userinfo.uid}}" hidden="true" />
+  <view class="orderpay_info_content">
+    <view class="orderpay_info_box">
+      <text>订单名称：</text>
+      <text>{{orderName}}</text>
+    </view>
+    <view class="orderpay_info_box">
+      <text>订单金额：</text>
+      <text>￥{{cost}}</text>
+    </view>
+  </view>
+  <view class="line"></view>
+  <view class="orderpay_bottom_style">
+    <image src="/images/orderpay_bottom_style.png"></image>
+  </view>
+  <view class="b_h"></view>
+  <view class="orderpay_need_content">
+    <text>还需支付：</text>
+    <text>￥{{cost}}</text>
+  </view>
+
+  <view class="orderpay_mode_content">
+    <radio-group name="paydotype">
+
+    <block wx:for="{{paylist}}" wx:key="key">
+      <view wx:if="{{item.loginname == 'weixin'}}" class="line"></view>
+      <view class="orderpay_mode_box" wx:if="{{item.loginname == 'weixin'}}">
+        <view class="orderpay_mode_img">
+          <image wx:if="{{item.loginname == 'weixin'}}" src="/images/9_1/icon_weixi.png"></image>
+        </view>
+        <text wx:if="{{item.loginname == 'weixin'}}">微信支付</text>
+        <radio value="{{item.loginname}}" />
+      </view>
+    </block>
+
+    </radio-group>
+  </view>
+
+
+  <view class="button_bottom_content">
+    <view class="button_bottom_box">
+      <button wx:if="{{ordhide == 1}}" formType="submit">确认支付</button>
+      <button wx:if="{{ordhide == 0}}" class="gray-button">确认支付</button>
+    </view>
+  </view>
+</form>
+
+
+</view>

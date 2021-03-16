@@ -1,0 +1,186 @@
+<view class="content">
+  <view class="ordeing_content">
+    <!-- 店铺搜索页头部 -->
+    <view class="order_head_content }">
+      <view class="head_search_box">
+        <view class="box_left">
+          <image src="/images/9_1/icon_head_search.png"></image>
+          <input type="text" name="searchVal" placeholder="搜索本店商品" placeholder-style="" bindinput="checkSearch" focus="true" confirm-type="search" bindconfirm="startSearch" />
+        </view>
+        <view class="box_right" bindtap="startSearch">
+          <text>搜索</text>
+        </view>
+      </view>
+    </view>
+    <view class="h_10"></view>
+    <!-- 商品 -->
+    <view class="ordeing_box" wx:if="{{list.length>0}}">
+      <block wx:for="{{list}}" wx:key="cc" wx:for-item="itc">
+        <!-- 一行两商品 -->
+        <view class="ordeing_market_content">
+            <view class="ordeing_market_list">
+              <view class="ordeing_market_img">
+                <image src="{{itc.img}}"></image>
+                <view  wx:if="{{itc.is_cx == 1}}" class="zhekou_nameclass" style="background-image:url(/images/cx_bg_icon.png);">
+                  <image src="/images/cx_icon.png"></image>
+                  <text>{{itc.zhekou}}折</text>
+                  <block wx:if="{{itc.cxnum==0}}">
+                    <text>不限购</text>
+                  </block>
+                  <block wx:else>
+                    <text>限购{{itc.cxnum}}{{itc.goodattr}}</text>
+                  </block>
+                </view>
+              </view>
+              <view class="ordeing_market_name">
+                <text>{{itc.name}}</text>
+              </view>
+              <view class="ordeing_market_sale">
+                <text>已售 {{itc.sellcount}}{{itc.goodattr}}</text>
+                <text  wx:if="{{itc.cost>itg.newcost}}" class="linethrough" >￥{{itc.cost}}</text>
+              </view>
+              <view class="ordeing_market_price">
+                <text>￥</text>
+                <text>{{itc.newcost}}</text>
+                <text>/{{itc.goodattr}}</text>
+              </view>
+              <view class="ordeing_market">
+                <view class="ordeing_market_input" wx:if="{{itc.have_det != 1 && itc.count > 0 && (openinfo.opentype == 2 || openinfo.opentype == 3)}}">
+                  <text class="inp_add" hidden="{{itc.cartnum == 0}}" data-id="{{itc.id}}" data-cost="{{itc.newcost}}" bindtap="downGoods">-</text>
+                  <input hidden="{{itc.cartnum == 0}}" type="text" value="{{itc.cartnum}}" disabled />
+                  <text class="inp_minus" data-id="{{itc.id}}" data-cost="{{itc.newcost}}" data-oldcost="{{itg.oldcost}}" data-bagcost="{{itc.bagcost}}" data-stock="{{itc.count}}" data-name="{{itc.name}}" data-pic="{{itc.img}}" data-cxnum="{{itc.cxnum}}" data-iscx="{{itc.is_cx}}" bindtap="addGoods">+</text>
+                </view>
+                <view class="ordeing_market_spec" data-id="{{itc.id}}" wx:if="{{itc.have_det == 1 && itc.count > 0 && (openinfo.opentype == 2 || openinfo.opentype == 3)}}" bindtap="ggShow">选规格</view>
+                <view class="ordeing_market_over" wx:if="{{itc.count <= 0 && (openinfo.opentype == 2 || openinfo.opentype == 3)}}">售完</view>
+                <view class="ordeing_market_over" wx:if="{{openinfo.opentype != 2 && openinfo.opentype != 3}}">休息中</view>
+              </view>
+            </view>
+        </view>
+      </block>
+    </view>
+    <!-- *** -->
+    <view class="emptybox" wx:if="{{list.length<=0}}">
+      <text>未搜索到商品...</text>
+    </view>
+    <!-- 规格弹窗 -->
+    <view class="ordering_popup_content" wx:if="{{!gghide}}">
+      <view class="ordering_popup_box">
+        <view class="ordering_popup_title">
+          <text style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width:384rpx;">{{productname}}</text>
+          <text class="ordering_popup_colse" bindtap="maskbind">x</text>
+        </view>
+        <view class="ordering_popup_main">
+          <block wx:for="{{productlist}}" wx:key="keyp" wx:for-item="vap">
+            <view class="ordering_popup">
+              <view class="ordering_popup_name">{{vap.name}}：</view>
+              <view class="ordering_popup_text">
+                <block wx:for="{{vap.det}}" wx:key="kdet" wx:for-item="vat">
+                  <text class="{{vat.check == 1?'navaA':''}}" data-gid="{{productgid}}"data-main="{{vap.id}}" data-id="{{vat.id}}" bindtap="choiceattr">{{vat.name}}</text>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="ordering_popup_bottom">
+          <view class="ordering_popup_left">
+            <text wx:if="{{productinfo.id > 0}}">￥{{productinfo.price}}</text>
+            <text wx:else>请选规格</text>
+          </view>
+          <view class="ordering_popup_right">
+            <view class="ordeing_popup_input">
+              <text class="inp_add" hidden="{{productinfo.count == 0}}" data-id="{{productinfo.id}}" bindtap="downggGoods">-</text>
+              <input hidden="{{productinfo.count == 0}}" type="text" value="{{productinfo.count}}" disabled />
+              <text class="inp_minus" data-id="{{productinfo.id}}" data-gid="{{productinfo.gid}}" data-iscx="{{productinfo.iscx}}" data-attrid="{{productinfo.attrid}}" data-cost="{{productinfo.price}}" data-oldcost="{{productinfo.oldcost}}" data-stock="{{productinfo.stock}}" data-name="{{productinfo.name}}" data-attrname="{{productinfo.attrname}}" data-pic="{{productinfo.pic}}" data-bagcost="{{productinfo.bagcost}}" data-cxnum="{{productinfo.cxnum}}"  bindtap="addggGoods">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- *** -->
+  </view>
+
+  <!-- 店铺底部 购物车，支付 -->
+  <view class="ordering_payment_content">
+    <view class="ordering_payment_box">
+      <!-- 支付 -->
+      <view class="ordering_payment_left">
+        <view class="ordering_payment_numbox" >
+          <view class="ordering_payment_num main_bg" catchtap="bgShow">
+            <image src="/images/icon_shoppingcar.png"></image>
+            <text>{{total.count}}</text>
+          </view>
+        </view>
+        <view class="ordering_payment_price">
+          <text class="ordering_payment_txtT">
+            <text class="ordering_payment_doller">￥</text>
+            <text class="ordering_payment_cost">{{total.money}}</text>
+          </text>
+          <view style="display: flex;">
+              <text wx:if="{{psinfo.pscost > 0}}" class="ordering_payment_txtB">另需配送费 {{psinfo.pscost}} 元</text>
+              <text  wx:if="{{psinfo.is_allow_ziti==1 && psinfo.pscost > 0}}" class="ordering_payment_txtB" style="margin-left:8rpx;">|</text>
+              <block wx:if="{{psinfo.is_allow_ziti==1}}"><text class="ordering_payment_txtB" style="margin-left:8rpx;">支持自取</text></block>
+          </view>
+        </view>
+      </view>
+      <view class="ordering_payment_right">
+        <button class="main_bg" wx:if="{{limitcost == 0 && (openinfo.opentype == 2 || openinfo.opentype == 3)}}" bindtap="gotoPay">选好了</button>
+        <button class="main_bg" wx:if="{{limitcost > 0 && (openinfo.opentype == 2 || openinfo.opentype == 3)}}">还差{{limitcost}}元</button>
+        <button class="main_bg" wx:if="{{openinfo.opentype != 2 && openinfo.opentype != 3}}">休息中</button>
+      </view>
+      <!-- *** -->
+      <!-- 购物车 -->
+      <view class="ordering_ppoput_content" wx:if="{{!carthide}}">
+        <!-- 购物车头部 -->
+        <view class="ordering_ppoput_list" style="background-color:#e4e2e2;">
+          <view class="ordering_ppoput_name" catchtap="bgShow">
+            <text style="color:#4a4a4a;font-size:14px;font-weight:bold;">关闭</text>
+          </view>
+          <view class="ordering_ppoput_price">
+            <text></text>
+          </view>
+          <view class="ordering_ppoput_input" bindtap="clearCar">
+             <text style="color:#4a4a4a;font-size:14px;font-weight:bold;">清空购物车</text>
+          </view>
+        </view>
+        <!-- *** -->
+        <!-- 购物车滚动 -->
+        <scroll-view scroll-y="true" style="height: 400rpx;" bindscroll="scroll">
+          <block wx:for="{{cartinfo}}" wx:key="kf" wx:for-item="itf">
+            <view class="ordering_ppoput_list" wx:if="{{itf.count > 0}}">
+              <view class="ordering_ppoput_name">
+                <text>{{itf.name}}</text>
+              </view>
+              <view class="ordering_ppoput_price">
+                <text>￥{{itf.price}}</text>
+              </view>
+              <view class="ordering_ppoput_input">
+                 <text class="ordering_add" data-id="{{itf.id}}" data-cost="{{itf.price}}" bindtap="downGoods">-</text>
+                 <input type="text" value="{{itf.count}}" disabled />
+                 <text class="ordering_minus main_bg" data-id="{{itf.id}}" data-cost="{{itf.price}}" data-oldcost="{{itf.oldcost}}" data-bagcost="{{itf.bagcost}}"  data-stock="{{itf.stock}}" data-cxnum="{{itf.cxnum}}" data-iscx="{{itf.iscx}}" bindtap="addGoods">+</text>
+              </view>
+            </view>
+          </block>
+          <block wx:for="{{ggcartinfo}}" wx:key="gg" wx:for-item="igc">
+            <view class="ordering_ppoput_list" wx:if="{{igc.count > 0}}">
+              <view class="ordering_ppoput_name">
+                <text>{{igc.name}}【{{igc.attrname}}】</text>
+              </view>
+              <view class="ordering_ppoput_price">
+                <text>￥{{igc.price}}</text>
+              </view>
+              <view class="ordering_ppoput_input">
+                 <text class="ordering_add" data-id="{{igc.id}}" bindtap="downggGoods">-</text>
+                 <input type="text" value="{{igc.count}}" disabled />
+                 <text class="ordering_minus main_bg" data-id="{{igc.id}}" data-gid="{{igc.gid}}" data-iscx="{{igc.iscx}}" data-attrid="{{igc.attrid}}" data-cost="{{igc.price}}" data-oldcost="{{igc.oldcost}}" data-stock="{{igc.stock}}" data-name="{{igc.name}}" data-attrname="{{igc.attrname}}" data-pic="{{igc.pic}}" data-bagcost="{{igc.bagcost}}" data-cxnum="{{igc.cxnum}}"  bindtap="addggGoods">+</text>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+        <!-- *** -->
+      </view>
+      <!-- *** -->
+    </view>
+  </view>
+
+  <view class="mask" wx:if="{{maskshow}}" bindtap="maskbind"></view>
+</view>

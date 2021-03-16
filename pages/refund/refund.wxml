@@ -1,0 +1,108 @@
+<view class="content">
+
+<form bindsubmit="formSubmit" wx:if="{{buttonShow == 1}}">
+  <input type="text" name="allcost" value="{{info.allcost}}" hidden="true" />
+  <input type="text" name="orderid" value="{{info.id}}" hidden="true" />
+  <input type="text" name="userid" value="{{userid}}" hidden="true" />
+  <input type="text" name="typeid" value="0" hidden="true" />
+  <view class="refund_prompt_content">
+    <image src="/images/green/icon_prompt.png"></image>
+    <text>商家确认后,款项将会原路退回</text>
+  </view>
+  <view class="b_h"></view>
+  <view class="refund_price_content">
+    <text>退款金额</text>
+    <text>￥{{info.allcost}}</text>
+  </view>
+  <view class="b_h"></view>
+  <view class="refund_title_content">
+    <text>退款原因</text>
+    <text>(至少选一项)</text>
+  </view>
+  <view class="line"></view>
+  <view class="refund_radio_content">
+    <radio-group name="reason">
+
+      <block wx:for="{{drawsmlist}}" wx:key="key" wx:for-item="item">
+        <view class="refund_radio_box">
+          <radio value="{{item}}" />
+          <text>{{item}}</text>
+        </view>
+        <view class="line"></view>
+      </block>
+
+    </radio-group>
+  </view>
+  <view class="b_h"></view>
+  <view class="orderassess_textarea">
+    <textarea placeholder-style="color:#ccc" name="content" placeholder="详细描述您遇到的问题，有助于更快处理退款" />
+  </view>
+
+  <view class="button_bottom_content">
+    <view class="button_bottom_box">
+      <button formType="submit">申请退款</button>
+    </view>
+  </view>
+</form>
+
+  <view class="draw_detail_content" wx:if="{{buttonShow == 0}}">
+    <view class="draw_content_des">
+      <view class="des_box">
+        <view class="box_left">
+          <text>退款金额</text>
+        </view>
+        <view class="box_right">
+          <text>￥{{cost}}</text>
+        </view>
+      </view>
+      <view class="des_box">
+        <view class="box_left">
+          <text>退回账户</text>
+        </view>
+        <view class="box_right">
+          <text>{{backacount}}</text>
+        </view>
+      </view>
+      <view class="des_box">
+        <view class="box_left">
+          <text>退款状态</text>
+        </view>
+        <view class="box_right">
+          <text>{{status}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="b_h"></view>
+    <view class="draw_content_progress">
+      <text class="progress_title">退款进度</text>
+       <block wx:for="{{drawbacklog}}" wx:key="keys" wx:for-index="index" wx:for-item="item">
+          <view class="progress_des">
+            <view class="des_left">
+              <text class="point {{index==0?'nanaA':''}}"></text>
+              <text class="point_line"></text>
+            </view>
+            <view class="des_right">
+                <view class="destitle">
+                  <text class="title_left {{index==0?'nanaA':''}}">{{item.title}}</text>
+                  <text class="title_right">{{item.addtime}}</text>
+                </view>
+                <view class="descontent">
+                  <text>{{item.content1}}</text>
+                  <text wx:if="{{item.content2!=''}}">{{item.content2}}</text>
+                </view>
+            </view>
+          </view>
+        </block>
+    </view>
+    <view class="line"></view>
+    <view class="draw_button" wx:if="{{showbtn==1}}">
+      <block wx:if="{{nowstatus==0}}">
+        <button class="closedraw" bindtap="cancelDraw">取消退款申请</button>
+      </block>
+      <block wx:elif="{{nowstatus==3}}">
+        <button class="keepdraw" bindtap="keepDraw">继续申请退款</button>
+        <button class="closedraw" bindtap="cancelDraw">取消退款申请</button>
+      </block>
+    </view>
+  </view>
+</view>

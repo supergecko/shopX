@@ -1,0 +1,26 @@
+<view class="content">
+<form bindsubmit="formSubmit">
+  <view class="addto_address_content">
+
+    <view class="addto_address_box">
+      <view class="addto_address">
+        <input type="text" name="card" placeholder="请输入券号" />
+      </view>
+    </view>
+
+    <view class="addto_address_box">
+      <view class="addto_address">
+        <input type="password" name="password" placeholder="请输入优惠券密码" />
+      </view>
+    </view>
+
+  </view>
+
+  <view class="button_bottom_content">
+    <view class="button_bottom_box">
+      <button formType="submit">确认提交</button>
+    </view>
+  </view>
+
+</form>
+</view>

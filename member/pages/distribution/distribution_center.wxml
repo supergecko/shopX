@@ -1,0 +1,94 @@
+<view class='content'>
+  <view class='distributioncore_head_content main_bg'>
+    <view class='distributioncore_head_box'>
+      <view class='distributioncore_head_top_content'>
+        <view class='distributioncore_head_top_portrait'><image src='{{meminfo.logo}}'></image></view>
+        <view class='distributioncore_head_top_info'>
+          <text>{{meminfo.username}}</text>
+          <text>邀请码：{{invitecode}}</text>
+        </view>
+      </view>
+      <view class='distributioncore_head_link' bindtap="urltomember">
+        <text>个人中心</text>
+        <image src='/images/icon_angle_right.png'></image>
+      </view>
+    </view>
+    <view class='distributioncore_head_line'></view>
+    <view class='distributioncore_head_bottom_content'>
+      <view class='distributioncore_head_bottom_left'>
+        <text>可提现金额(元)</text>
+        <text>{{meminfo.fxcost}}</text>
+      </view>
+      <view class='distributioncore_head_bottom_right' bindtap="urlToOther" data-url="/member/pages/distribution/distribution_yjtx">
+        <button>提现</button>
+      </view>
+    </view>
+  </view>
+  <view class='distributioncore_money_content'>
+    <view class='distributioncore_money_box'>
+      <text>{{allordercost}}</text>
+      <text>累计销售(元)</text>
+    </view>
+    <view class='distributioncore_money_box'>
+      <text>{{allyjcost}}</text>
+      <text>累计佣金(元)</text>
+    </view>
+  </view>
+  <view class='b_h'></view>
+  <view class='distributioncore_list_content'>
+    <view class='distributioncore_list_box' bindtap="urlToOther" data-url="/member/pages/myfxyj/myfxyj">
+      <view class='distributioncore_list_left'>
+        <image src='/images/icon_distributioncore_01.png'></image>
+        <text>我的佣金</text>
+      </view>
+      <view class='distributioncore_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+    <view class='line'></view>
+    <view class='distributioncore_list_box' bindtap="urlToOther" data-url="/member/pages/distribution/distribution_myjunior">
+      <view class='distributioncore_list_left'>
+        <image src='/images/icon_distributioncore_02.png'></image>
+        <text>我的下线</text>
+      </view>
+      <view class='distributioncore_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='b_h'></view>
+  <view class='distributioncore_list_content'>
+    <view class='distributioncore_list_box' bindtap="urlToOther" data-url="/member/pages/distribution/yjranking">
+      <view class='distributioncore_list_left'>
+        <image src='/images/icon_distributioncore_03.png'></image>
+        <text>佣金排名</text>
+      </view>
+      <view class='distributioncore_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+    <view class='line'></view>
+    <view class='distributioncore_list_box' bindtap="urlToOther" data-url="/member/pages/distribution/fxcontent">
+      <view class='distributioncore_list_left'>
+        <image src='/images/icon_distributioncore_04.png'></image>
+        <text>分销说明</text>
+      </view>
+      <view class='distributioncore_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='b_h'></view>
+  <view class='distributioncore_list_content'>
+    <view class='distributioncore_list_box' bindtap="urlToOther" data-url="/member/pages/distribution/distribution_fxcode">
+      <view class='distributioncore_list_left'>
+        <image src='/images/icon_distributioncore_05.png'></image>
+        <text>分销二维码</text>
+      </view>
+      <view class='distributioncore_list_right'>
+        <text>{{successcontent}}</text>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+  </view>
+</view>

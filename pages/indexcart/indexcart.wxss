@@ -1,0 +1,279 @@
+/* pages/indexcart/indexcart.wxss */
+@import '../../common/shop.wxss';
+.indexcart_content{
+  margin-bottom: 50px;
+}
+.emptycart{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  text-align:center;
+  margin-top:14%;
+}
+.emptycart image{
+  width:170px;
+  height:170px;
+  margin:0 auto;
+}
+.emptycart .cartfirsttxt{
+  margin-top:10px;
+  display:blcok;
+  color:#666;
+  font-size:14px;
+}
+.emptycart .cartsecondtxt{
+  width:40%;
+  margin:30px auto;
+  height:40px;
+  line-height:40px;
+  color:#fff;
+  border-radius:18px;
+  background-color:#00cd85;
+  font-size:14px;
+}
+.placeorder_main_content{
+
+}
+.placeorder_shopname_content{
+  height: 40px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.placeorder_shopname_left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.placeorder_shopname_left image:first-child{
+  width:20px;
+  height:20px;
+  margin-right:8px;
+  display:block;
+  border-radius:50%;
+}
+.placeorder_shopname_left image:last-child{
+  width:10px;
+  height:10px;
+  margin-left:9px
+}
+.placeorder_shopname_left text{
+  font-size: 13px;
+  color: #333;
+  display: block;
+}
+.placeorder_shopname_right{
+  width:40px;
+  text-align:right;
+}
+.placeorder_shopname_right image{
+  width: 16px;
+  height:18px;
+}
+
+.placeorder_shoplist_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+
+.placeorder_shoplist_box{
+  padding: 20rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.placeorder_shoplist_box:last-child{
+  margin-bottom: 0px;
+}
+
+.placeorder_shoplist_left,
+.placeorder_shoplist_left image{
+  width: 115rpx;
+  height: 115rpx;
+  margin-right: 20rpx;
+}
+
+.placeorder_shoplist_right{
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.placeorder_shoplist_head,
+.placeorder_shoplist_center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.placeorder_shoplist_head text{
+  font-size: 28rpx;
+  color: #333;
+}
+
+.placeorder_shoplist_center{
+  margin-top: 8rpx;
+}
+
+.placeorder_shoplist_center text,
+.placeorder_shoplist_bottom text{
+  font-size: 22rpx;
+  color: #999;
+}
+.placeorder_costlist_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.placeorder_costlist_box{
+  display: flex;
+  flex-direction: column;
+  height:40px;
+ line-height:40px;
+}
+
+.placeorder_costlist{
+  padding: 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.placeorder_costlist_left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.placeorder_costlist_left image.icon_discount{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+  display: block;
+}
+
+.placeorder_costlist_left image.icon_integralwhy{
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 10rpx;
+  display: block;
+}
+
+.placeorder_costlist_left text,
+.placeorder_costlist_right text,
+.placeorder_paymethod_left text,
+.placeorder_paymethod_right text{
+  font-size: 24rpx;
+  color: #333;
+}
+
+.placeorder_costlist_right text.red{
+  color: #ff0000;
+}
+
+.placeorder_costlist_right text.gray{
+  color: #999;
+}
+
+.angle_right{
+  width: 14rpx;
+  height: 24rpx;
+  margin: 1rpx 0 0 20rpx;
+}
+
+.placeorder_costlist_right,
+.placeorder_paymethod_right{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.placeorder_costlist_right text,
+.placeorder_paymethod_right text{
+  max-width: 550rpx;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-top:1px solid #f0f0f0;
+}
+
+.placeorder_total_content{
+  justify-content:space-between;
+  display:flex;
+  background-color: #fff;
+}
+.total_left text{
+  margin-left:10px;
+  height:50px;
+  line-height:50px;
+  font-size:14px;
+  color:#666;
+}
+.total_right text:first-child{
+  font-size:15px;
+color:#f00;
+font-weight:bold;
+}
+
+.total_right text:last-child{
+  margin:10px;
+  background-color:#00cd85;
+  height:30px;
+  line-height:30px;
+  font-size:14px;
+  width:80px;
+  text-align:center;
+  border-radius:2px;
+  color:#fff;
+  display:inline-block;
+
+}
+.cartheight{
+    height: 8px;
+    width: 100%;
+    background-color: #fafafa;
+}
+.guessbox{
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.box_title{
+  display: flex;
+  width: 96%;
+  padding: 10px 2% 0;
+  height: 35px;
+  align-items: center;
+  color: #6b6b6b;
+}
+.clearbox{
+  display: flex;
+  width: 100%;
+  background-color: #00cd85;
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.clearbox text{
+  color: #fff;
+  font-size: 14px;
+}

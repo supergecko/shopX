@@ -1,0 +1,177 @@
+
+.commisiondetail_list_content{
+  display: flex;
+  flex-direction: column;
+  background-color:#fff;
+  padding:0 3%;
+  width: 94%;
+}
+.home_closed_text{
+  margin-top:10rpx;
+  height:22rpx;
+  line-height:22rpx;
+  padding:5rpx;
+  font-size:24rpx;
+  color:#ffffff;
+  background:#cccccc;
+  border-radius:4rpx;
+  width:120px;
+text-align:center;
+}
+.home_order_text{
+  margin-top:10rpx;
+  height:22rpx;
+  line-height:22rpx;
+  padding:5rpx;
+  font-size:24rpx;
+  color:#ffffff;
+  background:#34b875;
+  border-radius:4rpx;
+  width:130px;
+  text-align:center;
+}
+  .nodata{
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  margin:100px;
+}
+.nodata image{
+  width:80px;
+  height:80px;
+  margin:20px auto;
+}
+.nodata text{
+  color:#bbb;
+}
+.mask{
+  width:100%;
+  height:100%;
+  background:rgba(0, 0, 0, .4);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:997;
+}
+.home_shopslist_content{
+  padding: 20rpx 0;
+  display: flex;
+  flex-direction: row;
+  border-bottom:1px solid #f0f0f0;
+  width: 100%;
+}
+
+.home_shopslist_img{
+  width: 28%;
+  height: 170rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 1px solid #f0f0f0;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.home_shopslist_img image{
+  width: 100%;
+  height: 100%;
+}
+
+.home_shopslist_box{
+  padding:0 0 0 3%;
+  width: 69%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home_shopslist_top{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.home_shopslist_left{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.home_shopslist_name text{
+  max-width: 380rpx;
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.home_shopslist_star{
+  padding-top: 12rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.home_shopslist_star image{
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 4rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.home_shopslist_star text{
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.home_shopslist_time{
+  padding-top: 18rpx;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.home_shopslist_time text{
+  height: 24rpx;
+  line-height: 24rpx;
+  font-size: 24rpx;
+  color: #00cd85;
+   display: inline-block;
+   min-width: 65px;
+}
+.home_shopslist_time .first{
+  padding-right: 2%;
+}
+
+.home_shopslist_time .last{
+  border-left:1px solid #d6d6d6;
+  padding-left: 2%;
+}
+
+.home_shopslist_right{
+  padding-top: 10rpx;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end
+}
+
+.home_cost_text{
+  margin-bottom: 12rpx;
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.home_cost_lab{
+  height: 28rpx;
+  line-height: 28rpx;
+  padding: 0 10rpx;
+  font-size: 22rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}

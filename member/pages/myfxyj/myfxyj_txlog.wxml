@@ -1,0 +1,55 @@
+<view class='content' wx:if="{{userinfo != null}}">
+  <view class='putforward_recordlist_content'>
+    <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+      <view class='putforward_recordlist_box' bindtap="showtxdet" data-id="{{item.id}}">
+        <view class='putforward_recordlist_left'>
+          <view class='putforward_recordlist_title'><text>佣金提现</text></view>
+          <view class='putforward_record'>
+            <text>{{item.status}}</text>
+            <text>{{item.addtime}}</text>
+          </view>
+        </view>
+        <view class='putforward_recordlist_right'><text>-{{item.cost}}</text></view>
+      </view>
+      <view class='line'></view>
+    </block>
+  </view>
+  <view class='nodata'  wx:if="{{list.length ==0}}">
+    <image src='/images/icon_no_tixian.png'></image>
+    <text>暂无提现记录</text>
+  </view>
+
+  <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+
+  <view class="loadingmore" hidden="{{loadshow}}" wx:if="{{list.length > 0}}">加载完毕...</view>
+</view>
+ <view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>
+
+
+<view class='putforward_details_content' wx:if="{{txdetShow==1}}">
+    <view class="txdettitle"><text>提现详情</text></view>
+    <view class='putforward_details_box'>
+      <view class='putforward_details_left'><text>提现金额</text></view>
+      <view class='putforward_details_right'><text>￥{{logdet.cost}}</text></view>
+    </view>
+    <view class='line'></view>
+    <view class='putforward_details_box'>
+      <view class='putforward_details_left'><text>提现状态</text></view>
+      <view class='putforward_details_right'><text>{{logdet.status}}</text></view>
+    </view>
+    <view class='line'></view>
+    <view class='putforward_details_box'>
+      <view class='putforward_details_left'><text>申请时间</text></view>
+      <view class='putforward_details_right'><text>{{logdet.addtime}}</text></view>
+    </view>
+    <view class='line'></view>
+    <view class='putforward_details_box'>
+      <view class='putforward_details_left'><text>收款方式</text></view>
+      <view class='putforward_details_right'><text>{{logdet.type}}</text></view>
+    </view>
+    <view class='line'></view>
+    <view class='putforward_details_box'>
+      <view class='putforward_details_left'><text>备注</text></view>
+      <view class='putforward_details_right'><text>{{logdet.content}}</text></view>
+    </view>
+</view>

@@ -1,0 +1,75 @@
+<view class="content" wx:if="{{userinfo}}">
+  <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+    <view class="orderlist_content">
+      <view class="orderlist_top">
+        <view class="orderlist_name">
+          <image src="/images/062.png"></image>
+          <text>{{item.addtime}}</text>
+        </view>
+        <view class="orderlist_state">
+          <text class="navaA">{{item.orderwuliustatus}}</text>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="orderlist_center" data-id="{{item.id}}" bindtap="infoOrder">
+        <view class="orderlist_img">
+          <image src="{{item.shoplogo}}"></image>
+        </view>
+        <view class="orderlist_info">
+          <text style="font-weight:bold;color:#3F3F3F;font-size:32rpx;">{{item.shopname}}</text>
+          <text>{{item.detname}}</text>
+          <view>
+            <block wx:if="{{item.is_ziti==1}}"><text style="background-color:#00cd85;color:#fff;margin-right:5px;padding:0 3px;">自取</text></block>
+            <text id="cost">合计:￥{{item.allcost}}</text>
+          </view>
+        </view>
+        <view class="orderlist_pstype" style="margin-left:6%;">
+          <text style="color:#B8B8B8;font-size:14px;">{{item.provide}}</text>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="orderlist_bottom">
+        <button data-type="1" data-id="{{item.shopid}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="bindButton" wx:if="{{!(item.paytype == 1 && item.paystatus == 0 && item.status < 3)}}">再来一单</button>
+        <button class="main_bg first" data-id="{{item.id}}" data-type="5" wx:if="{{item.paytype == 1 && item.paystatus == 0 && item.status < 3}}" bindtap="bindButton">立即支付</button>
+        <button class="main_bg first" data-id="{{item.id}}" data-type="7" wx:if="{{item.is_show_quhuo == 1 &&item.is_ziti != 1  }}" bindtap="bindButton">确认{{item.is_ziti==1?'取':'收'}}货</button>
+        <button class="main_bg first" data-id="{{item.id}}" data-type="8" wx:if="{{item.status == 3 && item.is_ping == 0}}" bindtap="bindButton">评价订单</button>
+      </view>
+    </view>
+    <view class="b_h"></view>
+  </block>
+
+</view>
+ <view class='foodhome_navbar_content'>
+        <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/pages/index/index'>
+          <image src='/images/bottom/bottom_wm1.png'></image>
+          <text>首页</text>
+        </view>
+        <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/quickcart/quickcart' wx:if="{{open_shangou==1}}">
+          <image src='/images/bottom/bottom_sg1.png'></image>
+          <text>闪购</text>
+        </view>
+        <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/paotui/paotui' wx:if="{{open_paotui==1}}">
+          <image src='/images/bottom/bottom_pt1.png'></image>
+          <text>跑腿</text>
+        </view>
+        <view class='foodhome_navbar' bindtap='indexskip' data-num='2' data-url='/pages/orderlist/orderlist'>
+          <image src='/images/bottom/bottom_dd2.png'></image>
+          <text style='color:#01CD88'>订单</text>
+        </view>
+        <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/member/pages/memcenter/memcenter'>
+          <image src='/images/bottom/bottom_wd1.png'></image>
+          <text>我的</text>
+        </view>
+      </view>
+
+ <view class="basestate_content" wx:if="{{userinfo == null || userinfo==''}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请登录后查看订单</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+
+
+<view class="basestate_content" wx:if="{{userinfo && list.length == 0}}">
+  <image src="/images/nearnoorder.png"></image>
+  <text>您还没有外卖订单哦~</text>
+</view>

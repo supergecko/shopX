@@ -1,0 +1,44 @@
+<view class='content bgf5'>
+  <view class='apply_banner_content'><image src='/images/9_1/001.png'></image></view>
+  <form bindsubmit="formSubmit">
+  <view class='apply_list_content'>
+    <view class='apply_list_box'>
+      <text class='apply_list_title'>姓名</text>
+      <view class='apply_list_input'>
+        <input type='text' placeholder='请输入联系人姓名' name="username" ></input>
+      </view>
+    </view>
+    <view class='apply_list_box'>
+      <text class='apply_list_title'>手机号</text>
+      <view class='apply_list_input'>
+        <input type='number' placeholder='请输入11位手机号' name="phone" maxlength="11"></input>
+      </view>
+    </view>
+    <view class='apply_list_box'>
+      <text class='apply_list_title'>邮箱</text>
+      <view class='apply_list_input'>
+        <input type='text' placeholder='请填写常用邮箱' name="email" ></input>
+      </view>
+    </view>
+    <view class='apply_list_box'>
+      <text class='apply_list_title'>意向城市</text>
+      <view class='apply_list_input'>
+        <input type='text' placeholder='请输入省、市、区' name="city" ></input>
+      </view>
+      <view class='apply_list_tips'><text>*请填写以上信息，三个工作日内获得反馈</text></view>
+    </view>
+  </view>
+  <view class='h_5'></view>
+  <view class='apply_problem_content'>
+    <view class='apply_problem_head_title'><text>{{title}}</text></view>
+    <view class='apply_problem_box'>
+      <text class='apply_problem_text'>{{content}}</text>
+    </view>
+  </view>
+  <view class='apply_btn_content'>
+    <view class='apply_btn_box'>
+      <button  formType="submit">提交代理商申请</button>
+    </view>
+  </view>
+  </form>
+</view>

@@ -1,0 +1,200 @@
+
+.refund_prompt_content{
+  padding: 22rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(1, 205, 136, .1);
+}
+
+.refund_prompt_content image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.refund_prompt_content text{
+  font-size: 25rpx;
+}
+
+.refund_price_content{
+  height: 90rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.refund_price_content text:first-child{
+  font-size: 27rpx;
+  color: #333;
+}
+
+.refund_price_content text:last-child{
+  font-size: 29rpx;
+}
+
+.refund_title_content{
+  height: 90rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.refund_title_content text:first-child{
+  font-size: 27rpx;
+  color: #333;
+}
+
+.refund_title_content text:last-child{
+  margin: 4rpx 0 0 10rpx;
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.refund_radio_content{
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.refund_radio_box{
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.refund_radio_box text{
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.orderassess_textarea textarea{
+  width:95%;
+  height:100px;
+
+  background-color:#fff;
+  padding:0 20rpx;
+}
+.draw_content_des{
+  background-color:#fff;
+display:flex;
+flex-direction:column;
+padding:20rpx 3%;
+}
+.draw_content_des .des_box{
+  display:flex;
+line-height:60rpx;
+font-size:24rpx;
+}
+.draw_content_des .des_box .box_left{
+  color:#999;
+}
+.draw_content_des .des_box:first-child .box_right{
+  color:#00cd85!important;
+}
+.draw_content_des .des_box .box_right{
+  color:#000;
+  margin-left:30rpx;
+}
+.draw_content_progress{
+  background-color:#fff;
+  padding:20rpx 3%;
+}
+.draw_content_progress .progress_title{
+  font-size:28rpx;
+  color:#999;
+  width: 50%;
+} 
+.progress_des .des_left{
+  width: 2%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.des_left .point.nanaA{
+  background-color:#00cd85!important;
+}
+.progress_des .des_left .point{
+   width:10rpx;
+height:10rpx;
+background-color:#ccc;
+border-radius:50%;
+position: absolute;
+top:18rpx;
+}
+.progress_des .des_left .point_line{
+  width: 1px;
+  height: 100rpx;
+  background-color: #ccc;
+  position: absolute;
+  top:28rpx;
+left:3rpx;
+}
+.draw_content_progress .progress_des:last-child .des_left .point_line{
+ display: none;
+}
+.progress_des .des_right{
+  width:93%;
+padding:10rpx 0 10rpx 20rpx;
+display:flex;
+flex-direction:column;
+}
+.des_right .destitle{
+  width:100%;
+color:#999;
+font-size:24rpx;
+display:flex;
+line-height:32rpx;
+}
+.des_right .destitle .title_left.nanaA{
+  color: #00cd85!important;
+}
+
+.des_right .destitle .title_right{
+  width:50%;
+text-align:right;
+}
+.des_right .descontent{
+  display:flex;
+flex-direction:column;
+font-size:24rpx;
+color:#999;
+margin-top:10rpx;
+}
+.des_right .descontent text{
+line-height:16px;
+max-height:32px;
+display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:2;
+overflow:hidden;
+}
+.des_right .descontent text:last-child{
+  margin-top: 10rpx;
+}
+.draw_button{
+  display:flex;
+flex-direction:column;
+margin-top:40rpx;
+}
+.draw_button .keepdraw{
+background-color:#00cd85;
+color:#fff;
+width:94%;
+font-size:28rpx;
+}
+.draw_button .closedraw{
+background-color:#fff;
+color:#333;
+width:94%;
+font-size:28rpx;
+margin-top:20rpx;
+}

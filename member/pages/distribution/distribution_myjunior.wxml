@@ -1,0 +1,46 @@
+<view class='content' wx:if="{{userinfo != null}}">
+  <view class='downline_tab_content'>
+    <block wx:if="{{distribution_grade >1}}">
+      <view class="downline_tab_box" bindtap="changegradetype" data-grade="1" style="border-bottom:{{grade==1?' 1px solid #00cd85':'none'}}"><text class="{{grade==1?'active':''}}">一线</text></view>
+      <view class="downline_tab_box" bindtap="changegradetype" data-grade="2" style="border-bottom:{{grade==2?' 1px solid #00cd85':'none'}}" wx:if="{{distribution_grade>=2}}"><text class="{{grade==2?'active':''}}">二线</text></view>
+      <view class="downline_tab_box" bindtap="changegradetype" data-grade="3" style="border-bottom:{{grade==3?' 1px solid #00cd85':'none'}}" wx:if="{{distribution_grade==3}}"><text class="{{grade==3?'active':''}}">三线</text></view>
+    </block>
+  </view>
+  <view class='downline_list_content'>
+     <block wx:for="{{list}}" wx:key="key" wx:for-item="item" wx:if="{{list.length>0}}">
+    <view class='h_4'></view>
+    <view class='downline_list_box'>
+      <view class='downline_list_head_content'>
+        <view class='downline_list_head_left'>
+          <image src='{{item.logo}}'></image>
+        </view>
+        <view class='downline_list_head_right'>
+          <text>{{item.username}}</text>
+          <text>成为分销商时间：{{item.befxtime}}</text>
+        </view>
+      </view>
+      <view class='downline_list_bottom_content'>
+        <view class='downline_list_bottom_box'>
+          <text>订单:</text>
+          <text>{{item.ordershu}}</text>
+        </view>
+        <view class='downline_list_bottom_box'>
+          <text>贡献佣金:</text>
+          <text>￥{{item.yjbcost}}</text>
+        </view>
+        <view class='downline_list_bottom_box'>
+          <text>下线成员:</text>
+          <text>{{item.juniorcount}}</text>
+        </view>
+      </view>
+    </view>
+   </block>
+  </view>
+  <view class='nodata' wx:if="{{list.length ==0}}">
+    <image src="/images/distribution_no.png"></image>
+		<text>您还没有下级哦~</text>
+  </view>
+  <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+
+  <view class="loadingmore" hidden="{{loadshow}}" wx:if="{{list.length > 0}}">加载完毕...</view>
+</view>

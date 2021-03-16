@@ -1,0 +1,76 @@
+<view class="content">
+
+<form bindsubmit="formSubmit" hidden="{{searchshow == 1}}">
+  <view class="b_h"></view>
+  <view class="addto_address_content">
+    <view class="addto_address_box">
+      <text>姓名：</text>
+      <view class="addto_address">
+        <input type="text" name="contactname" value="{{info.contactname}}" placeholder="请填写收货人的姓名" />
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="addto_address_box">
+      <text>手机：</text>
+      <view class="addto_address">
+        <input type="number" name="phone" value="{{info.phone}}" placeholder="请填写收货人手机号" maxlength="11" />
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="addto_address_box">
+      <text>地址：</text>
+      <view class="addto_address" bindtap="choiceAddress">
+        <!--<input type="text" name="bigadr" bindtap="choiceAddress" readonly value="{{check_bigadr}}" placeholder-style="color:#4d4d4d" placeholder="点击选择地址" />-->
+        <text>{{check_bigadr}}</text>
+        <input type="text" name="bigadr" value="{{check_bigadr}}" hidden="true" />
+        <input type="text" name="lat" value="{{check_lat}}" hidden="true" />
+        <input type="text" name="lng" value="{{check_lng}}" hidden="true" />
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="addto_address_box">
+      <text style="width: 42px;"></text>
+      <view class="addto_address">
+        <input type="text" name="detailadr" value="{{info.detailadr}}" placeholder="详细地址填写" />
+      </view>
+    </view>
+    <view class="line"></view>
+
+    <view class="addto_address_box">
+      <text>标签：</text>
+      <view class="addto_address">
+        <block wx:for="{{array}}" wx:key="keys" wx:for-index="index" wx:for-item="items">
+          <view class="tagbox {{check_tag == items.id ? 'borderstyle' : ''}}" data-tagid="{{items.id}}" catchtap="tagChange">
+            {{items.name}}
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="button_bottom_content">
+    <view class="button_bottom_box">
+      <button formType="submit">{{buttonText}}</button>
+    </view>
+  </view>
+
+</form>
+
+
+<view class="addto_address_search" hidden="{{searchshow == 0}}">
+  <form class="search-form" bindsubmit="searchAddress">
+    <view class="addto_address">
+      <input type="text" name="searchval" placeholder="请输入收货地址" />
+      <button formType="submit">搜索</button>
+    </view>
+  </form>
+  <view class="b_h"></view>
+  <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+    <view class="choice-address" data-location="{{item.location}}" data-name="{{item.name}}" bindtap="checkAddress">
+      <text>{{item.name}}</text>
+      <text>{{item.address}}</text>
+    </view>
+  </block>
+</view>
+
+</view>

@@ -1,0 +1,170 @@
+<!--pages/indexcart/indexcart.wxml-->
+<view class="container" wx:if="{{userInfo!=''}}">
+  <view class="indexcart_content" wx:if="{{cartempty}}">
+    <block wx:for="{{cartinfo}}" wx:key="keys" wx:for-item="items">
+      <view class="cartheight"></view>
+      <view class='placeorder_main_content'>
+        <view class='placeorder_shopname_content'>
+          <view class='placeorder_shopname_left' bindtap="shopOnclick" data-shopid="{{items.id}}" data-shopname="{{items.shopname}}" data-shoptype="{{items.shoptype}}">
+            <image src='{{items.shoplogo}}'></image>
+            <text>{{items.shopname}}</text>
+            <image src='/images/angle_right.png'></image>
+          </view>
+          <view class='placeorder_shopname_right' bindtap="clearShopcart" data-shopid="{{items.id}}">
+             <image src='/images/icon_del.png'></image>
+          </view>
+        </view>
+        <view class='placeorder_shoplist_content'>
+          <block wx:for="{{items.goodsinfo}}" wx:key="key" wx:for-index="index" wx:for-item="gdet">
+            <view class='placeorder_shoplist_box'>
+              <view class='placeorder_shoplist_left'><image src='{{gdet.img}}'></image></view>
+              <view class='placeorder_shoplist_right'>
+                <view class='placeorder_shoplist_head'>
+                  <view style="display:flex;">
+                    <text wx:if="{{gdet.is_cx==1}}" style="background-color:#f75ee6;padding:0 2px;margin-right:7px;color:#fff;height:16px;line-height:16px;font-size:12px;">折</text>
+                    <text>{{gdet.name}}</text>
+                  </view>
+                  <text>￥{{gdet.cost}}</text>
+                </view>
+                <view class='placeorder_shoplist_center'>
+                  <text>{{gdet.attrname}}</text>
+                  <block wx:if="{{gdet.is_cx==1}}"><text style="line-through;">￥{{gdet.oldcost}}</text></block>
+                </view>
+                <view class='placeorder_shoplist_bottom'>
+                  <text>x{{gdet.count}}</text>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class='placeorder_costlist_content'  wx:if="{{items.bagcost > 0}}">
+          <view class='placeorder_costlist_box'>
+            <view class='placeorder_costlist'>
+              <view class='placeorder_costlist_left'>
+                <text>包装费</text>
+              </view>
+              <view class='placeorder_costlist_right'>
+                <text>￥{{items.bagcost}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='placeorder_total_content'>
+          <view class="total_left">
+            <text wx:if="{{items.downcost >0}}">已优惠{{items.downcost}}元</text>
+          </view>
+          <view class="total_right">
+            <text>￥{{items.allcost}}</text>
+            <text wx:if="{{items.can_click==1}}" bindtap="tomakeorder" data-shopid="{{items.id}}" style="background-color:#00cd85;">{{items.btntext}}</text>
+            <text wx:if="{{items.can_click==0}}" style="background-color:#ccc;">{{items.btntext}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="clearbox" bindtap="clearAllcart">
+      <text>清空</text>
+    </view>
+  </view>
+  <view wx:if="{{!cartempty}}">
+    <view class="emptycart">
+      <image src="/images/9_1/Pic_empty.png"></image>
+      <text class="cartfirsttxt">还没有商品，速去下单吧</text>
+      <text class="cartsecondtxt"  bindtap="indexskip" data-num="1" data-url="/pages/index/index">去下单</text>
+    </view>
+    <view class="guessbox" >
+      <view class="box_title">
+        <text class="font_s16">猜你喜欢</text>
+      </view>
+      <view class="box_content">
+        <view class="home_shops_box">
+          <block wx:for="{{shoplist}}" class="item" wx:key="key" wx:for-item="item">
+            <view class="home_shopslist_content">
+              <!-- 左侧店铺图标 -->
+              <view class="home_shopslist_img" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+                <image src="{{item.shoplogo}}"></image>
+                <text wx:if="{{item.isforyou==1}}">优选</text>
+              </view>
+              <!-- 右侧店铺信息 -->
+              <view class="home_shopslist_box">
+                <view class="home_shopslist_top" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+                  <view class="home_shopslist_rows">
+                    <!-- 1行 店铺名称 -->
+                    <view class="home_shopslist_row row1">
+                      <view class="home_shopslist_name">
+                        <text>{{item.shopname}}</text>
+                      </view>
+                    </view>
+                    <!-- 2行 *，已售，距离，送达 -->
+                    <view class="home_shopslist_row row2">
+                       <view class="home_shopslist_star">
+                        <block wx:for="{{item.point}}" wx:key="kf">
+                          <image src="/images/star_light.png"></image>
+                        </block>
+                        <block wx:for="{{5-item.point}}" wx:key="ks">
+                          <image src="/images/star_gray.png"></image>
+                        </block>
+                        <text>月售{{item.ordercount}}单</text>
+                      </view>
+                      <view class="home_shopslist_time">
+                        <text class="first">{{item.juli}}</text>
+                        <text class="last">{{item.arrivetime}}分钟送达</text>
+                      </view>
+                    </view>
+                    <!-- 3行 起送，配送，图标 -->
+                    <view class="home_shopslist_row row3">
+                      <view class="startpsbox">
+                        <text class="home_cost_text">起送￥{{item.limitcost}}</text>
+                        <text class="home_cost_line">|</text>
+                        <text class="home_cost_text">配送￥{{item.pscost}}</text>
+                      </view>
+                      <view class="newimgpx">
+                        <block wx:if="{{item.is_show_ztimg ==1}}">
+                          <text class="psfirstt">支持自取</text>
+                        </block>
+                        <block wx:if="{{item.sendtype == 1  }}">
+                          <text class="psstext">店铺配送</text>
+                        </block>
+                        <block wx:if="{{item.sendtype != 1  }}">
+                          <text class="psstext">网站配送</text>
+                        </block>
+                      </view>
+                    </view>
+                    <!-- 4行 预定 -->
+                    <view class="home_shopslist_row row4">
+                      <view>
+                        <block wx:if="{{item.opentype == 0  || item.opentype == 4  }}">
+                          <view class="home_closed_text">休息中，暂不接受预定</view>
+                        </block>
+                        <block wx:if="{{item.opentype == 3 }}">
+                          <view class="home_order_text">预定中,{{item.newstartime}}开始配送</view>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+                  <!-- 5行 促销 -->
+                  <view class="home_shopslist_bottom {{item.checkcx==0?'btnhide':'btnshow'}}" wx:if="{{item.cxcountx > 0}}">
+                    <view class="home_shopslab_btn" data-cxcountx="{{item.cxcountx}}" data-id="{{item.id}}" catchtap="homelistShow"  wx:if="{{item.cxcountx >=5}}">
+                      <i class="icon_down"></i>
+                    </view>
+                    <view class="home_shopslab_box">
+                      <block wx:for="{{item.cxinfox}}" wx:key="kk" wx:for-item="ita">
+                        <view class="home_shopslab">
+                          <text>{{ita}}</text>
+                        </view>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="basestate_content" wx:if="{{userInfo == null || userInfo==''}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请先登录</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</view>

@@ -1,0 +1,22 @@
+<view class='content' wx:if="{{userinfo!=null}}">
+  <view class='integralrecord_head_content'>
+    <view class='integralrecord_head_box'><text>兑换礼品</text></view>
+    <view class='integralrecord_head_box'><text>兑换日期</text></view>
+    <view class='integralrecord_head_box'><text>兑换积分</text></view>
+    <view class='integralrecord_head_box'><text>兑换状态</text></view>
+  </view>
+  <view class='integralrecord_list_content' wx:if="{{giftlog.length>0}}">
+    <block wx:for="{{giftlog}}" wx:key="key" wx:for-item="item">
+      <view class='integralrecord_list_box'>
+        <view class='integralrecord_list'><text>{{item.giftname}}</text></view>
+        <view class='integralrecord_list'><text>{{item.addtime}}</text></view>
+        <view class='integralrecord_list'><text>-{{item.score}}</text></view>
+        <view class='integralrecord_list'><text>{{item.status}}</text></view>
+      </view>
+    </block>
+  </view>
+  <view class='integralrecord_no_content' wx:if="{{giftlog.length==0}}">
+    <image src='/images/nullgiftlog.png'></image>
+    <text>您还没有兑换任何礼品</text>
+  </view>
+</view>

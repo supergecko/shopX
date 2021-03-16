@@ -1,0 +1,145 @@
+<view class="history_search_content main_bg">
+  <view class="history_search_inp">
+    <input type="text" value="{{searchVal}}" bindinput="inputVal" placeholder="搜索商家、商品名称" placeholder-style="font-size:14px;" />
+    <text bindtap="checkSearch">搜索</text>
+  </view>
+</view>
+<view class="container">
+  <view class="beforesbox" wx:if="{{!needshow}}">
+    <view class="history_search_title">
+      <text>历史搜索</text>
+      <image src="/images/9_1/icon_myvaluate_del.png" bindtap="clearSearch"></image>
+    </view>
+    <block wx:if="{{searchlist.length>0}}">
+      <view class="history_record">
+        <block wx:for="{{searchlist}}" wx:key="ks" wx:for-item="its">
+          <text data-name="{{its}}" bindtap="checkSearch" wx:if="{{its!=''}}">{{its}}</text>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <view>
+        <text class="emptysearchbox font_c6 font_s12">暂无历史搜索数据</text>
+      </view>
+    </block>
+    <view class="history_search_title">
+      <text>热门搜索</text>
+    </view>
+    <view class="history_hot_content">
+      <block wx:for="{{hotlist}}" wx:key="kh" wx:for-item="ith">
+        <text data-name="{{ith}}" bindtap="checkSearch">{{ith}}</text>
+      </block>
+    </view>
+  </view>
+  <view class="home_shops_content" wx:if="{{needshow}}">
+    <view class="home_shops_box" wx:if="{{shoplist.length>0}}">
+      <block wx:for="{{shoplist}}" class="item" wx:key="key" wx:for-item="item">
+        <view class="home_shopslist_content">
+          <!-- 左侧店铺图标 -->
+          <view class="home_shopslist_img" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+            <image src="{{item.shoplogo}}"></image>
+            <!-- <text wx:if="{{item.isforyou==1}}">优选</text> -->
+          </view>
+          <!-- 右侧店铺信息 -->
+          <view class="home_shopslist_box">
+            <view class="home_shopslist_top" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+              <view class="home_shopslist_rows">
+                <!-- 1行 店铺名称 -->
+                <view class="home_shopslist_row row1">
+                  <view class="home_shopslist_name">
+                    <text>{{item.shopname}}</text>
+                  </view>
+                </view>
+                <!-- 2行 *，月售，距离，送达 -->
+                <view class="home_shopslist_row row2">
+                   <view class="home_shopslist_star">
+                    <block wx:for="{{item.point}}" wx:key="kf">
+                      <image src="/images/star_light.png"></image>
+                    </block>
+                    <block wx:for="{{5-item.point}}" wx:key="ks">
+                      <image src="/images/star_gray.png"></image>
+                    </block>
+                    <text>月售{{item.ordercount}}单</text>
+                  </view>
+                  <view class="home_shopslist_time">
+                    <text class="first">{{item.juli}}</text>
+                        <text class="last">{{item.arrivetime}}分钟送达</text>
+                  </view>
+                </view>
+                <!-- 3行 起送，配送，图标 -->
+                <view class="home_shopslist_row row3">
+                  <view class="startpsbox">
+                    <text class="home_cost_text">起送￥{{item.limitcost}}</text>
+                    <text class="home_cost_line">|</text>
+                    <text class="home_cost_text">配送￥{{item.pscost}}</text>
+                  </view>
+                  <view class="newimgpx">
+                    <block wx:if="{{item.is_show_ztimg ==1}}">
+                      <text class="psfirstt">支持自取</text>
+                    </block>
+                    <block wx:if="{{item.sendtype == 1  }}">
+                      <text class="psstext">店铺配送</text>
+                    </block>
+                    <block wx:if="{{item.sendtype != 1  }}">
+                      <text class="psstext">网站配送</text>
+                    </block>
+                  </view>
+                </view>
+                <!-- 4行 预定 -->
+                <view class="home_shopslist_row row4">
+                  <view>
+                    <block wx:if="{{item.opentype == 0  || item.opentype == 4  }}">
+                      <view class="home_closed_text">休息中，暂不接受预定</view>
+                    </block>
+                    <block wx:if="{{item.opentype == 3 }}">
+                      <view class="home_order_text">预定中,{{item.newstartime}}开始配送</view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+              <!-- 5行 促销 -->
+              <view class="home_shopslist_bottom {{item.checkcx==0?'btnhide':'btnshow'}}" wx:if="{{item.cxcount > 0}}">
+                <view class="home_shopslab_btn" data-cxcount="{{item.cxcount}}" data-id="{{item.id}}" catchtap="homelistShow" wx:if="{{item.cxcount >=5}}">
+                  <i class="icon_down"></i>
+                </view>
+                <view class="home_shopslab_box">
+                  <block wx:for="{{item.cxinfo}}" wx:key="kk" wx:for-item="ita">
+                    <view class="home_shopslab">
+                      <text>{{ita}}</text>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <!-- 右侧商品信息 -->
+            <view class='home_goodlist_box' wx:if="{{item.recomgoodslist.length>0}}">
+              <scroll-view scroll-x='true'>
+                <view class='home_goodlist_box_content'>
+                  <block wx:for='{{item.recomgoodslist}}' wx:key='keys' wx:for-index="index" wx:for-item="itg">
+                    <view class='home_goodlist_box_box' wx:if="{{index<6}}">
+                      <view class='home_goodlist_box_img'>
+                        <image src='{{itg.img}}'></image>
+                        <text class="font_s14 font_cf">{{itg.name}}</text>
+                      </view>
+                      <view class='home_goodlist_box_text'>
+                        <text class="font_s14 font_cr">￥{{itg.cost}}</text>
+                        <text class="font_s12 font_c9">月售{{itg.sellcount}}</text>
+                      </view>
+                    </view>
+                  </block>
+                  <view class='goshop' wx:if="{{item.recomgoodslist.length >6}}" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+                    <text class="font_c9"> ‹ </text>
+                    <text class="font_s12 font_c9">进\n入\n商\n家</text>
+                  </view>
+                </view>
+              </scroll-view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+      <view class="loadingmore" hidden="{{loadshow}}">加载完毕...</view>
+    </view>
+    <view class="emptysearchbox" wx:if="{{shoplist.length == 0}}">未找到符合条件的商家...</view>
+  </view>
+</view>

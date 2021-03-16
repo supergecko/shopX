@@ -1,0 +1,136 @@
+
+<view class="container">
+  <view class="home_content">
+    <view style="position:fixed;top:0;width:100%;z-index:100">
+      <view class="home_head_content">
+        <view style="padding:0 2%;width:96%;">
+          <view class="home_head_bottom"  bindtap="checkSearch">
+            <icon type="search" size="12" color="#999999" />
+            <text>输入商家或商品名称</text>
+          </view>
+        </view>
+      </view>
+      <view class="shaopcattypes">
+        <view class="shopcatbox">
+          <scroll-view scroll-x="true" style="height: 40px;width:100%;white-space: nowrap;">
+            <block wx:for="{{goodstype}}" wx:key="ka" wx:for-item="ita" >
+                    <text class="{{ita.id==shopcat?'nava':''}}" data-id="{{ita.id}}" bindtap="typeOnclick">{{ita.name}}</text>
+            </block>
+            </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <block wx:if="{{lbimg.length > 0 && shopcat==0}}">
+      <view class="home_class_content" >
+        <swiper indicator-dots="{{lbimg.length > 1 ? true : false}}" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay circular>
+            <block wx:for="{{lbimg}}" wx:key="ka" wx:for-item="ita" >
+              <swiper-item style="top:0;">
+                    <image src="{{ita.img}}" style="width:100%;height:100%;"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+      </view>
+    </block>
+	<view class="home_shops_content " id="sortposition" style="margin-top:{{lbimg.length > 0 && shopcat==0?'0':'77px'}};">
+		<view class="home_shops_title">
+			<text>附近商家</text>
+		</view>
+	</view>
+  <view class="line"></view>
+	<view class="home_shops_box" wx:if="{{list.length > 0}}">
+		<block wx:for="{{list}}" class="item" wx:key="key" wx:for-item="item"  >
+			<view class="home_shopslist_content">
+				<view style="display:flex;">
+					<view class="home_shopslist_img"  data-shopid="{{item['id']}}" data-shoptype="{{item['shoptype']}}" data-shopname="{{item['shopname']}}" bindtap="shopOnclick" >
+						<image src="{{item.shoplogo}}"></image>
+					</view>
+					<view class="home_shopslist_box">
+						<view class="home_shopslist_top" data-shopid="{{item['id']}}" data-shoptype="{{item['shoptype']}}" data-shopname="{{item['shopname']}}" bindtap="shopOnclick"  >
+							<view class="home_shopslist_left">
+								<view class="home_shopslist_name">
+									<text>{{item.shopname}}</text>
+								</view>
+								<view class="home_shopslist_star">
+									<block wx:for="{{item.point}}" wx:key="kf">
+										<image src="/images/star_light.png"></image>
+									</block>
+									<block wx:for="{{5-item.point}}" wx:key="ks">
+										<image src="/images/star_gray.png"></image>
+									</block>
+									<text>已售{{item.ordercount}}单</text>
+								</view>
+								<view class="home_shopslist_time">
+									<text class="first">{{item.juli}}</text>
+									<text class="last" wx:if="{{item.arrivetime > 0}}">{{item.arrivetime}}分钟送达</text>
+								</view>
+								<block  wx:if="{{item.opentype == 0  || item.opentype == 4  }}">
+									<view class="home_closed_text">休息中，暂不接受预定</view>
+								</block>
+								<block  wx:if="{{item.opentype == 3 }}">
+									<view class="home_order_text">预定中,{{item.newstartime}}开始配送</view>
+								</block>
+							</view>
+							<view class="home_shopslist_right">
+								<text class="home_cost_text">￥{{item.limitcost}}元起送</text>
+								<text class="home_cost_text">￥{{item.pscost}}配送费</text>
+								<view class="newimgpx">
+									<block wx:if="{{item.is_ziti ==1 && item.ztimg!=''}}">
+										<image class="home_ps" src="{{item.ztimg}}" style="margin-right: 10rpx;"></image>
+									</block>
+									<image class="home_ps" src="{{item.psimg}}"></image>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="home_shopslist_bottom {{item.checkcx == 0?'btnhide':'btnshow'}}" wx:if="{{item.cxcount > 0}}">
+					<view class="home_shopslab_btn" data-cx="{{item.cxcount}}" data-id="{{item.id}}" catchtap="homelistShow">
+						<text wx:if="{{item.cxcount > 1}}">{{item.cxcount}}个活动</text>
+						<i wx:if="{{item.cxcount > 1}}" class="icon_down"></i>
+					</view>
+					<view class="home_shopslab_box">
+						<block wx:for="{{item.cxlist}}" wx:key="kk" wx:for-item="ita">
+							<view class="home_shopslab">
+								<image src="{{ita.imgurl}}"></image>
+								<text>{{ita.name}}</text>
+							</view>
+						</block>
+					</view>
+				</view>
+			</view>
+			<view class="comgoodslist" wx:if="{{item.comgoodslist.length>0}}">
+				<block wx:for="{{item.comgoodslist}}" wx:key="keys" wx:for-item="icom">
+					<view class="comgoodbox" data-shopid="{{item['id']}}" data-shoptype="{{item['shoptype']}}" data-shopname="{{item['shopname']}}" bindtap="shopOnclick">
+						<image src="{{icom.img}}"></image>
+						<text class="box_name">{{icom.name}}</text>
+						<view>
+							<text class="box_cost">￥{{icom.cost}}</text>
+							<block wx:if="{{icom.is_cx==1}}">
+								<text class="box_oldcost"> {{icom.oldcost}}</text>
+							</block>
+						</view>
+					</view>
+				</block>
+			</view>
+			<view class="line"></view>
+		</block>
+		<view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+		<view class="loadingmore" hidden="{{loadshow}}">加载完毕...</view>
+	</view>
+	<view class="emptyshoplist" wx:if="{{list.length==0 && page==1}}">
+		<image src="/images/shop__icon.png"></image>
+		<text>没有符合条件的商家~~</text>
+	</view>
+    </view>
+  </view>
+
+<view class="body-view">
+    <loading hidden="{{hidden}}">
+        加载中...
+    </loading>
+</view>
+
+
+
+

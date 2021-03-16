@@ -1,0 +1,345 @@
+<view class="content" wx:if="{{userInfo!=''}}">
+	<view class="diffrentcontent">
+		<block wx:if="{{pttype==2}}">
+			<view class="buy_textarea">
+				<textarea class="detailtext" value="{{beizhu}}" bindinput="textareaVal"></textarea>
+			</view>
+			<view class="buy_choose">
+				<block wx:for="{{bqlist}}" wx:key="key" wx:for-item="item">
+					<view class="choosebox" bindtap="bqnameOnclick" data-bqid="{{item.id}}" data-name="{{item.name}}" data-beizhu="{{beizhu}}">
+						<text class="choosename">{{item.name}}</text>
+					</view>
+				</block>
+			</view>
+			<view class="helpmepickCon">
+				<view class="gouaddress" bindtap="gouaddressOnclick">
+					<view class="addressleft">
+						<image src="/images/icon_gou.png"></image>
+						<text>{{check_bigadr}}</text>
+						<input type="text" name="bigadr" value="{{check_bigadr}}" hidden="true" />
+				        <input type="text" name="lat" value="{{check_lat}}" hidden="true" />
+				        <input type="text" name="lng" value="{{check_lng}}" hidden="true" />
+					</view>
+					<view class="jiantou">
+						<image src="/images/jiantou.png"></image>
+					</view>
+				</view>
+				<view class="shouaddress" bindtap="{{defaultmsg != null ? 'showAddress' : 'editAddress'}}" data-addresstype="shou">
+					<view class="addressleft">
+						<image src="/images/icon_shou.png"></image>
+						<block wx:if="{{shouaddress != '' && defaultmsg !=null}}">
+							<view class="detailaddress">
+								<view class="addressup">
+									<text class="username">{{shouaddress.contactname}}</text>
+									<text class="userphone">{{shouaddress.phone}}</text>
+								</view>
+								<view class="addressdown">
+									<text>{{shouaddress.address}}</text>
+								</view>
+							</view>
+						</block>
+						<block wx:else>
+							<view class="emptyshouaddress" bindtap="editAddress" data-addresstype="shou" style='display:flex;'>
+								<text style='align-self:center;'>请选择收货地址</text>
+							</view>
+						</block>
+					</view>
+					<view class="jiantou">
+						<image src="/images/jiantou.png"></image>
+					</view>
+				</view>
+			</view>
+			<view class="pttime">
+				<view class="nowpstime">
+					<text>送达时间：</text>
+					<text class="selecttime" bindtap="timeboxShow" data-isshow="{{timeShow}}">{{pstime}}</text>
+				 	<view class="timelistbox" wx:if="{{timeShow==1}}">
+						<scroll-view scroll-y style="height:150px" scroll-top="{{scrollTop}}">
+							<block wx:for="{{pstimelist}}" wx:key="ks" wx:for-item="its">
+								<view class="timelist" bindtap="selecttime" data-name="{{its.name}}" data-value="{{its.value}}">
+									<view class="pstime">
+										<text>{{its.name}}</text>
+									</view>
+								</view>
+							</block>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="givelist">
+				<view>
+					<text>物品类型：</text>
+					<text>{{movegoodsname}}</text>
+				</view>
+				<view>
+					<text>物品重量：</text>
+					<text>{{movegoodsweight}}</text>
+				</view>
+				<view>
+					<text>物品价值：</text>
+					<text>{{movegoodscost}}</text>
+				</view>
+			</view>
+			<view class="givepickCon">
+				<view class="quaddress" bindtap="{{defaultmsg != null ? 'showAddress' : 'editAddress'}}" data-addresstype="get">
+					<view class="addressleft">
+						<image src="/images/icon_qu.png"></image>
+						<block wx:if="{{getaddress != ''}}">
+							<view class="detailaddress">
+								<view class="addressup">
+									<text class="username">{{getaddress.contactname}}</text>
+									<text class="userphone">{{getaddress.phone}}</text>
+								</view>
+								<view class="addressdown">
+									<text>{{getaddress.address}}</text>
+								</view>
+							</view>
+						</block>
+						<block wx:else>
+							<view class="emptyshouaddress" style='display:flex;'>
+								<text style='align-self:center;'>请选择取货地址</text>
+							</view>
+						</block>
+					</view>
+					<view class="jiantou">
+						<image src="/images/jiantou.png"></image>
+					</view>
+				</view>
+				<view class="shouaddress" bindtap="{{defaultmsg != null ? 'showAddress' : 'editAddress'}}" data-addresstype="shou">
+					<view class="addressleft">
+						<image src="/images/icon_shou.png"></image>
+						<block wx:if="{{shouaddress != ''}}">
+							<view class="detailaddress">
+								<view class="addressup">
+									<text class="username">{{shouaddress.contactname}}</text>
+									<text class="userphone">{{shouaddress.phone}}</text>
+								</view>
+								<view class="addressdown">
+									<text>{{shouaddress.address}}</text>
+								</view>
+							</view>
+						</block>
+						<block wx:else>
+							<view class="emptyshouaddress" style='display:flex;'>
+								<text style='align-self:center;'>请选择收货地址</text>
+							</view>
+						</block>
+					</view>
+					<view class="jiantou">
+						<image src="/images/jiantou.png"></image>
+					</view>
+				</view>
+			</view>
+			<view class="pttime">
+				<view class="nowpstime">
+					<text>取件时间：</text>
+					<text class="selecttime" bindtap="timeboxShow" data-isshow="{{timeShow}}">{{pstime}}</text>
+					 <view class="timelistbox" wx:if="{{timeShow==1}}">
+						<scroll-view scroll-y style="height:150px" scroll-top="{{scrollTop}}">
+							<block wx:for="{{pstimelist}}" wx:key="ks" wx:for-item="its">
+								<view class="timelist" bindtap="selecttime" data-name="{{its.name}}">
+									<view class="pstime">
+										<text>{{its.name}}</text>
+									</view>
+								</view>
+							</block>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+			<view class="beizhuinfo">
+				<text class="beizhutitle">备注信息：</text>
+				<input type="text" name="beizhu" value="{{beizhu}}" bindinput="inputVal" placeholder="请输入特殊需求等信息"/>
+			</view>
+		</block>
+	</view>
+	<view class="commentcontent">
+		<view class="costbox">
+			<view class="costboxleft">
+				<text class="lefttitle">配送费(元)</text>
+				<text class="leftcontent">{{allcost}}</text>
+			</view>
+			<view class="costboxright">
+				<text class="righttitle">预计里程(千米)</text>
+				<text class="rightcontent">{{juli}}</text>
+			</view>
+		</view>
+		<view class="addmorecost" bindtap="addcostshow" data-isshow="{{addcostShow}}">
+			<view class="addmorecost_content">
+				<block wx:if="{{addcostShow==0}}">
+					<image src="/images/checkbox.png"></image>
+				</block>
+				<block wx:else>
+					<image src="/images/icon_xz02.png"></image>
+				</block>
+				<text class="morecostleft">我要加价</text>
+				<text class="morecostright">加价有助于更快被接单</text>
+			</view>
+		</view>
+		<view class="morecostlist" wx:if="{{addcostShow==1}}">
+			<view class="morecost">
+				<view class="{{addcost==5?'selectcostcolor':''}}" bindtap="selectmoreCost" data-value="5"><text>+5元</text></view>
+				<view class="{{addcost==10?'selectcostcolor':''}}" bindtap="selectmoreCost" data-value="10"><text>+10元</text></view>
+				<view class="{{addcost==15?'selectcostcolor':''}}"  bindtap="selectmoreCost" data-value="15"><text>+15元</text></view>
+				<view class="{{addcost==20?'selectcostcolor':''}}" bindtap="selectmoreCost" data-value="20"><text>+20元</text></view>
+			</view>
+		</view>
+		<view class="suretopay" bindtap="formSubmit">
+			<view class="paybutton">
+				<button type="default">确认支付 </button>
+			</view>
+		</view>
+	</view>
+		<view class="address_popup_content" wx:if="{{addressHide == 0}}">
+			<view class="address_popup_box">
+				<view class="address_popup">
+					<view class="address_popup_title">
+						<text bindtap="maskbind">取消</text>
+						<text>我的收货地址</text>
+						<text></text>
+					</view>
+					<view class="address_choice_content">
+						<scroll-view scroll-y style="height:300px" scroll-top="{{scrollTop}}">
+								<block wx:for="{{arealist}}" wx:key="key" wx:for-item="item">
+									<view class="line"></view>
+									<view class="address_choice_box">
+										<view class="address_choice_left" data-id="{{item.id}}" data-addresstype="{{addresstype}}" bindtap="editAddress">
+											<image src="/images/green/icon_pen.png"></image>
+										</view>
+										<view class="address_choice_center">
+											<view class="address_choice_info">
+												<text>{{item.contactname}}</text>
+												<text>{{item.phone}}</text>
+											</view>
+											<view class="address_choice_add">{{item.bigadr}}{{item.detailadr}}</view>
+										</view>
+										<view class="address_choice_radio" data-addressid="{{item.id}}" bindtap="areaChange" data-addresstype="{{addresstype}}">
+											<image src="/images/select_address.png"  wx:if="{{item.default == 1}}"></image>
+                      <image src="/images/noselect_address.png" wx:if="{{item.default != 1}}"></image>
+										</view>
+									</view>
+								</block>
+						</scroll-view>
+					</view>
+					<view class="line"></view>
+					<view class="new_address" data-addresstype="{{addresstype}}" data-id="0" bindtap="editAddress">
+						<image src="/images/green/icon_addto.png"></image>
+						<text>新增收货地址</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="address_choice_content" wx:if="{{addressShow == 1}}">
+			<view class="address_title">
+				<text>{{addresstitle}}</text>
+			</view>
+			<scroll-view scroll-y style="height:300px" scroll-top="{{scrollTop}}">
+				<form bindsubmit="formSubmitAddress">
+					<input type="text" name="addresstype" value="{{addresstype}}" hidden="true" />
+					<block wx:if="{{addresstype=='shou'}}">
+						<view class="addto_address_content">
+							<view class="addto_address_box">
+								<text>姓名：</text>
+								<view class="addto_address">
+									<input type="text" name="contactname" value="{{shouaddress.contactname}}" placeholder="请填写收货人的姓名"   bindinput="checkShouContactName" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>手机：</text>
+								<view class="addto_address">
+									<input type="number" name="phone" value="{{shouaddress.phone}}" placeholder="请填写收货人手机号"   bindinput="checkShouPhone"/>
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>地址：</text>
+								<view class="addto_address">
+								<!--<input type="text" name="bigadr" bindtap="choiceAddress" readonly value="{{check_bigadr}}" placeholder-style="color:#4d4d4d" placeholder="点击选择地址" />-->
+									<text bindtap="choiceAddress" data-addresstype="{{addresstype}}">{{shou_bigadr}}</text>
+									<input type="text" name="bigadr" value="{{shou_bigadr}}" hidden="true" />
+									<input type="text" name="lat" value="{{shou_lat}}" hidden="true" />
+									<input type="text" name="lng" value="{{shou_lng}}" hidden="true" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>楼号-门牌号：</text>
+								<view class="addto_address">
+									<input type="text" name="detailadr" value="{{shouaddress.detailadr}}" placeholder="例：16号楼107室" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>标签：</text>
+								<view class="addto_address">
+									<picker name="tag" bindchange="bindPickerChange" value="{{shou_tag}}" range="{{array}}">
+										<view class="picker">{{array[shou_tag]}}</view>
+									</picker>
+								</view>
+							</view>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="addto_address_content">
+							<view class="addto_address_box">
+								<text>姓名：</text>
+								<view class="addto_address">
+									<input type="text" name="contactname" value="{{getaddress.contactname}}" placeholder="请填写取货人的姓名" bindinput="checkGetContactName" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>手机：</text>
+								<view class="addto_address">
+									<input type="number" name="phone" value="{{getaddress.phone}}" placeholder="请填写取货人手机号"  bindinput="checkGetPhone" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>地址：</text>
+								<view class="addto_address" >
+									<text catchtap="choiceAddress" data-addresstype="{{addresstype}}">{{get_bigadr}}</text>
+									<input type="text" name="bigadr" value="{{get_bigadr}}" hidden="true" />
+									<input type="text" name="lat" value="{{get_lat}}" hidden="true" />
+									<input type="text" name="lng" value="{{get_lng}}" hidden="true" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>楼号-门牌号：</text>
+								<view class="addto_address">
+									<input type="text" name="detailadr" value="{{getaddress.detailadr}}" placeholder="例：16号楼107室" />
+								</view>
+							</view>
+							<view class="line"></view>
+							<view class="addto_address_box">
+								<text>标签：</text>
+								<view class="addto_address">
+									<picker name="tag" bindchange="bindPickerChange" value="{{get_tag}}" range="{{array}}">
+										<view class="picker">{{array[get_tag]}}</view>
+									</picker>
+								</view>
+							</view>
+						</view>
+					</block>
+					<view class="line"></view>
+					<view class="button_bottom_content">
+						<view class="button_bottom_box">
+							<button formType="submit">保存地址</button>
+						</view>
+					</view>
+				</form>
+			</scroll-view>
+		</view>
+
+		 <view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>
+</view>
+ <view class="basestate_content" wx:if="{{!userInfo || userInfo==''}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请登录</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>

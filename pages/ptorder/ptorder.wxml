@@ -1,0 +1,109 @@
+<view class="content" wx:if="{{userinfo}}">
+
+  <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+    <view class="orderlist_content">
+      <view class="orderlist_top">
+        <view class="orderlist_left">
+          <block wx:if="{{item.pttype==2}}">
+            <text>帮我买</text>
+          </block>
+          <block wx:else>
+            <text>帮我送</text>
+          </block>
+          <text>{{item.content}}</text>
+        </view>
+        <view class="orderlist_state">
+          <text class="navaA">{{item.orderwuliustatus}}</text>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="orderlist_center" data-id="{{item.id}}" bindtap="infoptOrder">
+        <view class="center_box">
+          <view class="box_left">
+            <text>下单时间</text>
+          </view>
+          <view class="box_right">
+            <text>{{item.addtime}}</text>
+          </view>
+        </view>
+        <view class="center_box">
+          <view class="box_left">
+            <block wx:if="{{item.pttype==2}}">
+              <text>购买地址</text>
+            </block>
+            <block wx:else>
+              <text>取货地址</text>
+            </block>
+          </view>
+          <view class="box_right">
+            <text>{{item.shopaddress}}</text>
+          </view>
+        </view>
+        <view class="center_box">
+          <view class="box_left">
+            <text style="width:56px;display:block">收货地址</text>
+          </view>
+          <view class="box_right">
+            <text>{{item.buyeraddress}}</text>
+            <view class="right_address">
+              <text>{{item.buyername}}</text>
+              <text style="margin-left: 20rpx;">{{item.buyerphone}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="orderlist_bottom">
+      <button  bindtap="bindButton" data-type="1">再来一单</button>
+      <block wx:if="{{item.status < 3 && item.is_reback == 0}}">
+        <block wx:if="{{item.psstatus==0}}">
+          <button data-id="{{item.id}}" data-type="2"  wx:if="{{(item.paytype ==1 && item.paystatus ==0 ) || item.paytype ==0}}" bindtap="bindButton">取消订单</button>
+          <button data-id="{{item.id}}" data-type="3"  wx:if="{{item.paytype ==1 && item.paystatus ==1}}" bindtap="bindButton">取消订单</button>
+        </block>
+        <block wx:else>
+            <button data-id="{{item.id}}" data-type="4"  wx:if="{{item.paytype ==1 && item.paystatus ==1}}" bindtap="bindButton">申请退款</button>
+        </block>
+      </block>
+      <button class="main_bg first" data-id="{{item.id}}" data-type="5" wx:if="{{item.paytype == 1 && item.paystatus == 0 && item.status < 3}}" bindtap="bindButton">立即支付</button>
+      <button class="main_bg first" data-id="{{item.id}}" data-type="6" wx:if="{{item.is_reback > 0}}" bindtap="bindButton">退款详情</button>
+      <button class="main_bg first" data-id="{{item.id}}" data-type="7" wx:if="{{item.is_ping == 0 && item.status == 3}}" bindtap="bindButton">评价订单</button>
+    </view>
+    </view>
+    <view class="b_h"></view>
+  </block>
+    <view class="basestate_content" wx:if="{{list.length == 0}}">
+      <image src="/images/nearnoorder.png"></image>
+      <text>您还没有跑腿订单哦~</text>
+    </view>
+</view>
+
+
+ <view class="basestate_content" wx:if="{{!userinfo}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请登录后查看订单</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+
+
+
+
+
+
+<view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>
+<view class="drawpop_up" wx:if="{{showpop_up==1}}">
+  <view class="draw_title">
+    <text>申请退款</text>
+  </view>
+  <view class="draw_content">
+    <block wx:if="{{orderinfo.status < 3}}">
+      <text>配送员已接单，请联系平台客服处理</text>
+    </block>
+    <block wx:else>
+      <text>配送员已取货，请联系平台客服处理</text>
+    </block>
+  </view>
+  <view class="draw_button">
+    <text bindtap="close_draw">取消</text>
+    <text data-num="{{callphone}}" bindtap="callmeTap">联系客服</text>
+  </view>
+</view>

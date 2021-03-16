@@ -1,0 +1,156 @@
+
+page{
+  height: 100%;
+}
+.commisionranking_content{
+  height: 100%;
+  padding: 0 20rpx;
+}
+
+.commisionranking_box{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.commisionranking_box::before,
+.commisionranking_box::after{
+  content: '';
+  width: 1px;
+  background-color: #ff8a3c;
+  position: absolute;
+  top: 64rpx;
+  bottom: 0;
+  z-index: 1;
+}
+
+.commisionranking_box::before{
+  left: 10rpx;
+}
+
+.commisionranking_box::after{
+  right: 10rpx;
+}
+
+.commisionranking_head_content{
+  width: 100%;
+  height: 18.656%;
+}
+
+.commisionranking_head_content image{
+  width: 100%;
+  height: 110px;
+}
+
+.commisionranking{
+  width: 714rpx;
+  height: 81.344%;
+  background-color: #fff;
+}
+
+.commisionranking_title_content{
+  height: 7.3222%;
+  margin: 0 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.commisionranking_title_left,
+.commisionranking_my_left,
+.commisionranking_list_left{
+  width: 100rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.commisionranking_title_center{
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.commisionranking_title_left text,
+.commisionranking_title_center text,
+.commisionranking_title_right text{
+  font-size: 12px;
+  color: #666;
+  display: block;
+}
+
+.commisionranking_my_content{
+  height: 9.76%;
+  margin: 0 16rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.commisionranking_my_center,
+.commisionranking_list_center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.commisionranking_my_center image,
+.commisionranking_list_center image{
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.commisionranking_my_center text,
+.commisionranking_my_left text,
+.commisionranking_my_right text,
+.commisionranking_list_center text,
+.commisionranking_list_left text,
+.commisionranking_list_right text{
+  font-size: 14px;
+  color: #333;
+  display: block;
+}
+
+.commisionranking_list_content{
+  width: 100%;
+  height: 82.9178%;
+}
+
+.commisionranking_list_box{
+  margin: 0 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.commisionranking_list{
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.commisionranking_list_left image{
+  width: 16px;
+  height: 22px;
+  display: block;
+}
+  .nodata{
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  margin:100px;
+}
+.nodata image{
+  width:80px;
+  height:80px;
+  margin:20px auto;
+}
+.nodata text{
+  color:#bbb;
+}

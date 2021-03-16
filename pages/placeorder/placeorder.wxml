@@ -1,0 +1,451 @@
+<view class="content" wx:if="{{userinfo != null && userinfo != '' && userinfo}}">
+
+<form bindsubmit="formSubmit" hidden="{{searchshow == 1}}">
+<input type="text" name="shopid" value="{{shopid}}" hidden="true" />
+<input type="text" name="shoptype" value="{{shopinfo.shoptype}}" hidden="true" />
+<input type="text" name="minit" value="{{minit}}" hidden="true" />
+<input type="text" name="dikou" value="{{checkscore}}" hidden="true" />
+<input type="text" name="juanid" value="{{juanid}}" hidden="true" />
+<input type="text" name="shopjuanid" value="{{shopjuanid}}" hidden="true" />
+<input type="text" name="bagcost" value="{{bagcost}}" hidden="true" />
+<input type="text" name="cartcost" value="{{cartcost}}" hidden="true" />
+<input type="text" name="allcount" value="{{total.count}}" hidden="true" />
+<input type="text" name="is_ziti" value="{{is_ziti}}" hidden="true" />
+<input type="text" name="zititime" value="{{zititime}}" hidden="true" />
+<input type="text" name="ziti_phone" value="{{ziti_phone}}" hidden="true" />
+<input type="text" name="cx_shoudan" value="{{cx_shoudan}}" hidden="true" />
+<input type="text" name="cx_manjian" value="{{cx_manjian}}" hidden="true" />
+<input type="text" name="cx_zhekou" value="{{cx_zhekou}}" hidden="true" />
+<input type="text" name="cx_nopsf" value="{{cx_nopsf}}" hidden="true" />
+
+  <block wx:if="{{support_ziti==1}}">
+    <view class='placeorder_head_content main_bg'>
+      <view class="placeorder_head_tab {{is_ziti==0?'active':''}}" bindtap="changezitiType" data-isziti="0"><text>外卖配送</text></view>
+      <view class="placeorder_head_tab {{is_ziti==1?'active':''}}" bindtap="changezitiType" data-isziti="1"><text>到店自取</text></view>
+    </view>
+  </block>
+  <view class='h_10'></view>
+  <view class='placeorder_head_box'>
+    <block wx:if="{{is_ziti==0}}">
+      <view class='placeorder_head_list'  bindtap="{{defaultmsg != null || arealist.length>0? 'showAddress' : 'editAddress'}}">
+        <view class='placeorder_head_left'>
+          <view class='placeorder_head_icon'>
+            <image src='/images/icon_placeorder_dw.png'></image>
+          </view>
+          <view class='placeorder_head_info' wx:if="{{defaultmsg != null}}">
+            <text class='placeorder_head_address'>{{defaultmsg.address}}</text>
+            <view class='placeorder_head_text'>
+              <text class='placeorder_head_txt'>{{defaultmsg.contactname}}</text>
+              <text class='placeorder_head_txt'>{{defaultmsg.phone}}</text>
+              <text class="top-last" wx:if="{{defaultmsg.canps != 1}}">不在配送范围内</text>
+            </view>
+          </view>
+          <view class="placeorder_head_addto" wx:if="{{defaultmsg == null}}" data-id="0">
+            <text>添加/选择收货地址</text>
+          </view>
+        </view>
+        <view class='placeorder_head_right'><image src='/images/angle_right.png'></image></view>
+      </view>
+       <view class='placeorder_head_list'>
+      <view class='placeorder_head_left'>
+        <view class='placeorder_head_icon'>
+          <image src='/images/icon_placeorder_time.png'></image>
+        </view>
+        <view class='placeorder_head_info'>
+          <view class='placeorder_head_text' bindtap="showTime">
+            <text class='placeorder_head_distributiontiem'>{{choiceTime}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='placeorder_head_right'><image src='/images/angle_right.png'></image></view>
+    </view>
+    </block>
+    <block wx:else>
+      <view class='placeorder_head_list'>
+        <view class='placeorder_head_left'>
+          <view class='placeorder_head_icon'>
+            <image src='/images/icon_placeorder_dw.png'></image>
+          </view>
+          <view class='placeorder_head_info'>
+            <text class='placeorder_head_address'>{{shopinfo.address}}</text>
+            <view class='placeorder_head_text'>
+              <text class='placeorder_head_txt'style="font-size: 11px;color: #666;">自取地址距离当前位置{{juli}}km</text>
+            </view>
+          </view>
+        </view>
+      </view>
+        <view class='placeorder_head_list'>
+      <view class='placeorder_head_left'>
+        <view class='placeorder_head_icon'>
+          <image src='/images/icon_placeorder_time.png'></image>
+        </view>
+        <view class='placeorder_head_info'>
+          <view class='placeorder_head_text' bindtap="showzitiTime">
+            <text class='placeorder_head_txt'>自取时间</text>
+            <text class='placeorder_head_txt'>{{zititime}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='placeorder_head_right'><image src='/images/angle_right.png'></image></view>
+    </view>
+    <view class='placeorder_head_list'>
+      <view class='placeorder_head_left'>
+        <view class='placeorder_head_icon'>
+          <image src='/images/icon_placeorder_phone.png'></image>
+        </view>
+        <view class='placeorder_head_info'>
+          <view class='placeorder_head_text'>
+            <text class='placeorder_head_txt' style="width:64px;">自取电话</text>
+            <input type="text" name="ziti_phone" value="{{ziti_phone}}" bindinput='checkztphone' placeholder="请输入自提电话"/>
+          </view>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+  <view class='h_10'></view>
+  <view class='placeorder_main_content'>
+    <view class='placeorder_shopname_content'>
+      <view class='placeorder_shopname_left'>
+        <image src='/images/icon_placeorder_shop.png'></image>
+        <text>{{shopinfo.shopname}}</text>
+      </view>
+      <view class='placeorder_shopname_right'>
+        <block wx:if="{{is_ziti==0}}">
+          <block wx:if="{{shopinfo.sendtype ==1}}">
+             <text class="s1">店铺配送</text>
+          </block>
+          <block wx:else>
+            <text class="s2">平台配送</text>
+          </block>
+        </block>
+        <block wx:else>
+            <text class="s3">到店自取</text>
+        </block>
+
+      </view>
+    </view>
+    <view class='placeorder_shoplist_content'>
+      <block wx:for="{{goodslist}}" wx:key="key" wx:for-index="index" wx:for-item="igc">
+        <view class='placeorder_shoplist_box' wx:if="{{igc.count > 0 && index<=2}}">
+          <view class='placeorder_shoplist_left'><image src='{{igc.img}}'></image></view>
+          <view class='placeorder_shoplist_right'>
+            <view class='placeorder_shoplist_head'>
+              <text>{{igc.name}}</text>
+              <text>￥{{igc.newcost}}</text>
+            </view>
+            <view class='placeorder_shoplist_center'>
+              <text>{{igc.attrname}}</text>
+              <block wx:if="{{igc.is_cx==1}}"><text style="text-decoration: line-through;">￥{{igc.oldcost}}</text></block>
+            </view>
+            <view class='placeorder_shoplist_bottom'>
+              <text>x{{igc.count}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='placeorder_shoplist_box' wx:if="{{index>2 && moregood==1}}">
+          <view class='placeorder_shoplist_left'><image src='{{igc.img}}'></image></view>
+          <view class='placeorder_shoplist_right'>
+            <view class='placeorder_shoplist_head'>
+              <text>{{igc.name}}</text>
+              <text>￥{{igc.newcost}}</text>
+            </view>
+            <view class='placeorder_shoplist_center'>
+              <text>{{igc.attrname}}</text>
+              <block wx:if="{{igc.is_cx==1}}"><text style="text-decoration:line-through">￥{{igc.oldcost}}</text></block>
+            </view>
+            <view class='placeorder_shoplist_bottom'>
+              <text>x{{igc.count}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+     <view class="showmore" wx:if="{{goodslist.length >3}}">
+        <view>
+          <block wx:if="{{moregood==0}}">
+              <text class="showmoretext" bindtap="showmoregoods" data-more="{{1}}">展开更多</text>
+              <text class="showmorearrowdown"></text>
+          </block>
+          <block wx:else>
+              <text class="showmoretext" bindtap="showmoregoods" data-more="{{0}}">点击收起</text>
+              <text class="showmorearrowup"></text>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='placeorder_costlist_content'>
+      <view class='placeorder_costlist_box'>
+        <view class='placeorder_costlist' wx:if="{{bagcost > 0}}">
+          <view class='placeorder_costlist_left'>
+            <text>餐盒费</text>
+          </view>
+          <view class='placeorder_costlist_right'>
+            <text>￥{{bagcost}}</text>
+          </view>
+        </view>
+        <view class='placeorder_costlist'  wx:if="{{newpscost > 0}}">
+          <view class='placeorder_costlist_left'>
+            <text>配送费</text>
+          </view>
+          <view class='placeorder_costlist_right'>
+            <text>￥{{newpscost}}</text>
+          </view>
+        </view>
+      </view>
+      <view class='placeorder_costlist_box' wx:if="{{cxdet.length>0}}">
+        <block wx:for="{{cxdet}}" wx:key="cx" wx:for-item="imc">
+        <view class='placeorder_costlist' wx:if="{{!(imc.type==4 && is_ziti==1)}}">
+          <view class='placeorder_costlist_left'>
+            <image class='icon_discount' src='{{imc.img}}'></image>
+            <text>{{imc.name}}</text>
+          </view>
+          <view class='placeorder_costlist_right'>
+            <block wx:if="{{imc.downcost == 'exempt'}}">
+                <text class='red'>-￥{{cx_nopsf}}</text>
+            </block>
+            <block wx:else>
+                <text class='red'>{{imc.downcost}}</text>
+            </block>
+          </view>
+        </view>
+      </block>
+      </view>
+      <view class='placeorder_costlist_box'>
+        <view class='placeorder_costlist'>
+          <view class='placeorder_costlist_left'>
+            <text>平台优惠券</text>
+          </view>
+          <view class='placeorder_costlist_right' bindtap="{{juanlist.length>0?'showPtJuan':''}}">
+            <text class='gray' style="color:{{juancolor}}">{{juanname}}</text>
+            <image class='angle_right' src='/images/angle_right.png'></image>
+          </view>
+        </view>
+        <view class='placeorder_costlist'>
+          <view class='placeorder_costlist_left'>
+            <text>商家优惠券</text>
+          </view>
+          <view class='placeorder_costlist_right' bindtap="{{shopjuanlist.length>0?'showShopJuan':''}}">
+            <text class='gray' style="color:{{shopjuancolor}}">{{shopjuanname}}</text>
+            <image class='angle_right' src='/images/angle_right.png'></image>
+          </view>
+        </view>
+        <view class='placeorder_costlist' wx:if="{{isopenscoretocost == 1}}">
+          <view class='placeorder_costlist_left' bindtap='showjfgz'>
+            <text>积分兑换</text>
+            <image class='icon_integralwhy' src='/images/icon_integralwhy.png'></image>
+          </view>
+          <view class='placeorder_costlist_right' bindtap="showScore">
+            <text class='gray' style="color:{{scorecolor}}">{{scorename}}</text>
+             <image class='angle_right' src='/images/angle_right.png'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='placeorder_total_content'>
+      <text>订单总计：</text>
+      <text>￥{{allcost}}</text>
+    </view>
+    <view class='h_10'></view>
+    <view class='placeorder_paymethod_content'>
+      <view class='placeorder_paymethod_box'>
+        <view class='placeorder_paymethod_left'>
+          <text>备注</text>
+        </view>
+         <view class='placeorder_paymethod_right' style="width: 90%;">
+          <input class="grayc" name="instro" placeholder="添加备注,50字以内" placeholder-style="font-size:12px;" style="font-size: 12px;width:100%;" maxlength="50"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height: 124rpx;'></view>
+  <view class='placeorder_bottom_content'>
+    <view class='placeorder_bottom_box'>
+      <view class='placeorder_bottom_left'>
+        <text class='placeorder_bottom_price'>￥{{allcost}}</text>
+        <block wx:if="{{allcxcost>0}}">
+          <text class='placeorder_bottom_discount'>已优惠￥{{allcxcost}}</text>
+        </block>
+      </view>
+      <view class='placeorder_bottom_right main_bg'>
+         <button wx:if="{{ordhide}}" formType="submit">立即下单</button>
+         <button wx:if="{{!ordhide}}" class="gray-button" style="background-color:#ccc;">立即下单</button>
+      </view>
+    </view>
+  </view>
+</form>
+</view>
+
+<view class="jfgz" wx:if="{{jfgzshow==1}}">
+  <text class="jftitle">积分抵现规则</text>
+  <view class="jfcontent">
+    <text>• {{scoretocost}}积分可以抵扣1元</text>
+    <text wx:if="{{scoretocostmax>0}}">• 积分单次最高抵现金额{{scoretocostmax}}元</text>
+    <text>• 积分满{{scoretocost}}可使用(含)，使用积分数量为{{scoretocost}}的整数倍。</text>
+  </view>
+  <text class="jfbuttom" bindtap='closejfgz'>我知道了</text>
+</view>
+<view class="address_popup_content" wx:if="{{addressHide == 0}}">
+  <view class="address_popup_box">
+    <view class="address_popup">
+      <view class="address_popup_title">
+        <text bindtap="maskbind">取消</text>
+        <text>我的收货地址</text>
+        <text></text>
+      </view>
+      <view class="address_choice_content">
+        <scroll-view scroll-y style="height:300px" scroll-top="{{scrollTop}}">
+          <radio-group bindchange="areaChange">
+
+          <block wx:for="{{arealist}}" wx:key="key" wx:for-item="item">
+          <view class="line"></view>
+            <view class="address_choice_box">
+              <view class="address_choice_left" data-id="{{item.id}}" bindtap="editAddress">
+                <image src="/images/green/icon_pen.png"></image>
+              </view>
+              <view class="address_choice_center">
+                <view class="address_choice_add">{{item.bigadr}}  {{item.detailadr}}</view>
+                <view class="address_choice_info">
+                  <text>{{item.contactname}}</text>
+                  <text style="margin-left: 10px;">{{item.phone}}</text>
+                  <block wx:if="{{item.canps!=1}}">
+                    <text style="margin-left: 10px;padding: 2px 4px;font-size: 12px;color: #fe7223;background-color: #fff4e5;">不在配送范围</text>
+                  </block>
+                </view>
+              </view>
+              <view class="address_choice_radio">
+                <radio value="{{item.id}}" checked="{{item.default == 1}}" />
+              </view>
+            </view>
+        </block>
+
+          </radio-group>
+        </scroll-view>
+      </view>
+      <view class="line"></view>
+      <view class="new_address" data-id="0" bindtap="editAddress">
+        <image src="/images/green/icon_addto.png"></image>
+        <text>新增收货地址</text>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 配送时间弹窗 -->
+<view class="received_address_content" wx:if="{{timeHide == 0}}">
+  <view class="boxtitle"><text>选择配送时间</text></view>
+  <scroll-view scroll-y style="height:300px;margin-bottom: 36px;" scroll-top="{{scrollTop}}">
+    <block wx:for="{{pstime}}" wx:key="kp" wx:for-item="itp">
+      <view class="received_address_box">
+        <view class="received_address_top" data-name="{{itp.name}}" data-val="{{itp.value}}" data-cost="{{itp.cost}}" bindtap="checkTime" >
+          <view class="received_address_info" style="margin-right: 0;">
+            <view class="received_address_name" style="display: flex;justify-content: space-between;">
+              <text class="{{minit==itp.value?'navaA':''}}">{{itp.name}}</text>
+              <text class="{{minit==itp.value?'navaA':''}}">{{itp.cost}}元配送费</text>
+              <image src="{{minit==itp.value?'/images/9_1/icon_select1.png':'/images/9_1/icon_select2.png'}}" style="width: 16px;height:16px;"></image>
+            </view>
+          </view>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="boxbottom" bindtap="maskbind"><text>取消</text></view>
+ </view>
+<!-- 平台优惠券弹窗 -->
+<view class="received_address_content" wx:if="{{juanHide == 0}}">
+  <view class="boxtitle"><text>选择平台优惠券</text></view>
+  <scroll-view scroll-y style="height:400px;margin-bottom: 36px;" scroll-top="{{scrollTop}}">
+    <block wx:for="{{juanlist}}" wx:key="kj" wx:for-item="itj">
+      <view class="received_address_box">
+        <view class="received_address_top" data-id="{{itj.id}}"  data-cost="{{itj.cost}}"  bindtap="choicePtJuan" style="padding:4rpx 20rpx;">
+          <view class="received_address_info" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
+            <view class="received_juanleft" style="width:30%;">
+              <text class="juansign">￥</text><text class="juancost">{{itj.cost}}</text>
+        <view class="juancontent"><text class="font_s11">满{{itj.limitcost}}元可用</text></view>
+            </view>
+        <view class="received_juanright" style="width:68%;">
+              <text class="juanname">{{itj.name}}</text>
+        <view><text style="font-size:24rpx;">有效期:{{itj.creattime}}至{{itj.endtime}}</text></view>
+            </view>
+          </view>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="boxbottom" data-id="0"  data-cost="0"  bindtap="choicePtJuan" style="background-color: #fafafa;"><text>不使用平台优惠券</text></view>
+ </view>
+<!-- 店铺优惠券弹窗 -->
+<view class="received_address_content" wx:if="{{shopjuanHide == 0}}">
+  <view class="boxtitle"><text>选择店铺优惠券</text></view>
+  <scroll-view scroll-y style="height:400px;margin-bottom: 36px;" scroll-top="{{scrollTop}}">
+    <block wx:for="{{shopjuanlist}}" wx:key="kj" wx:for-item="itj">
+      <view class="received_address_box">
+        <view class="received_address_top" data-id="{{itj.id}}"  data-cost="{{itj.cost}}"  bindtap="choiceShopJuan" style="padding:4rpx 20rpx;">
+          <view class="received_address_info" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
+            <view class="received_juanleft" style="width:30%;">
+              <text class="juansign">￥</text><text class="juancost">{{itj.cost}}</text>
+        <view class="juancontent"><text class="font_s11">满{{itj.limitcost}}元可用</text></view>
+            </view>
+        <view class="received_juanright" style="width:68%;">
+              <text class="juanname">{{itj.name}}</text>
+        <view><text style="font-size:24rpx;">有效期:{{itj.creattime}}至{{itj.endtime}}</text></view>
+            </view>
+          </view>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="boxbottom" data-id="0"  data-cost="0"  bindtap="choiceShopJuan" style="background-color: #fafafa;"><text>不使用店铺优惠券</text></view>
+ </view>
+<!-- 积分弹窗 -->
+<view class="received_address_content" wx:if="{{scoreHide == 0}}">
+  <view class="boxtitle"><text>选择抵扣积分</text></view>
+  <scroll-view scroll-y style="height:300px;margin-bottom: 36px;" scroll-top="{{scrollTop}}">
+    <block wx:for="{{scorelist}}" wx:key="ks" wx:for-item="its">
+      <view class="received_address_box">
+        <view class="received_address_top" data-name="{{its.name}}" data-cost="{{its.cost}}" bindtap="choiceScore" >
+          <view class="received_address_info" style="margin-right: 0;">
+            <view class="received_address_name" style="display: flex;justify-content: space-between;">
+              <text class="{{checkscore==its.cost?'navaA':''}}">使用{{its.name}}积分</text>
+              <text class="{{checkscore==its.cost?'navaA':''}}">抵扣{{its.cost}}元</text>
+              <image src="{{checkscore==its.cost?'/images/9_1/icon_select1.png':'/images/9_1/icon_select2.png'}}" style="width: 16px;height:16px;"></image>
+            </view>
+          </view>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="boxbottom" data-name="不使用积分抵扣" data-cost="0" bindtap="choiceScore"><text>不使用积分抵扣</text></view>
+ </view>
+ <!-- 自取时间弹窗 -->
+ <view class="received_address_content" wx:if="{{zititimeHide == 0}}">
+  <view class="boxtitle"><text>选择自取时间</text></view>
+  <scroll-view scroll-y style="height:300px;margin-bottom: 36px;" scroll-top="{{scrollTop}}">
+    <block wx:for="{{zttimelist}}" wx:key="ks" wx:for-item="its">
+      <view class="received_address_box">
+        <view class="received_address_top" data-time="{{its}}"  bindtap="choicezitiTime">
+          <view class="received_address_info" style="margin-right: 0;">
+            <view class="received_address_name" style="display: flex;justify-content: space-around;">
+              <text class="{{zititime==its?'navaA':''}}">{{its}}</text>
+              <image src="{{zititime==its?'/images/9_1/icon_select1.png':'/images/9_1/icon_select2.png'}}" style="width: 16px;height:16px;"></image>
+            </view>
+          </view>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class="boxbottom" bindtap="maskbind"><text>取消</text></view>
+ </view>
+
+ <view class="basestate_content" wx:if="{{userinfo == null || userinfo==''}}">
+    <image class="no_login" src="/images/no_login.png"></image>
+    <text>您还没有登录，请登录</text>
+    <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+
+
+
+ <view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>

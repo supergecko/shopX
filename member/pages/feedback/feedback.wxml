@@ -1,0 +1,29 @@
+<view class='content bgf5'>
+  <form bindsubmit="formSubmit"> 
+  <view class='feedback_content'>
+    <view class='feedback_type_content'>
+      <block wx:for='{{3}}' wx:key='index'>
+        <view
+          class='feedback_type_box'
+          data-index='{{index}}'
+          bindtap='tabsClick' 
+        >
+          <image src='/images/9_1/{{index == 0 ? "icon_feedback_system" : (index == 1 ? "icon_feedback_shop" : (index == 2 ? "icon_feedback_delivery" : ""))}}.png'></image>
+          <text name='adv'>{{index == 0 ? '系统问题' : (index == 1 ? '商家问题' : (index == 2 ? '配送问题' : ''))}}</text>
+          <label style='background-color: {{baseColor}};' wx:if='{{index == tabsActive}}'></label>
+        </view>
+      </block>
+    </view>
+    <view class='feedback_textarea_content'>
+      <textarea name='problem'  placeholder='您的意见对我们很重要，我们会积极的改正您所提出的问题'></textarea>
+    </view>
+    <view class='feedback_title_content'><text>改进计划 (可不填)</text></view>
+    <view class='feedback_textarea_content h188'>
+      <textarea name='suggestion'  placeholder='您觉得什么样的功能让我们更好的帮助您'></textarea>
+    </view>
+  </view>
+  <view class='feedback_submit_content'>
+    <button  form-type="submit">提交</button>
+  </view>
+  </form>
+</view>

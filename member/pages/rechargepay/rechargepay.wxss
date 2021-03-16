@@ -1,0 +1,104 @@
+
+.orderpay_info_content{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.orderpay_info_box{
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderpay_info_box text{
+  font-size: 30rpx;
+  color: #333;
+}
+
+.orderpay_bottom_style image{
+  width: 750rpx;
+  height: 30rpx;
+}
+
+.orderpay_need_content{
+  height: 82rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.orderpay_need_content text{
+  font-size: 30rpx;
+}
+
+.orderpay_need_content text:first-child{
+  color: #333;
+}
+
+.orderpay_need_content text:last-child{
+  color: #ff0000;
+}
+
+.orderpay_mode_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.orderpay_mode_box{
+  height: 104rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderpay_mode_img{
+  width: 126rpx;
+  height: 64rpx;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderpay_mode_img image{
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 10rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderpay_mode_box text{
+  flex-grow: 1;
+}
+
+.orderpay_mode_box .balance{
+  font-size:12px;
+  color:#999;
+  margin-left:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

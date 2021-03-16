@@ -1,0 +1,125 @@
+
+.orderlist_content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.orderlist_top{
+  height: 88rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orderlist_name{
+  width: 50%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+}
+
+.orderlist_name image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 9rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderlist_name text{
+  width: 80%;
+  font-size: 28rpx;
+  color: #000000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.orderlist_state text{
+  font-size: 24rpx;
+}
+
+.orderlist_center{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderlist_img{
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+  border: 1px solid #f0f0f0;
+}
+
+.orderlist_img image{
+  width: 100%;
+  height: 100%;
+}
+
+.orderlist_info{
+  display: flex;
+  flex-direction: column;
+  width:55%;
+}
+
+#cost{
+  color:#666666;
+  font-size:28rpx;
+}
+
+.orderlist_info text{
+  margin: 5rpx 0;
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.orderlist_bottom{
+  padding: 6rpx 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.orderlist_bottom button{
+  width: 146rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  margin: 0 0 0 20rpx;
+  padding: 0;
+  background-color:#fff;
+}
+.orderlist_bottom .first{
+  color: #fff;
+  border: none;
+  background-color:#00cd85;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

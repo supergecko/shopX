@@ -1,0 +1,26 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class='content' wx:if="{{userinfo!=null}}">
+  <view class='integraldetails_banner_content'>
+    <image src='{{giftinfo.img}}'></image>
+    <view class='integraldetails_banner_name'>
+      <text>{{giftinfo.title}}</text>
+    </view>
+  </view>
+  <view class='integraldetails_head_content'>
+    <view class='integraldetails_head_left'>
+      <image src='/images/icon-qianbi.png'></image>
+      <text>{{giftinfo.score}}</text>
+    </view>
+    <block wx:if="{{giftinfo.stock>0}}">
+      <view class='integraldetails_head_right' bindtap="startduihuan" data-id="{{giftinfo.id}}" data-score="{{giftinfo.score}}" data-stock="{{giftinfo.stock}}">立即兑换</view>
+    </block>
+    <block wx:else>
+        <view class='integraldetails_head_right active'>已兑完</view>
+    </block>
+  </view>
+  <view class='b_h'></view>
+  <view class='integral_details_content'>
+    <view class='integral_details_title'>商品简介</view>
+    <view class='integral_details_box'><template is="wxParse" data="{{wxParseData:content.nodes}}"/></view>
+  </view>
+</view>

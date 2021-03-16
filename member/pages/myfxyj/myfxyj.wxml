@@ -1,0 +1,47 @@
+<view class='content'>
+  <view class='commisionmy_head_content main_bg'>
+    <view class='commisionmy_head_top'>
+      <text>今日收益佣金(元）</text>
+      <text>{{todaycost}}</text>
+    </view>
+    <view class='commisionmy_head_bottom'>
+      <text>累计收益佣金(元）</text>
+      <text>{{allcost}}</text>
+    </view>
+  </view>
+  <view class='commisionhome_putforward_content'>
+    <view class='commisionhome_putforward_box'>
+      <text>可提现佣金(元）</text>
+      <text>{{cantxcost}}</text>
+    </view>
+    <view class='commisionhome_putforward_box'>
+      <text>已提现佣金(元）</text>
+      <text>{{txcost}}</text>
+    </view>
+  </view>
+  <view class='b_h'></view>
+  <view class='commisionhome_list_content'>
+    <view class='commisionhome_list_box' bindtap="urltoYjmx">
+      <view class='commisionhome_list_left'>
+        <image src='/images/yjmx.png'></image>
+        <text>佣金明细</text>
+      </view>
+      <view class='commisionhome_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+    <view class='line'></view>
+    <view class='commisionhome_list_box' bindtap="urltoTxlog">
+      <view class='commisionhome_list_left'>
+        <image src='/images/txjl.png'></image>
+        <text>提现记录</text>
+      </view>
+      <view class='commisionhome_list_right'>
+        <image src='/images/angle_right.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='commisionhome_btn_content'>
+    <view class='commisionhome_btn_box' bindtap="intoyjtx"><button class='main_bg'>提现</button></view>
+  </view>
+</view>

@@ -1,0 +1,116 @@
+@import '../../common/shop.wxss';
+
+page{
+  background-color: #fff;
+}
+.history_search_content{
+  padding:10px 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width:94%;
+}
+
+.history_search_content image{
+  width: 25rpx;
+  height: 44rpx;
+  margin-right: 32rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.history_search_inp{
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+.history_search_inp text{
+  width:20%;
+  text-align:right;
+  color:#fff;
+  font-size:16px;
+}
+
+.history_search_inp input{
+  width: 80%;
+  margin-top: 4rpx;
+  font-size: 30rpx;
+  color: #333;
+  background:rgba(255, 255, 255, .9);
+  border-radius:10rpx;
+  padding-left: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.history_search_title{
+  height: 80rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ justify-content: space-between;
+}
+.history_search_title image{
+  width: 22rpx;
+  height: 24rpx;
+}
+.history_search_title text{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.history_hot_content{
+  padding: 0 3%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #fff;
+  width: 96%;
+}
+
+.history_hot_content text{
+  width: 160rpx;
+  padding: 6px 0;
+  margin: 20rpx 14rpx 0 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background-color:#f7f7f7;
+}
+
+.history_record{
+  padding:0 3%;
+  display:flex;
+  background-color:#fff;
+  width:96%;
+  flex-wrap:wrap;
+}
+.history_record text{
+  width:160rpx;
+  padding:6px 0;
+  margin:20rpx 14rpx 0 0;
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  background-color:#f7f7f7;
+}
+
+.home_shops_content{
+  display: flex;
+  flex-direction: column;
+}
+
+.emptysearchbox{
+  padding:0 3%;
+}

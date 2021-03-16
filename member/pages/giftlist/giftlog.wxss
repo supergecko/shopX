@@ -1,0 +1,84 @@
+.integralrecord_head_content{
+  padding: 18rpx 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.integralrecord_head_box{
+  padding: 5rpx 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  text-align: center;
+  border-right: 1px dotted #f0f0f0;
+  box-sizing: border-box;
+}
+
+.integralrecord_head_box:last-child{
+  border: none;
+}
+
+.integralrecord_head_box text{
+  font-size: 27rpx;
+  color: #333;
+}
+
+.integralrecord_no_content{
+  margin-top: 270rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.integralrecord_no_content image{
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.integralrecord_no_content text{
+  margin-top: 30rpx;
+  font-size: 34rpx;
+  color: #ccc;
+}
+
+.integralrecord_list_content{
+  display: flex;
+  flex-direction: column;
+}
+
+.integralrecord_list_box{
+  height: 104rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.integralrecord_list{
+  width: 25%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.integralrecord_list text{
+  max-width: 100%;
+  font-size: 26rpx;
+  color: #333;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.integralrecord_list:last-child text{
+  color: #00cd85;
+}
+
+.integralrecord_list.active text{
+  font-size: 26rpx;
+  color: #666;
+}

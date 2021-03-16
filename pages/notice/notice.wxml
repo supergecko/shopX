@@ -1,0 +1,26 @@
+
+<view class="content">
+  <view class='notice_content'>
+
+    <block wx:for="{{list}}" wx:key="key" wx:for-item="itv" > 
+      <view class='notice_box' data-id="{{itv.id}}" bindtap="checkNotice">
+        <image src='{{itv.img}}'></image>
+        <view class='notice_right'>
+          <text class='notice_title'>{{itv.title}}</text>
+          <text class='notice_time'>{{itv.addtime}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+    <view class="loadingmore" hidden="{{loadshow}}">加载完毕...</view>        
+
+  </view>
+
+  <view class="body-view">
+      <loading hidden="{{hidden}}">
+          加载中...
+      </loading>
+  </view>
+
+</view>

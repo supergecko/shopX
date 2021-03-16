@@ -1,0 +1,346 @@
+<view class="container">
+  <block wx:if="{{is_applet_examine==0 && applet_url!=null}}">
+    <web-view src="{{applet_url}}&version={{version}}"></web-view>
+  </block>
+  <block wx:else>
+    <view class="home_content" hidden="{{locationshow}}">
+      <!-- 头部地址，天气 -->
+      <view class="home_head_content {{scrollMove > 30 ? 'clear' : ''}}">
+        <view class="home_head_top {{scrollMove > 30 ? 'hide' : ''}}" bindtap="checkCity">
+          <image class="icon_position" src="/images/9_1/icon_home_dw.png"></image>
+          <text>{{homeposition}}</text>
+          <image class="icon_angle_right" src="/images/icon_angle_right.png"></image>
+        </view>
+        <view class="home_head_rights {{scrollMove > 30 ? 'hide' : ''}}" wx:if="{{is_show_weather!=0}}">
+          <image src="{{weatherinfo.img}}"></image>
+          {{weatherinfo.tmp}}
+        </view>
+      </view>
+      <!-- 头部搜索 -->
+      <view class="sticky_search" style="top: 0px;z-index: 9999;background-color:#fff">
+        <view style="position: relative; z-index: 9999;">
+          <view class="home_content_search">
+            <view class="home_head_bottom" bindtap="checkSearch" data-searchval="">
+              <icon type="search" size="12" color="#999999" />
+              <text>输入商家或商品名称</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 头部热搜关键词 -->
+      <view class="hotsearchbox">
+        <block wx:for="{{hotsearchlist}}" wx:key="keys" wx:for-index="index" wx:for-item="items">
+          <view class="singlebox" bindtap="checkSearch" data-searchval="{{items}}">
+            <text>{{items}}</text>
+          </view>
+        </block>
+      </view>
+      <!-- 轮播图 -->
+      <block wx:if="{{advlist.length > 0}}">
+        <view class="home_class_content">
+          <swiper indicator-dots="{{advlist.length > 1 ? true : false}}" indicator-color="rgba(0,205,133,.3)" indicator-active-color="#00cd85" autoplay circular>
+            <block wx:for="{{advlist}}" wx:key="ka" wx:for-item="ita">
+              <swiper-item style="top:0;">
+                <image src="{{ita.img}}" style="width:100%;height:100%;border-radius: 10rpx;"></image>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+      </block>
+      <!-- 分类 -->
+      <block wx:if="{{moretypelist.length > 0}}">
+        <blcok wx:if="{{ztymode.classlisttype == 1}}">
+          <view class="home_class_content" style="background:url({{flimgurl}}) no-repeat #FFFFFF 100% 100%;height:{{moretypelist[0].length >5?'165px' :'78px'}}">
+            <swiper indicator-dots="{{moretypelist.length > 1 ? true : false}}" indicator-color="rgba(0,205,133,.3)" indicator-active-color="#00cd85" style="height:{{moretypelist[0].length > 5 ? 165 : 78}}px;padding:0;">
+            <block wx:for="{{moretypelist}}" wx:key="key" wx:for-item="item">
+              <swiper-item>
+                <block wx:for="{{item}}" wx:key="key1" wx:for-item="items">
+                  <view class="home_class_box" data-name="{{items.name}}" data-activity="{{items['activity']}}" data-typeid="{{items['param']}}" bindtap="cateOnclick">
+                    <image src="{{items.img}}"></image>
+                    <text style="color:{{flfontcolor}};">{{items.name}}</text>
+                  </view>
+                </block>
+              </swiper-item>
+            </block>
+          </swiper>
+          </view>
+        </blcok>
+        <block wx:else>
+          <view class="home_class_content2" style="background:url({{flimgurl}}) no-repeat #FFFFFF 100% 100%;">
+              <block wx:for="{{moretypelist}}" wx:key="key" wx:for-item="items">
+                <view class="home_class_box" data-name="{{items.name}}" data-activity="{{items['activity']}}" data-typeid="{{items['param']}}" bindtap="cateOnclick">
+                  <image src="{{items.img}}"></image>
+                  <text style="color:{{flfontcolor}};">{{items.name}}</text>
+                </view>
+              </block>
+          </view>
+        </block>
+      </block>
+
+      <!-- 分类下图片 -->
+      <view calss="flximginfo_img" wx:if="{{flximginfo_img.length>0}}">
+        <image style="width:100%;height:{{flbottomHeight}}px;" src="{{flximginfo_img}}"></image>
+      </view>
+      <!-- 通知跑马灯 -->
+      <view class="example" wx:if="{{notice != ''}}">
+        <view class="marquee_img">
+          <image src="/images/icon_lb04.png"></image>
+        </view>
+        <view class="marquee_box" bindtap="noticeOnclick">
+          <view class="marquee_text {{marquee == 1 ? 'marquee_animation' : ''}}" style="font-size: {{notice_size}}px;">
+            <text>{{notice}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 为你优选 -->
+      <view class="foryou_content" wx:if="{{fyshoplist.length > 0}}">
+        <view class="foryou_title">
+          <text class="foryou_h3">为您优选</text>
+        </view>
+        <view class="foryou_list">
+          <block wx:for="{{fyshoplist}}" wx:key="kf" wx:for-item="itf">
+            <view class="foryou_li" data-shopid="{{itf['id']}}" data-shoptype="{{itf['shoptype']}}" data-shopname="{{itf['shopname']}}" bindtap="shopOnclick">
+              <image src="{{itf.shoplogo}}"></image>
+              <text>{{itf.shopname}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="b_h" wx:if="{{fyshoplist.length > 0}}"></view>
+
+      <!-- 附近商家 -->
+      <view class="home_shops_content " id="sortposition">
+        <view class="home_shops_title">
+          <text>附近商家</text>
+        </view>
+        <view class="sticky {{sticky_top?'sticky_top_style':''}}" style="top: 42px;z-index: 9999;">
+          <view style="position: relative; z-index: 9999;">
+            <view class="goodslist_sort_content">
+              <view class="goodslist_sort_box">
+                <view class="goodslist_sort_title" bindtap="sortShow">
+                  <text class="{{sortcolor}}">{{sortname}}</text>
+                  <text class="{{sortupdown}}"></text>
+                </view>
+                <view class="goodslist_sort_list" wx:if="{{sortisShow}}">
+                  <text class="{{pxid <= 0?'navaA':''}}" data-id="0" data-name="综合排序" bindtap="sortOnclick">综合排序</text>
+                  <text class="{{pxid == 1?'navaA':''}}" data-id="1" data-name="好评优先" bindtap="sortOnclick">好评优先</text>
+                  <text class="{{pxid == 2?'navaA':''}}" data-id="2" data-name="起送价" bindtap="sortOnclick">起送价</text>
+                </view>
+              </view>
+              <view class="goodslist_sort_box bestsellcount">
+                <view class="goodslist_sort_title" data-id="3" data-name="销量最高" bindtap="sellcountOnclick">
+                  <text class="goodslist_sort_name {{pxid == 3?'navaA':''}}">{{sellcountname}}</text>
+                  <text class=""></text>
+                </view>
+              </view>
+              <view class="goodslist_sort_box smalljuli">
+                <view class="goodslist_sort_title" data-id="4" data-name="距离最近" bindtap="juliOnclick">
+                  <text class="goodslist_sort_name {{pxid == 4?'navaA':''}}">{{distancename}}</text>
+                  <text class=""></text>
+                </view>
+              </view>
+              <view class="goodslist_sort_box">
+                <view class="goodslist_sort_title" bindtap="sxShow">
+                  <text class="{{sxcolor}}">{{shaixuanname}}</text>
+                  <image src="/images/icon_sx.png" style="height:24rpx;width:24rpx;margin-left:10rpx;"></image>
+                </view>
+                <view class="sxcontent" wx:if="{{sxisShow}}">
+                  <view>
+                    <text class="sxtype">配送方式</text>
+                    <view class="sxsendtype">
+                      <view class="{{sendtype == 2?'sxbackgroundcolor':''}}" data-sendtype="2" bindtap="sendtypeOnclick">
+                        <image src="/images/icon_wzps.png"></image>
+                        <text class="sxcondition">网站配送</text>
+                      </view>
+                      <view class="{{sendtype == 1?'sxbackgroundcolor':''}}" data-sendtype="1" bindtap="sendtypeOnclick">
+                        <image src="/images/icon_dpps.png"></image>
+                        <text class="sxcondition">店铺配送</text>
+                      </view>
+                      <view class="{{sendtype == 3?'sxbackgroundcolor':''}}" data-sendtype="3" bindtap="sendtypeOnclick" wx:if="{{is_allow_ziti==1}}">
+                        <image src="/images/icon_ddzt.png"></image>
+                        <text class="sxcondition">到店自取</text>
+                      </view>
+                      <view>
+
+                      </view>
+                    </view>
+                  </view>
+                  <view>
+                    <text class="sxtype">优惠活动</text>
+                    <view class="sxsendtype">
+                      <view class="{{controltype == 2?'sxbackgroundcolor':''}}" data-controltype="2" bindtap="yhhdOnclick">
+                        <image src="/images/icon_jian.png"></image>
+                        <text class="sxcondition">限时满减</text>
+                      </view>
+                      <view class="{{controltype == 3?'sxbackgroundcolor':''}}" data-controltype="3" bindtap="yhhdOnclick">
+                        <image src="/images/icon_zhe.png"></image>
+                        <text class="sxcondition">促销打折</text>
+                      </view>
+                      <view class="{{controltype == 1?'sxbackgroundcolor':''}}" data-controltype="1" bindtap="yhhdOnclick">
+                        <image src="/images/icon_zeng.png"></image>
+                        <text class="sxcondition">送赠品</text>
+                      </view>
+                      <view class="{{controltype == 4?'sxbackgroundcolor':''}}" data-controltype="4" bindtap="yhhdOnclick">
+                        <image src="/images/icon_mian.png"></image>
+                        <text class="sxcondition">免配送费</text>
+                      </view>
+                    </view>
+                  </view>
+                  <view style="height: 36rpx;background-color: #fafafa;"></view>
+                  <view class="sxbutton">
+                    <text class="clearsx" bindtap="clearsxOnclick">清除筛选</text>
+                    <text class="oversx" data-sendtype="{{sendtype}}" data-controltype="{{controltype}}" bindtap="oversxOnclick">完成</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="line"></view>
+        <view class="home_shops_box">
+          <block wx:for="{{list}}" class="item" wx:key="key" wx:for-item="item">
+            <view class="home_shopslist_content" wx:if="{{list.length > 0}}">
+              <!-- 左侧店铺图标 -->
+              <view class="home_shopslist_img" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+                <image src="{{item.shoplogo}}"></image>
+                <text wx:if="{{item.isforyou==1}}">优选</text>
+              </view>
+              <!-- 右侧店铺信息 -->
+              <view class="home_shopslist_box">
+                <view class="home_shopslist_top" data-shopid="{{item.id}}" data-shoptype="{{item.shoptype}}" data-shopname="{{item.shopname}}" bindtap="shopOnclick">
+                  <view class="home_shopslist_rows">
+                    <!-- 1行 店铺名称 -->
+                    <view class="home_shopslist_row row1">
+                      <view class="home_shopslist_name">
+                        <text>{{item.shopname}}</text>
+                      </view>
+                    </view>
+                    <!-- 2行 *，已售，距离，送达 -->
+                    <view class="home_shopslist_row row2">
+                       <view class="home_shopslist_star">
+                        <block wx:for="{{item.point}}" wx:key="kf">
+                          <image src="/images/star_light.png"></image>
+                        </block>
+                        <block wx:for="{{5-item.point}}" wx:key="ks">
+                          <image src="/images/star_gray.png"></image>
+                        </block>
+                        <text>月售{{item.monthcount}}单</text>
+                      </view>
+                      <view class="home_shopslist_time">
+                        <text class="first">{{item.juli}}</text>
+                        <text class="last">{{item.arrivetime}}分钟送达</text>
+                      </view>
+                    </view>
+                    <!-- 3行 起送，配送，图标 -->
+                    <view class="home_shopslist_row row3">
+                      <view class="startpsbox">
+                        <text class="home_cost_text">起送￥{{item.limitcost}}</text>
+                        <text class="home_cost_line">|</text>
+                        <text class="home_cost_text">配送￥{{item.pscost}}</text>
+                      </view>
+                      <view class="newimgpx">
+                        <block wx:if="{{item.is_show_ztimg ==1}}">
+                          <text class="psfirstt">支持自取</text>
+                        </block>
+                        <block wx:if="{{item.sendtype == 1  }}">
+                          <text class="psstext">店铺配送</text>
+                        </block>
+                        <block wx:if="{{item.sendtype != 1  }}">
+                          <text class="psstext">网站配送</text>
+                        </block>
+                      </view>
+                    </view>
+                    <!-- 4行 预定 -->
+                    <view class="home_shopslist_row row4">
+                      <view>
+                        <block wx:if="{{item.opentype == 0  || item.opentype == 4  }}">
+                          <view class="home_closed_text">休息中，暂不接受预定</view>
+                        </block>
+                        <block wx:if="{{item.opentype == 3 }}">
+                          <view class="home_order_text">预定中,{{item.newstartime}}开始配送</view>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+                  <!-- 5行 促销 -->
+                  <view class="home_shopslist_bottom {{item.checkcx==0?'btnhide':'btnshow'}}" wx:if="{{item.cxcountx > 0}}">
+                    <view class="home_shopslab_btn" data-cxcountx="{{item.cxcountx}}" data-id="{{item.id}}" catchtap="homelistShow" wx:if="{{item.cxcountx >=5}}">
+                      <i class="icon_down"></i>
+                    </view>
+                    <view class="home_shopslab_box">
+                      <block wx:for="{{item.cxinfox}}" wx:key="kk" wx:for-item="ita">
+                        <view class="home_shopslab">
+                          <text>{{ita}}</text>
+                        </view>
+                      </block>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+          <view class="loadingmore" hidden="{{!loadshow}}">上拉加载更多...</view>
+          <view class="loadingmore" hidden="{{loadshow}}">加载完毕...</view>
+        </view>
+      </view>
+    </view>
+    <!-- 首页购物车，微信客服 -->
+    <view class="index_cart" bindtap="indexskip" data-num="3" data-url="/pages/indexcart/indexcart" wx:if="{{cartShow}}">
+      <image src="/images/index_cart.png"></image>
+      <text wx:if="{{cartnum > 0}}">{{cartnum}}</text>
+    </view>
+    <view class="wx_kefu" wx:if="{{wxkefu_open && wxSow}}" bindtap="showwx">
+      <image src="{{wxkefu_logo}}"></image>
+    </view>
+
+    <view class="wxkefu_showino" wx:if="{{wxkefu_show == 1}}">
+      <view class="wx_closed" bindtap="closedwx">
+        <image src="/images/wx_closed.png"></image>
+      </view>
+      <view class="wxkefu_showewm">
+        <view class="kf_ewm" style="height:200px;">
+          <image src="{{wxkefu_ewm}}"></image>
+        </view>
+        <view class="an_ewm">长按上方二维码添加好友</view>
+        <view class="kf_ewm" wx:if="{{wxkefu_phone != ''}}">或者拨打电话直接联系我们</view>
+        <view class="wx_phone" bindtap="calling" data-phone="{{wxkefu_phone}}" wx:if="{{wxkefu_phone != ''}}">
+          <image src="/images/wx_phone.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="wxkefu_bg" wx:if="{{wxkefu_show == 1}}"></view>
+
+
+    <view class="basestate_content" hidden="{{!locationshow}}">
+      <image src="/images/nearnoshop.png"></image>
+      <text>您所在的城市暂无开通</text>
+      <button class="main_bg" bindtap="checkCity">切换城市</button>
+    </view>
+    <view class='foodhome_navbar_content'>
+      <view class='foodhome_navbar' bindtap='indexskip' data-num='2' data-url='/pages/index/index'>
+        <image src='/images/bottom/bottom_wm2.png'></image>
+        <text style='color:#01CD88'>首页</text>
+      </view>
+      <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/quickcart/quickcart' wx:if="{{is_open_shangou==1}}">
+        <image src='/images/bottom/bottom_sg1.png'></image>
+        <text>闪购</text>
+      </view>
+      <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/paotui/paotui' wx:if="{{is_open_paotui==1}}">
+        <image src='/images/bottom/bottom_pt1.png'></image>
+        <text>跑腿</text>
+      </view>
+      <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/pages/orderlist/orderlist'>
+        <image src='/images/bottom/bottom_dd1.png'></image>
+        <text>订单</text>
+      </view>
+      <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/member/pages/memcenter/memcenter'>
+        <image src='/images/bottom/bottom_wd1.png'></image>
+        <text>我的</text>
+      </view>
+    </view>
+  </block>
+</view>
+ <!-- 遮罩层 -->
+  <view class='mask' wx:if='{{maskShow}}' bindtap="maskbind"></view>

@@ -1,0 +1,135 @@
+<view class="content">
+  <view class="orderstate_class_content">
+    <view class="orderstate_class {{is_showstatus==1 && is_showdetail==0 ?'navaA':''}}" bindtap="statusShow">
+      <text>订单状态</text>
+    </view>
+    <view class="orderstate_class {{is_showdetail==1 && is_showstatus ==0?'navaA':''}}" bindtap="detailShow">
+      <text>订单详情</text>
+    </view>
+  </view>
+  <view class="orderstate_content" wx:if="{{is_showstatus==1 && is_showdetail==0}}">
+    <block wx:for="{{orderwuliustatus}}" wx:key="key" wx:for-index="index" wx:for-item="item">
+      <view class="orderstate_box">
+        <view class="orderstate_left">
+          <view class="orderstate_line" wx:if="{{index<orderwuliustatus.length-1}}"></view>
+          <view class="orderstate_img">
+           <block wx:if="{{index==0}}">
+              <image src="/images/ordershow1.png"></image>
+            </block>
+            <block wx:else>
+              <image src="/images/oldordershow.png"></image>
+            </block>
+          </view>
+        </view>
+        <view class="orderstate_right">
+          <view class="orderstate_title">
+            <text>{{item.statustitle}}</text>
+            <text>{{item.addtime}}</text>
+          </view>
+          <view class="orderstate_text">
+            {{item.ststusdesc}}<text wx:if="{{item.telnum != 0}}" data-num="{{item.telnum}}" bindtap="callmeTap">{{item.telnum}}</text>
+          </view>
+          <view class="orderstate_map" wx:if="{{item.showmap != 0}}">
+            <map id="map" longitude="{{item.maplng}}" latitude="{{item.maplat}}" scale="16" markers="{{item.markers}}" show-location bindtap="showMap" hidden="{{maphidden}}" />
+          </view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+  <view class="btn_h" wx:if="{{is_showstatus==1 && is_showdetail==0}}"></view>
+
+  <view class="orderdetails_content" wx:if="{{is_showdetail==1 && is_showstatus ==0}}">
+    <view class="b_h"></view>
+    <view class="orderdetails_box">
+      <view class="orderdetails_title">
+        <image src="/images/green/icon_home.png"></image>
+        <text>跑腿  【{{orderinfo.pttype==2?'帮我买':'帮我送'}}】</text>
+      </view>
+      <view class="line"></view>
+      <view class="orderdetails">
+        <view class="orderdetails_list_box">
+          <view class="orderdetails_list_l">订单实价</view>
+          <view class="orderdetails_list_c"></view>
+          <view class="orderdetails_list_r" style="color:red">￥{{orderinfo.allcost}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="b_h"></view>
+    <view class="orderdetails_box">
+      <view class="orderdetails_title">
+        <image src="/images/green/icon_bill.png"></image>
+        <text>订单详情</text>
+      </view>
+      <view class="line"></view>
+      <view class="orderdetails">
+        <view class="orderdetails_info_box">
+          <view class="orderdetails_info_l">订单号：</view>
+          <view class="orderdetails_info_r">{{orderinfo.dno}}</view>
+        </view>
+        <view class="orderdetails_info_box">
+          <view class="orderdetails_info_l">下单时间：</view>
+          <view class="orderdetails_info_r">{{orderinfo.addtime}}</view>
+        </view>
+        <view class="orderdetails_info_box">
+          <view class="orderdetails_info_l">支付方式：</view>
+          <view class="orderdetails_info_r">{{orderinfo.paystatusname}}</view>
+        </view>
+        <view class="orderdetails_info_box">
+          <view class="orderdetails_info_l">联系人：</view>
+          <view class="orderdetails_info_r">{{orderinfo.buyername}}</view>
+        </view>
+        <view class="orderdetails_info_box">
+          <view class="orderdetails_info_l">手机号码：</view>
+          <view class="orderdetails_info_r">{{orderinfo.buyerphone}}</view>
+        </view>
+        <view class="orderdetails_info_box" wx:if="{{orderinfo.is_goshop == 0}}">
+              <view class="orderdetails_info_l">收货地址：</view>
+              <view class="orderdetails_info_r">{{orderinfo.buyeraddress}}</view>
+        </view>
+        <view class="orderdetails_info_box" wx:if="{{orderinfo.is_goshop == 0}}">
+          <view class="orderdetails_info_l">配送信息：</view>
+          <view class="orderdetails_info_r">{{orderinfo.pstypename}}</view>
+        </view>
+        <view class="orderdetails_info_box" wx:if="{{orderinfo.content != ''}}">
+          <view class="orderdetails_info_l">备注：</view>
+          <view class="orderdetails_info_r">{{orderinfo.content}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="b_h"></view>
+  </view>
+   <view class="orderlist_bottom">
+      <button  bindtap="bindButton" data-type="1">再来一单</button>
+      <block wx:if="{{orderinfo.status < 3 && orderinfo.is_reback == 0}}">
+        <block wx:if="{{orderinfo.psstatus==0}}">
+          <button data-id="{{orderinfo.id}}" data-type="2"  wx:if="{{(orderinfo.paytype ==1 && orderinfo.paystatus ==0 ) || orderinfo.paytype ==0}}" bindtap="bindButton">取消订单</button>
+          <button data-id="{{orderinfo.id}}" data-type="3"  wx:if="{{orderinfo.paytype ==1 && orderinfo.paystatus ==1}}" bindtap="bindButton">取消订单</button>
+        </block>
+        <block wx:else>
+            <button data-id="{{orderinfo.id}}" data-type="4"  wx:if="{{orderinfo.paytype ==1 && orderinfo.paystatus ==1}}" bindtap="bindButton">申请退款</button>
+        </block>
+      </block>
+      <button class="main_bg first" data-id="{{orderinfo.id}}" data-type="5" wx:if="{{orderinfo.paytype == 1 && orderinfo.paystatus == 0 && orderinfo.status < 3}}" bindtap="bindButton">立即支付</button>
+      <button class="main_bg first" data-id="{{orderinfo.id}}" data-type="6" wx:if="{{orderinfo.is_reback > 0}}" bindtap="bindButton">退款详情</button>
+      <button class="main_bg first" data-id="{{orderinfo.id}}" data-type="7" wx:if="{{orderinfo.is_ping == 0 && orderinfo.status == 3}}" bindtap="bindButton">评价订单</button>
+    </view>
+</view>
+<view class="mask" wx:if="{{maskShow == 1}}" bindtap="maskbind"></view>
+<view class="drawpop_up" wx:if="{{showpop_up==1}}">
+  <view class="draw_title">
+    <text>申请退款</text>
+  </view>
+  <view class="draw_content">
+    <block wx:if="{{orderinfo.status < 3}}">
+      <text>配送员已接单，请联系平台客服处理</text>
+    </block>
+    <block wx:else>
+      <text>配送员已取货，请联系平台客服处理</text>
+    </block>
+  </view>
+  <view class="draw_button">
+    <text bindtap="closepop_up">取消</text>
+    <text data-num="{{callphone}}" bindtap="callmeTap">联系客服</text>
+  </view>
+</view>

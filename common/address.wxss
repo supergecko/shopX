@@ -1,0 +1,141 @@
+/*添加、编辑地址、*/
+
+.received_head_content{
+  height: 86rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.received_head_content image{
+  width: 46rpx;
+  height: 46rpx;
+  margin-right: 14rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.received_head_content text{
+  font-size: 27rpx;
+}
+
+.received_address_box{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.received_address_top{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.received_address_info{
+  margin-right: 20rpx;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.received_address_name{
+  font-size: 27rpx;
+  color: #333;
+  margin-top: 10rpx;
+}
+
+.received_address_name text{
+  margin-right: 20rpx;
+}
+
+.received_address_name text:first-child{
+  color: #808080;
+}
+
+.received_address{
+  font-size: 26rpx;
+  color: #333;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.received_address_lab{
+  width: 75rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.received_address_lab.green{
+  background-color: #01cd88;
+}
+
+.received_address_lab.blue{
+  background-color: #49aff7;
+}
+
+.received_address_lab.orange{
+  background-color: #fe9900;
+}
+
+.received_address_bottom{
+  height: 94rpx;
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.received_address_radio{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.received_address_radio text{
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.received_address_fun{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.received_address_btn{
+  margin-left: 20rpx;
+}
+
+.received_address_btn image{
+  margin-right: 10rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.received_address_btn:first-child image{
+  width: 25rpx;
+  height: 25rpx;
+}
+
+.received_address_btn:last-child image{
+  width: 24rpx;
+  height: 26rpx;
+}
+
+.received_address_btn text{
+  margin-top: -6rpx;
+  font-size: 26rpx;
+  color: #999999;
+}
+

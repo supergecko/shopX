@@ -1,0 +1,259 @@
+<view class='content bgf5'>
+  <block wx:if="{{is_show_map==1}}">
+    <view class='map'>
+      <view class="scroller">
+        <map
+        id="myMap"
+        style="width: 100%; height: 300px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        markers="{{markers}}"
+        covers="{{covers}}"
+        scale="14"
+        show-location
+        hidden="{{maphidden}}"
+      ></map>
+      </view>
+    </view>
+  </block>
+  <view class='h_5'></view>
+  <view class='order_state_content'>
+    <view class='order_state_handle'></view>
+    <view class='order_state_box' bindtap='showModal'>
+      <text>{{orderstatus.ordtitle}}</text>
+      <image src='/images/9_1/icon_allclassify_angleright.png'></image>
+    </view>
+    <!-- 订单状态跟踪---开始 -->
+    <view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap="hideModal"></view>
+    <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+      <view class='order_statusinfo_title'><text>订单跟踪</text></view>
+      <view class="screen_boxtop" catchtouchmove="ture">
+        <scroll-view scroll-y style="height: 270px;">
+          <block wx:for='{{orderwuliustatus}}' wx:key="k2" wx:for-item="itvs" wx:for-index="index">
+            <view class='order_statusinfo_content'>
+              <view class="connectline" wx:if="{{index<orderwuliustatus.length-1}}"></view>
+              <view class="{{itvs.key == statusnum?'order_status_check_onenav':'order_status_check_one'}}"></view>
+              <view class="right_content">
+                <view class='order_status_content'><text>{{itvs.statustitle}}</text></view>
+                <view class='order_status_time'><text>{{itvs.addtime}}</text></view>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+      <view class='order_statusinfo_button'>
+        <button bindtap="clearoff" style='background-color:#4BC877;' bindtap="hideModal">关闭</button>
+      </view>
+    </view>
+    <!-- 订单状态跟踪---结束 -->
+    <view class='order_state_tips'>
+      <text><block wx:if="{{countcontent!=''&& order.status<2 && order.paytype=='在线支付 (未支付)' && order.paystatus==0}}">{{countcontent}}</block><block wx:else>{{orderstatus.describe}}</block></text>
+    </view>
+
+    <!-- 订单状态下方---按钮 -->
+    <view class='order_state_btn'>
+      <block wx:for='{{btnarr}}' wx:key="key2" wx:for-item="itv">
+        <button  data-type="{{itv.dotype}}" bindtap="bindButton" style="{{itv.style==2?'background-color:#00cd85;color:#fff;':''}}">{{itv.text}}</button>
+      </block>
+    </view>
+  </view>
+  <view class='orderdetails_psyinfo' wx:if="{{psyinfo != null}}">
+    <view class="psylogo" style="margin-top:7px;"><image src='{{psyinfo.psyimgurl}}' style='width: 35px; height: 35px;'></image></view>
+    <view class='psyname'><text>{{psyinfo.psusername}}</text></view>
+    <view class='psyphone' bindtap="clearpsy" data-phone="{{psyinfo.psemail}}" style="margin-top:5px;"><image src='/images/9_1/icon_tel_orange.png' style='width: 40rpx; height: 40rpx;'></image></view>
+  </view>
+  <view class='h_5'></view>
+  <view class='orderdetails_content'>
+    <view class='orderdetails_title_content'  data-type="1" bindtap="bindButton">
+      <view class='orderdetails_title_left'><text>{{shopinfo.shopname}}</text></view>
+      <view class='orderdetails_title_right'>
+        <image src='/images/9_1/icon_allclassify_angleright.png'></image>
+      </view>
+    </view>
+    <view class='orderdetails_goods_list_content'>
+      <block wx:for='{{orderdet}}' wx:key="key" wx:for-index="index" wx:for-item="item">
+        <view class='orderdetails_goods_list_box' wx:if="{{orderdet.length > 0 && index<=2}}">
+          <view class='orderdetails_goods_list_left'><image src='{{item.img}}'></image></view>
+          <view class='orderdetails_goods_list_right'>
+            <view class='orderdetails_goods_list_top'>
+              <blcok wx:if="{{item.is_send == 1}}">
+                <text>{{item.goodsname}}（赠品）</text>
+              </blcok>
+              <blcok wx:if="{{item.is_send != 1}}">
+                <text>{{item.goodsnames}}</text>
+              </blcok>
+                <text>¥ {{item.goodscost}}</text>
+            </view>
+            <view class='orderdetails_goods_list_center'>
+              <text>{{item.gg}}</text>
+              <blcok wx:if="{{item.is_send != 1}}">
+                <blcok wx:if="{{item.oldcost != item.goodscost}}">
+                  <text>¥ {{item.oldcost}}</text>
+                </blcok>
+              </blcok>
+            </view>
+            <view class='orderdetails_goods_list_bottom'>
+              <text>x{{item.goodscount}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='orderdetails_goods_list_box' wx:if="{{index>2 && moregood==1}}">
+          <view class='orderdetails_goods_list_left'><image src='{{item.img}}'></image></view>
+          <view class='orderdetails_goods_list_right'>
+            <view class='orderdetails_goods_list_top'>
+              <blcok wx:if="{{item.is_send == 1}}">
+                <text>{{item.goodsname}}（赠品）</text>
+              </blcok>
+              <blcok wx:if="{{item.is_send != 1}}">
+                <text>{{item.goodsnames}}</text>
+              </blcok>
+                <text>¥ {{item.goodscost}}</text>
+            </view>
+            <view class='orderdetails_goods_list_center'>
+              <text>{{item.gg}}</text>
+              <blcok wx:if="{{item.is_send != 1}}">
+                <blcok wx:if="{{item.oldcost != item.goodscost}}">
+                  <text>¥ {{item.oldcost}}</text>
+                </blcok>
+              </blcok>
+            </view>
+            <view class='orderdetails_goods_list_bottom'>
+              <text>x{{item.goodscount}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="showmore" wx:if="{{orderdet.length >3}}">
+        <view>
+          <block wx:if="{{moregood==0}}">
+              <text class="showmoretext" bindtap="showmoregoods" data-more="{{1}}">展开更多</text>
+              <text class="showmorearrowdown"></text>
+          </block>
+          <block wx:else>
+              <text class="showmoretext" bindtap="showmoregoods" data-more="{{0}}">点击收起</text>
+              <text class="showmorearrowup"></text>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class='orderdetails_discountlist_content'>
+       <view class='orderdetails_discountlist_box' wx:if="{{order.bagcost > 0}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>打包费</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>￥{{order.bagcost}}</text>
+        </view>
+      </view>
+      <view class='orderdetails_discountlist_box' wx:if="{{order.shopps > 0 && order.is_ziti!=1}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>配送费</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>￥{{order.shopps}}</text>
+        </view>
+      </view>
+      <view class='orderdetails_discountlist_box' wx:if="{{order.addpscost > 0 && order.is_ziti!=1}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>附加配送费</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>￥{{order.addpscost}}</text>
+        </view>
+      </view>
+      <view class='orderdetails_discountlist_box' wx:if="{{order.scoredown > 0}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>积分抵扣</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>-￥{{order.scoredowncost}}</text>
+        </view>
+      </view>
+      <view class='orderdetails_discountlist_box' wx:if="{{order.yhjcost > 0}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>优惠券抵扣</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>-￥{{order.yhjcost}}</text>
+        </view>
+      </view>
+      <view class='orderdetails_discountlist_box' wx:if="{{order.shopyhjcost > 0}}">
+        <view class='orderdetails_discountlist_left'>
+          <text>店铺优惠券抵扣</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>-￥{{order.shopyhjcost}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='orderdetails_discountlist_content'>
+      <block wx:for='{{cxdet}}' wx:key="key1" wx:for-item="items">
+        <view class='orderdetails_discountlist_box'>
+          <view class='orderdetails_discountlist_left'>
+            <image src='{{items.img}}'></image>
+            <text>{{items.name}}</text>
+          </view>
+          <view class='orderdetails_discountlist_right'>
+            <text class='red'>{{items.downcost}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='orderdetails_discountlist_content'>
+      <view class='orderdetails_discountlist_box' style='height: 80rpx;'>
+        <view class='orderdetails_discountlist_left' bindtap="callSite" data-phone="{{shopinfo.phone}}">
+          <image src='/images/9_1/icon_tel_orange.png' style='width: 40rpx; height: 40rpx;'></image>
+          <text>联系商家</text>
+        </view>
+        <view class='orderdetails_discountlist_right'>
+          <text>订单总计：</text>
+          <text class='red' style="font-weight: bold;">￥{{order.allcost}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='h_5'></view>
+  <view class='orderdetails_content' wx:if="{{order.is_ziti!=1}}">
+    <view class='orderdetails_title_content'>
+      <view class='orderdetails_title_left'><text>配送信息</text></view>
+    </view>
+    <view class='orderdetails_list_content'>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>配送服务</text></view>
+        <view class='orderdetails_list_right'><text>{{order.pstype}}</text></view>
+      </view>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>期望时间</text></view>
+        <view class='orderdetails_list_right'><text>{{order.posttime}}</text></view>
+      </view>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>收货信息</text></view>
+        <view class='orderdetails_list_right'>
+          <text>{{order.buyername}} {{order.buyerphone}}</text>
+          <text>{{order.buyeraddress}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='h_5'></view>
+  <view class='orderdetails_content'>
+    <view class='orderdetails_title_content'>
+      <view class='orderdetails_title_left'><text>订单信息</text></view>
+    </view>
+    <view class='orderdetails_list_content'>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>订单编号</text></view>
+        <view class='orderdetails_list_right'><text>{{order.dno}}</text></view>
+      </view>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>下单时间</text></view>
+        <view class='orderdetails_list_right'><text>{{order.addtime}}</text></view>
+      </view>
+      <view class='orderdetails_list_box'>
+        <view class='orderdetails_list_left'><text>支付方式</text></view>
+        <view class='orderdetails_list_right'><text>{{order.paytype}}</text></view>
+      </view>
+    </view>
+  </view>
+  <view class='h_5'></view>
+</view>

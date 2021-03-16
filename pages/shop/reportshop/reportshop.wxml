@@ -1,0 +1,42 @@
+<view class="content" wx:if="{{!loginShow}}">
+  <view class="reportshop_title">
+    <image src="/images/9_1/icon_warning.png"></image>
+    <text>{{shopname}}</text>
+  </view>
+  <view class="line"></view>
+  <form bindsubmit="formSubmit">
+    <input type="text" name="shopid" value="{{shopid}}" style="display:none"/>
+    <input type="text" name="shopname" value="{{shopname}}" style="display:none"/>
+    <view class="reportshop_content">
+      <radio-group name="reason" bindchange="radioChange">
+        <block wx:for="{{reasonlist}}" wx:key="keys" wx:for-item="iems">
+          <view class="reportshop_box">
+            <label>
+              <radio class="reportshop_radio" value="{{iems}}" />
+              <text>{{iems}}</text>
+            </label>
+          </view>
+          <view class="line"></view>
+        </block>
+      </radio-group>
+    </view>
+    <view class="b_h"></view>
+    <view class="reportshop_textarea">
+      <textarea name="content" placeholder="输入详细情况，核实后有机会领奖励（必填）" value=""/>
+    </view>
+    <view class="line"></view>
+    <view class="reportshop_input">
+      <input type="text" name="phone" placeholder="输入您的手机号码（必填，此号码仅内部员工可见）" value=""/>
+    </view>
+    <view class="b_h"></view>
+    <view class="buttonbox">
+      <button form-type="submit">确认提交</button>
+    </view>
+  </form>
+</view>
+<view class="basestate_content" wx:if="{{loginShow}}">
+  <image class="no_login" src="/images/no_login.png"></image>
+  <text>您还没登录，请先登录</text>
+  <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</view>
+

@@ -1,0 +1,4 @@
+
+<view class="content">
+    <web-view src="{{siteurl}}/index.php?ctrl=applet&action=notice&id={{id}}&version={{version}}"></web-view>
+</view>

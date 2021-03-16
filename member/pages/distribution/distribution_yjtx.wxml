@@ -1,0 +1,99 @@
+<view class='content' wx:if="{{meminfo != null}}">
+  <form bindsubmit="formSubmit">
+  <view class='putforward_head_content'>
+    <view class='putforward_head_top'>
+      <text>￥</text>
+      <view class='putforward_head_inp'>
+        <input type='digit' placeholder='请输入提现金额' value="{{txcost}}" bindinput="checktxcost"></input>
+      </view>
+      <text class='putforward_head_btn' bindtap="alltxcost">全部提现</text>
+    </view>
+    <view class='putforward_head_txt'>
+        <text>最多可提现{{meminfo.fxcost}}元</text>
+        <text wx:if="{{minfxtxcost > 0}}">，最低提现{{minfxtxcost}}元</text>
+        <text wx:if="{{txtype != 1 && fxfeelv > 0}}">，需收手续费{{fxfeelv}}%</text>
+    </view>
+  </view>
+  <view class='b_h'></view>
+  <view class='putforward_title_content'>
+    <text>提现方式</text>
+  </view>
+  <view class='line'></view>
+  <view class='putforward_list_content'>
+    <radio-group bindchange="radioChange">
+      <view class='putforward_list_box'>
+        <view class='putforward_list_left'>
+          <image src='/images/zhye.png'></image>
+          <view class='putforward_list_name'>
+            <text>账户余额</text>
+            <text>申请成功后将自动转入账户余额</text>
+          </view>
+        </view>
+        <view class='putforward_list_right'>
+          <radio value="1" checked="{{txtype==1}}" />
+        </view>
+      </view>
+      <view class='line'></view>
+      <view class='putforward_list_box'>
+        <view class='putforward_list_left'>
+          <image src='/images/zfb.png'></image>
+          <view class='putforward_list_name'>
+            <text>支付宝</text>
+            <text>推荐已经开通支付宝账户的用户使用</text>
+          </view>
+        </view>
+        <view class='putforward_list_right'>
+          <radio value="2" checked="{{txtype==2}}" />
+        </view>
+      </view>
+      <view class='line'></view>
+      <view class='putforward_list_box'>
+        <view class='putforward_list_left'>
+          <image src='/images/yhk.png'></image>
+          <view class='putforward_list_name'>
+            <text>银行卡</text>
+            <text>推荐已绑定银行卡的用户使用</text>
+          </view>
+        </view>
+        <view class='putforward_list_right'>
+          <radio value="3" checked="{{txtype==3}}" />
+        </view>
+      </view>
+    </radio-group>
+  </view>
+  <view class='payinfo_content'>
+    <view class='payinfo_box pay_zfb' wx:if="{{zfbShow==1}}">
+      <view class='b_h'></view>
+      <view class='payinfo'>
+        <view class='payinfo_left'><text>支付宝账户：</text></view>
+        <view class='payinfo_right'><input type='text' placeholder='请输入支付宝账户' value="{{zfbaccount}}" bindinput="checkzfbaccount"></input></view>
+      </view>
+      <view class='line'></view>
+      <view class='payinfo'>
+        <view class='payinfo_left'><text>收款人姓名：</text></view>
+        <view class='payinfo_right'><input type='text' placeholder='请输入支付宝姓名' value="{{zfbusername}}" bindinput="checkzfbusername"></input></view>
+      </view>
+    </view>
+    <view class='payinfo_box pay_zfb' wx:if="{{yhkShow==1}}">
+      <view class='b_h'></view>
+      <view class='payinfo'>
+        <view class='payinfo_left'><text>持卡人：</text></view>
+        <view class='payinfo_right'><input type='text' placeholder='请输入持卡人姓名' value="{{cardusername}}" bindinput="checkcardusername"></input></view>
+      </view>
+      <view class='line'></view>
+      <view class='payinfo'>
+        <view class='payinfo_left'><text>卡号：</text></view>
+        <view class='payinfo_right'><input type='number' placeholder='请输入银行卡号' value="{{cardnumber}}" bindinput="checkcardnumber"></input></view>
+      </view>
+      <view class='line'></view>
+      <view class='payinfo'>
+        <view class='payinfo_left'><text>开户行：</text></view>
+        <view class='payinfo_right'><input type='text' placeholder='请输入开户银行名称' value="{{bankname}}" bindinput="checkbankname"></input></view>
+      </view>
+    </view>
+  </view>
+  <view class='putforward_btn_content'>
+    <view class='putforward_btn_box'><button class='main_bg' formType="submit">确认提现</button></view>
+  </view>
+</form>
+</view>

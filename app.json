@@ -1,0 +1,84 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/shop/shop",
+    "pages/shop/shopsearch/shopsearch",
+    "pages/shop/orderingassess/orderingassess",
+    "pages/shop/reportshop/reportshop",
+    "pages/shop/orderingshop/orderingshop",
+    "pages/addto-address/addto-address",
+    "pages/orderlist/orderlist",
+    "pages/orderassess/orderassess",
+    "pages/orderdetail/orderdetail",
+    "pages/refund/refund",
+    "pages/placeorder/placeorder",
+    "pages/orderpay/orderpay",
+    "pages/choice-address/choice-address",
+    "pages/history/history",
+    "pages/ordermap/ordermap",
+    "pages/notice/notice",
+    "pages/notice-details/notice-details",
+    "pages/paotui/paotui",
+    "pages/pthelpme/pthelpme",
+    "pages/ptorder/ptorder",
+    "pages/paotuidetail/paotuidetail",
+    "pages/quickcart/quickcart",
+    "pages/indexcart/indexcart",
+    "pages/type/typelist",
+    "pages/type/channelseach",
+    "pages/type/channel"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#00cd85",
+    "backgroundColor": "#00cd85",
+    "navigationBarTitleText": "用户端小程序",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取附近商家信息"
+    }
+  },
+  "subPackages": [
+    {
+      "root": "member",
+      "pages": [
+        "pages/memcenter/memcenter",
+        "pages/coupon/coupon",
+        "pages/newcoupon/newcoupon",
+        "pages/memcard/memcard",
+        "pages/rechargepay/rechargepay",
+        "pages/distribution/distribution_center",
+        "pages/distribution/distribution_yjtx",
+        "pages/distribution/distribution_myjunior",
+        "pages/distribution/yjranking",
+        "pages/distribution/fxcontent",
+        "pages/distribution/distribution_fxcode",
+        "pages/myfxyj/myfxyj",
+        "pages/myfxyj/myfxyj_txlog",
+        "pages/myfxyj/myfxyj_yjmx",
+        "pages/gift/gift",
+        "pages/giftlist/giftlist",
+        "pages/giftlist/giftdetail",
+        "pages/giftlist/giftlog",
+        "pages/giftlist/dhgift",
+        "pages/received-address/received-address",
+        "pages/shoucshop/shoucshop",
+        "pages/mycomment/mycomment",
+        "pages/agentjoin/agentjoin",
+        "pages/shopsettled/shopsettled",
+        "pages/shangjiaapply/shangjiaapply",
+        "pages/shangjiaresult/shangjiaresult",
+        "pages/sharejuan/sharejuan",
+        "pages/recruitpsy/recruitpsy",
+        "pages/invitefriend/invitefriend",
+        "pages/feedback/feedback",
+        "pages/aboutus/aboutus",
+        "pages/xieyi/xieyi"
+      ]
+    }
+  ],
+  "sitemapLocation": "sitemap.json"
+}

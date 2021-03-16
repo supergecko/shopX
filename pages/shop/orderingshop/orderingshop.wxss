@@ -1,0 +1,231 @@
+
+.ordeing_class{
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.ordeing_classTxt{
+  flex-grow: 1;
+  height: 84rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ordeing_classTxt text{
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.ordeing_classTxt.navaA{
+  border-bottom-width: 3rpx;
+  border-bottom-style: solid;
+}
+
+.orderingshop_head_content{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.orderingshop_head_img{
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderingshop_head_img image{
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.orderingshop_head_right{
+  width: 80px;
+  flex-grow: 1;
+}
+
+.orderingshop_head_title{
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.orderingshop_head_title text{
+  font-size: 31rpx;
+  color: #333;
+}
+
+.orderingshop_head_star{
+  padding: 16rpx 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderingshop_head_star image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderingshop_head_price{
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.orderingshop_head_price text{
+  padding: 0 10rpx;
+  font-size: 25rpx;
+}
+
+.orderingshop_head_price text:first-child{
+  padding-left: 0;
+}
+
+.orderingshop_info_content{
+  background-color: #fff;
+}
+
+.orderingshop_info_box{
+  padding: 24rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderingshop_info_box image{
+  width: 15px;
+  height: 20px;
+  margin-right: 20rpx;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.orderingshop_info_box text{
+  text-align: justify;
+  font-size: 25rpx;
+  color: #333;
+}
+
+.orderingshop_intr_content{
+  padding: 0 20rpx;
+  background-color: #fff;
+}
+
+.orderingshop_intr_title{
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.orderingshop_intr_box{
+  line-height: 36rpx;
+  padding: 14rpx 0;
+  font-size: 25rpx;
+  color: #333;
+  width: 100%;
+}
+.orderingshop_intr_box view{
+  font-size: 14px!important;
+}
+
+.orderingshop_report{
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fff;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+}
+.realbox{
+  width:25%;
+  height:71px;
+  display:inline-block;
+  position:relative;
+}
+.realbox image{
+  height: 100%;
+  width: 100%;
+}
+.realbox .left_top{
+  position:absolute;
+  top:0;
+  left:0;
+  background-color:#000;
+  color:#fff;
+  padding:0 5px;
+  text-align:center;
+  opacity:.5;
+}
+.realbox .right_bottom{
+  position:absolute;
+  bottom:0;
+  right:0;
+  background-color:#000;
+  color:#fff;
+  padding:0 5px;
+  text-align:center;
+  opacity:.5;
+}
+.real_img_box{
+  display:flex;
+  width:100%;
+  flex-wrap:wrap;
+  height:71px;
+  overflow:hidden;
+  flex-direction:row;
+}
+.imgbox{
+ z-index:999;
+  width:100%;
+  position:fixed;
+  top:25%;
+  left:0;
+  height:50%;
+}
+.imgbox swiper{
+  height:100%;
+}
+.imgbox image{
+  width:100%;
+  height:100%;
+  margin:0;
+}
+.shopreport text{
+  color:#f00;
+  font-size:14px;
+}
+.cx_content{
+  display:flex;
+  flex-direction:column;
+  width: 100%;
+}
+.cx_box{
+  padding:20rpx 0;
+  display:flex;
+  align-items:center;
+  width:100%;
+}
+.cx_box image{
+  width:17px;
+  height:17px;
+  margin-right:10px;
+}
+.cx_box text{
+  height:24px;
+  line-height:24px;
+}
+

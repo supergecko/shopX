@@ -1,0 +1,67 @@
+<view class='content bgf5'>
+  <form bindsubmit="formSubmit">
+    <view class='feedback_content'>
+      <view class='feedback_type_content'>
+          <view class='feedback_type_box'>
+            <image src='/images/9_1/pro_01_1.png'></image>
+          </view>
+          <view class='feedback_type_zi'>
+            <text>商家资料</text>
+            <text>账户信息</text>
+            <text>网站审核</text>
+          </view>
+      </view>
+    </view>
+    <view class='feedback_textarea_content'>
+      <view class='feedback_text_content'>
+        <text>1.完善店铺资料，以便于我们了解您的情况。</text>
+        <text>2.认证所需资料不公开给任何组织和个人。</text>
+        <text>3.审核通过的信息无法修改，如需帮助请致电客服：{{sitephone}}</text>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>联系电话：</text>
+          <input type='text' placeholder='请输入电话' name="shopphone" maxlength="11"/>
+        </view>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>店铺名称：</text>
+          <input type='text' placeholder='请输入店铺名称' name="shopname"></input>
+        </view>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>店铺地址：</text>
+          <input type='text' placeholder='请输入店铺地址' name="shopaddress"></input>
+        </view>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>选择城市：</text>
+          <picker bindchange="bindcity" range="{{citynamelist}}" name="cityid" value="{{citylist[citykey].adcode}}">
+            <view class="picker">{{citylist[citykey].name}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>店铺分类：</text>
+          <picker bindchange="bindshoptype" range="{{catnamelist}}" name="shoptype" value="{{catlist[catkey].id}}">
+            <view class="picker">{{catlist[catkey].name}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class='feedback_text_content'>
+        <view class='apply_list_input'>
+          <text class='apply_list_title'>营业执照：</text>
+          <image style="width:50px;height:50px;" src="{{imgurl}}" style="display: {{showImg==1?'inline-block':'none'}};width: 50px;height: 50px;"></image>
+          <button bindtap="upimg"  class='jia_img' >上传</button>
+        </view>
+      </view>
+    </view>
+    <view class='feedback_submit_content'>
+      <button form-type="submit">下一步</button>
+    </view>
+  </form>
+</view>

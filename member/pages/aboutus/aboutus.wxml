@@ -1,0 +1,3 @@
+<view class="content">
+    <web-view src="{{siteurl}}/index.php?ctrl=applet&action=aboutus&version={{version}}"></web-view>
+</view>

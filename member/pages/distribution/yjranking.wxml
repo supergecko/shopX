@@ -1,0 +1,56 @@
+<view class='content' wx:if="{{meminfo != null}}">
+  <view class='commisionranking_content main_bg'>
+    <view class='commisionranking_box'>
+    <view class='commisionranking_head_content'><image src='/images/commision_ranking_head.png'></image></view>
+      <view class='commisionranking'>
+        <view class='commisionranking_title_content'>
+          <view class='commisionranking_title_left'><text>排名</text></view>
+          <view class='commisionranking_title_center'><text>分销商</text></view>
+          <view class='commisionranking_title_right'><text>累计佣金</text></view>
+        </view>
+        <scroll-view scroll-y class='commisionranking_list_content' height="100%;">
+          <view class='commisionranking_list_box'>
+            <block wx:if="{{is_showself==1}}">
+               <view class='commisionranking_list' style="background-color: #f0f0f0;">
+                  <view class='commisionranking_list_left'>{{selfinfo.ranking}}</view>
+                  <view class='commisionranking_list_center'>
+                    <image src='{{meminfo.log}}'></image>
+                    <text>{{selfinfo.username}}</text>
+                  </view>
+                  <view class='commisionranking_list_right'><text>{{selfinfo.yjbcost}}</text></view>
+                </view>
+            </block>
+            <block wx:for="{{list}}" wx:key="key" wx:for-item="item">
+              <view class='commisionranking_list' style="background-color: {{item.ranking==selfranking?'#f0f0f0':''}};">
+                <view class='commisionranking_list_left'>
+                  <block wx:if="{{item.ranking==1}}">
+                    <image src='/images/lab_num1.png'></image>
+                  </block>
+                  <block wx:elif="{{item.ranking==2}}">
+                    <image src='/images/lab_num2.png'></image>
+                  </block>
+                  <block wx:elif="{{item.ranking==3}}">
+                    <image src='/images/lab_num3.png'></image>
+                  </block>
+                  <block wx:else>
+                    {{item.ranking}}
+                  </block>
+                </view>
+                <view class='commisionranking_list_center'>
+                  <image src='{{item.logo}}'></image>
+                  <text> {{item.username}}</text>
+                </view>
+                <view class='commisionranking_list_right'><text> {{item.yjbcost}}</text></view>
+              </view>
+              <view class='line'></view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+  <view class='nodata'  wx:if="{{list.length ==0}}">
+    <image src='/images/distribution_no.png'></image>
+    <text>暂无记录</text>
+  </view>
+</view>

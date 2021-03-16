@@ -1,0 +1,58 @@
+
+.integraladdress_head_content{
+  padding: 26rpx 20rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.integraladdress_head_content image{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 18rpx;
+}
+
+.integraladdress_head_content text{
+  font-size: 28rpx;
+  color: #333;
+}
+
+.integraladdress_content{
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.integraladdress_box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.integraladdress_left{
+  margin-top: -7rpx;
+}
+
+.integraladdress_left text{
+  font-size: 28rpx;
+  color: #333;
+}
+
+.integraladdress_right{
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.integraladdress_right input{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.button_bottom_content{
+  margin-top: 84rpx;
+}

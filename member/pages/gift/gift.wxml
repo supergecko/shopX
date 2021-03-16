@@ -1,0 +1,58 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class="content" wx:if="{{meminfo!=null}}">
+  <scroll-view scroll-y style="height:100%"  scroll-top="0"  >
+      <view class="integralcore_head_content">
+        <view class="integralcore_head_box">
+          <view class="integralcore_head">
+            <text>{{meminfo.score}}</text>
+            <text>我的积分</text>
+          </view>
+        </view>
+      </view>
+      <view class="line"></view>
+      <view class="integral_detailedtab_content">
+        <view class="integral_detailedtab_box {{scoreShow==1?'navaA':' '}}" bindtap="showscore">
+          <block wx:if="{{scoreShow==1}}">
+            <image src="/images/019.png"></image>
+          </block>
+          <block wx:else>
+            <image src="/images/018.png"></image>
+          </block>
+          <text>积分明细</text>
+        </view>
+        <view class="integral_detailedtab_box {{jfgzShow==1?'navaA':' '}}" bindtap="showjfgz">
+          <block wx:if="{{jfgzShow==1}}">
+            <image src="/images/021.png"></image>
+          </block>
+          <block wx:else>
+            <image src="/images/020.png"></image>
+          </block>
+          <text>积分规则</text>
+        </view>
+      </view>
+      <view class="integral_detailed_content" wx:if="{{scoreShow==1}}">
+        <block wx:for="{{giftlog}}" wx:key="key" wx:for-item="item">
+          <view class="b_h"></view>
+          <view class="integral_detailed_box">
+            <view class="integral_detailed_top">
+              <text>{{item.title}}</text>
+              <block wx:if="{{item.addtype==1}}">
+                <text class="colorgrayadd">+{{item.result}}</text>
+              </block>
+              <block wx:else>
+                <text class="colorgrayjian">-{{item.result}}</text>
+              </block>
+            </view>
+            <view class="integral_detailed_bottom">
+              <text>{{item.addtime}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="jfgzcontent" wx:if="{{jfgzShow==1}}">
+        <template is="wxParse" data="{{wxParseData:jfgz.nodes}}"/>
+      </view>
+    </scroll-view>
+  <view class="b_h"></view>
+  <view class="suredhgift" bindtap="intodhgift"><button>兑换礼品</button></view>
+</view>

@@ -1,0 +1,117 @@
+<view class='content bgf5' wx:if="{{userInfo!=''}}">
+  <view class='personal_head_content'>
+    <view style="width:100%;height:100%;"><image src="/images/9_1/memtop.png" style="width:100%;height:88%;"></image></view>
+    <view class="personal_head_box">
+      <view class='personal_head_user_content'>
+        <view class='personal_head_user_left'>
+          <image src="{{userInfo.logo}}"></image>
+          <text>{{userInfo.username}}</text>
+        </view>
+      </view>
+      <view class='personal_head_property_content'>
+        <view class='personal_head_property_box' bindtap="urlother" data-url="/member/pages/memcard/memcard">
+          <text>{{userInfo.cost}}</text>
+          <text>帐户余额</text>
+        </view>
+        <view class='personal_head_property_box' bindtap="urlother" data-url="/member/pages/coupon/coupon">
+          <text>{{userInfo.juancount}}</text>
+          <text>优惠券</text>
+        </view>
+        <view class='personal_head_property_box' bindtap="urlother" data-url="/member/pages/gift/gift">
+          <text>{{userInfo.score}}</text>
+          <text>积分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='h_10'></view>
+  <view class='personal_content'>
+    <view class='personal_box'>
+      <view class='personal_ad_content' wx:if="memimg!='' && memimg!=null"><image src='{{memimg}}'></image></view>
+      <view class='personal_list_content big'>
+        <view class="personal_list_box {{open_distribution==1?'w_25':'w_33'}}" bindtap="urlother" data-url="/member/pages/received-address/received-address">
+          <image src='/images/9_1/icon_personal0_1.png'></image>
+          <text>收货地址</text>
+        </view>
+        <view class="personal_list_box {{open_distribution==1?'w_25':'w_33'}}" bindtap="urlother" data-url="/member/pages/shoucshop/shoucshop">
+          <image src='/images/9_1/icon_personal0_2.png'></image>
+          <text>我的收藏</text>
+        </view>
+        <view class="personal_list_box {{open_distribution==1?'w_25':'w_33'}}" bindtap="urlother" data-url="/member/pages/mycomment/mycomment">
+          <image src='/images/9_1/icon_personal0_3.png'></image>
+          <text>我的评价</text>
+        </view>
+        <view class="personal_list_box w_25" bindtap="urlother" data-url="/member/pages/distribution/distribution_center" wx:if="{{open_distribution==1}}">
+          <image src='/images/9_1/icon_personal0_4.png'></image>
+          <text>分销中心</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='h_10'></view>
+  <view class='personal_content'>
+    <view class='personal_box'>
+      <view class='personal_list_content'>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/giftlist/giftlist">
+          <image src='/images/9_1/icon_personal1_1.png'></image>
+          <text>兑换礼品</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/agentjoin/agentjoin">
+          <image src='/images/9_1/icon_personal1_2.png'></image>
+          <text>代理加盟</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/shopsettled/shopsettled">
+          <image src='/images/9_1/icon_personal1_3.png'></image>
+          <text>商家入驻</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/recruitpsy/recruitpsy">
+          <image src='/images/9_1/icon_personal1_4.png'></image>
+          <text>骑手招募</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/invitefriend/invitefriend">
+          <image src='/images/9_1/icon_personal1_5.png'></image>
+          <text>邀请好友</text>
+        </view>
+        <view class='personal_list_box' bindtap="callSite">
+          <image src='/images/9_1/icon_personal1_6.png'></image>
+          <text>联系客服</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/feedback/feedback">
+          <image src='/images/9_1/icon_personal1_7.png'></image>
+          <text>意见反馈</text>
+        </view>
+        <view class='personal_list_box' bindtap="urlother" data-url="/member/pages/aboutus/aboutus">
+          <image src='/images/9_1/icon_personal1_8.png'></image>
+          <text>关于我们</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="basestate_content" wx:if="{{userInfo==null || userInfo == ''}}">
+  <image class="no_login" src="/images/no_login.png"></image>
+  <text>您还没登录，请先登录</text>
+  <button class="main_bg" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+</view>
+<view class='foodhome_navbar_content'>
+  <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/pages/index/index'>
+    <image src='/images/bottom/bottom_wm1.png'></image>
+    <text>首页</text>
+  </view>
+  <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/quickcart/quickcart' wx:if="{{open_shangou==1}}">
+    <image src='/images/bottom/bottom_sg1.png'></image>
+    <text>闪购</text>
+  </view>
+  <view class='foodhome_navbar' bindtap='indexskip' data-num='3' data-url='/pages/paotui/paotui' wx:if="{{open_paotui==1}}">
+    <image src='/images/bottom/bottom_pt1.png'></image>
+    <text>跑腿</text>
+  </view>
+  <view class='foodhome_navbar' bindtap='indexskip' data-num='1' data-url='/pages/orderlist/orderlist'>
+    <image src='/images/bottom/bottom_dd1.png'></image>
+    <text>订单</text>
+  </view>
+  <view class='foodhome_navbar' bindtap='indexskip' data-num='2' data-url='/member/pages/memcenter/memcenter'>
+    <image src='/images/bottom/bottom_wd2.png'></image>
+    <text style='color:#00cd85'>我的</text>
+  </view>
+</view>
